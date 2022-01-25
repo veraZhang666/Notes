@@ -33,8 +33,6 @@
     + [4.2.1 页面的特点：](#421-------)
       - [1.Routes：](#1routes-)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 
 # 1. 创建Google Cloud 项目
