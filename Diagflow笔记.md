@@ -19,7 +19,8 @@ Dialog flow cx 教程-简易版
 
 #### 1.2.1第一步：
 
-![image-20220124194935803](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220124194935803.png)
+![image-20220124194935803](./imgs/image-20220124194935803.png)
+
 
 #### 2.2 第二步：
 
