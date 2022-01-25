@@ -1,39 +1,3 @@
-- [1. 创建Google Cloud 项目](#1---google-cloud---)
-  + [1.1 登录google cloud platform](#11---google-cloud-platform)
-  + [1.2 新建项目](#12 new project-----)
-    + [1.2.1 步骤1：](#121 step1---1-)
-    + [1.2.2 步骤2：](#122---2-)
-  * [1.3 为该项目创建服务账号](#13-----------)
-    + [1.3.1 什么是服务账号？](#131---------)
-    + [1.3.2 创建步骤](#132-----)
-      - [1.3.2.1 步骤1](#1321---1)
-      - [1.3.2.2 步骤2](#1322---2)
-      - [1.3.2.3 步骤3](#1323---3)
-  * [1.4 为该服务账号创建其密匙](#14------------)
-    + [1.4.1 步骤1](#141---1)
-    + [1.4.2 步骤2](#142---2)
-  * [1.5 最佳做法与解决方案](#15----------)
-    + [1.5.1 谷歌技术人员给出的建议：](#151-------------)
-    + [1.5.2 具体步骤：](#152------)
-    + [3. 设置环境变量](#3-------)
-    + [3.1 windows+pycharm的环境变量设置。](#31-windows-pycharm--------)
-    + [2.2 linux, mac用户的环境变量设置](#22-linux--mac---------)
-- [2.代理、流、页面](#2-------)
-  * [2.1 创建dialogflow cx 代理](#21---dialogflow-cx---)
-- [3. dialogflow 控制台面板功能介绍](#3-dialogflow----------)
-      - [3.1 Build](#31-build)
-      - [3.2 Manage](#32-manage)
-    + [3.3 Agent Test](#33-agent-test)
-      - [3.4 Agent settings](#34-agent-settings)
-- [4. 流、页面、意图、实体、参数的概念](#4-----------------)
-  * [4.1 流](#41--)
-      - [4.1.1 流的特点](#411-----)
-      - [4.1.2 流的初始页面](#412-------)
-  * [4.2 页面](#42---)
-    + [4.2.1 页面的特点：](#421-------)
-      - [1.Routes：](#1routes-)
-
-
 
 # 1. 创建Google Cloud 项目
 
@@ -135,7 +99,7 @@
 
 拿到上一步下载的json密匙绝对路径
 
-### 3.1 windows+pycharm的环境变量设置。
+#### 3.1 windows+pycharm的环境变量设置。
 
 以下配置方法生效范围为整个pycharm项目目录
 
@@ -145,23 +109,23 @@
 
 选中pycharm项目中任一py文件，单击右上角。
 
-![image-20220125094055760](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125094055760.png)
+![image-20220125094055760](./imgs/image-20220125094055760.png)
 
-![image-20220125094238473](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125094238473.png)
+![image-20220125094238473](./imgs/image-20220125094238473.png)
 
 
 
-![image-20220125094317033](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125094317033.png)
+![image-20220125094317033](./imgs/image-20220125094317033.png)
 
 在红色框出输入GOOGLE_APPLICATION_CREDENTIALS=C:\Users\admin\xxxx\xxxbcb6202b4.json
 
 点击apply，这样你就可以访问谷歌项目了。
 
-![image-20220125094441290](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125094441290.png)
+![image-20220125094441290](./imgs/image-20220125094441290.png)
 
 
 
-### 2.2 linux, mac用户的环境变量设置
+#### 3.2 linux, mac用户的环境变量设置
 
 可以直接把json密匙路径配置到用户环境变量，生效范围为该linux系统的用户，当然你也可也设置linux系统级的环境变量（参照链接：https://www.cnblogs.com/lihao-blog/p/6945040.html）
 
@@ -183,7 +147,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=/var/www_r/www_bot/catering-robot-aecbcb62
 
 请将json密匙的地址替换为你的绝对路径。
 
-![image-20220125095852958](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125095852958.png)
+![image-20220125095852958](./imgs/image-20220125095852958.png)
 
 
 
@@ -195,10 +159,8 @@ source ~/.bashrc
 
 
 
-# 2.代理、流、页面
-
-## 2.1 创建dialogflow cx 代理
-
+# 2.代理的操作：
+## 2.1 代理的创建
 
 [登录链接](https://dialogflow.cloud.google.com/cx/projects)
 
@@ -216,31 +178,32 @@ Default language：代理使用的语言，这决定了意图识别、实体的�
 
 Time zone：代理所用的时间
 
-![image-20220125102649971](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125102649971.png)
+![image-20220125102649971](./imgs/image-20220125102649971.png)
 
 代理创建说明：
 dialogflow代理id为谷歌自动生成，创建代理成功后可以通过API或者客户端库拿到代理的id，也可以在控制台的导航栏查看代理的id。
 
-![image-20220125133337809](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125133337809.png)
+![image-20220125133337809](./imgs/image-20220125133337809.png)
 
 
 一个google dialogflow cx项目（也叫google cloud项目）下可以创建1000个代理，具体参数限制如下表。
 
-![image-20220125101122308](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125101122308.png)
+![image-20220125101122308](./imgs/image-20220125101122308.png)
 
-
-
+## 2.2 代理的导入
+## 2.3 代理的导出
+## 2.4 代理的删除
 
 
 # 3. dialogflow 控制台面板功能介绍
 
-#### 3.1 Build
+## 3.1 Build
 
-![image-20220125133721423](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125133721423.png)
+![image-20220125133721423](./imgs/image-20220125133721423.png)
 
 
 
-#### 3.2 Manage
+## 3.2 Manage
 
 Resources:
 
@@ -262,11 +225,11 @@ Prebuild Agent：
 
 谷歌预设好的代理。 
 
-![image-20220125142022121](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125142022121.png)
+![image-20220125142022121](./imgs/image-20220125142022121.png)
 
 
 
-### 3.3 Agent Test
+## 3.3 Agent Test
 
 点击右边test Agent可对创作好的代理进行测试。
 
@@ -290,15 +253,12 @@ Prebuild Agent：
 
    
 
-![image-20220125134259588](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125134259588.png)
+![image-20220125134259588](./imgs/image-20220125134259588.png)
 
-![image-20220125141552260](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125141552260.png)
-
-
+![image-20220125141552260](./imgs/image-20220125141552260.png)
 
 
-
-#### 3.4 Agent settings
+## 3.4 Agent settings
 
 点击控制台右上角Agent setting->ML
 
@@ -312,9 +272,7 @@ Classification thredshould：
 
 意图检测的阈值，如果意图匹配的置信度分数小于阈值，则会调用[无匹配事件](https://cloud.google.com/dialogflow/cx/docs/concept/handler#event-built-in)
 
-
-
-![image-20220125140729785](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125140729785.png)
+![image-20220125140729785](./imgs/image-20220125140729785.png)
 
 
 
@@ -336,33 +294,33 @@ Classification thredshould：
 
 初始页面和普通的页面功能不一，在初始页里，你只可以：
 
-1. 添加意图![image-20220125144512536](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125144512536.png)
+1. 添加意图![image-20220125144512536](./imgs/image-20220125144512536.png)
 
 2.不做任何操作，通过条件True执行其他操作
 
 下面展示了如何在初始页添加条件True
 
-![image-20220125144904664](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125144904664.png)
+![image-20220125144904664](./imgs/image-20220125144904664.png)
 
 
 
 3. 自定义事件Event Handler 事件处理器
 
-![image-20220125145157219](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125145157219.png)
+![image-20220125145157219](./imgs/image-20220125145157219.png)
 
 
 
-4.1.3 流的增、删、导出、导入
+#### 4.1.3 流的增、删、导出、导入
 
 流的操作有三种方式，1.通过API ([链接](https://cloud.google.com/dialogflow/cx/docs/concept/flow))。2.通过客户端([链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/services.html#google.cloud.dialogflowcx_v3beta1.services.flows.FlowsClient))。 3.通过控制台。 下面展示了通过控制台创建流。
 
-4.1.3.1 增加流：
+##### 4.1.3.1 增加流：
 
 在dialogflow cx 控制台 ->点击build-> 点击 + 号->点击create flow->输入流名 ->回车保存
 
-![image-20220125161314942](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125161314942.png)
+![image-20220125161314942](./imgs/image-20220125161314942.png)
 
- 4.1.3.2 删除流：
+##### 4.1.3.2 删除流：
 
 打开dialogflow cx 控制台 ->点击build-> 点击 + 号->点击Delete->输入流名 ->回车保存
 
@@ -370,13 +328,10 @@ Classification thredshould：
 
 删除某个流的时候需要注意与之关联的页面、流等信息，要确保删除后其他页面或者流不受影响，如果该流以后可能需要，可以选择导出存到本地，或者为该流保存一个版本，关于流的版本，请参照流的版本控制。
 
-![image-20220125161726476](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125161726476.png)
+![image-20220125161726476](./imgs/image-20220125161726476.png)
 
 
-
-
-
- 4.1.3.2 导出流：
+##### 4.1.3.3 导出流：
 
 打开dialogflow cx 控制台 ->鼠标移到要导出的流->点击三个点->点击Export flow ->回车保存
 
@@ -386,29 +341,27 @@ Cloud storage：把流存到谷歌云服务器，这个服务要额外购买。
 
 Download：存到本地
 
-![image-20220125163141835](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125163141835.png)
+![image-20220125163141835](./imgs/image-20220125163141835.png)
 
-![image-20220125163426361](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125163426361.png)
+![image-20220125163426361](./imgs/image-20220125163426361.png)
 
-
-
- 4.1.3.2 导入流：
+##### 4.1.3.2 导入流：
 
 这里仅展示将本地存储的流文件导入到代理。
 
 步骤： 打开dialogflow cx 控制台 ->点击build -> 点击Flow 右边的 +号 ->选中upload local file -> 点击select file -> 选中本地存储的流文件点击“打开” -> 单击import 按钮
 
-![image-20220125164248196](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125164248196.png)
+![image-20220125164248196](./imgs/image-20220125164248196.png)
 
-![image-20220125164334682](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125164334682.png)
+![image-20220125164334682](./imgs/image-20220125164334682.png)
 
 
 
 ## 4.2 页面
 
-![image-20220125153012686](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125153012686.png)
+![image-20220125153012686](./imgs/image-20220125153012686.png)
 
-[image-20220125170059852](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125170059852.png)
+[image-20220125170059852](./imgs/image-20220125170059852.png)
 
 ### 4.2.1 页面的特点：
 
@@ -420,46 +373,31 @@ Download：存到本地
 
 - 一个页面包含了intro
 
-  
-
-
-
-一个流可以由多个页面组成，每个流都有一个初始页面。
+- 一个流可以由多个页面组成，每个流都有一个初始页面。
 
 所以页面分为初始页面和普通页面。 
 
-![image-20220125154105480](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125154105480.png)
+![image-20220125154105480](./imgs/image-20220125154105480.png)
 
-页面的功能：
+### 4.2.2 页面的功能
 
-#### 1.Routes：
-
+1.Routes：
  这里可以新增意图以及训练语句，或者加入已建立好的意图。
 
 1.方式一： 直接新增：
 
 点击上图的Routes旁边的加号 -> 输入意图名以及训练语句、根据情况标题参数 ->选中该意图 -> save
 
-![image-20220125154450010](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125154450010.png)
+![image-20220125154450010](./imgs/image-20220125154450010.png)
 
 2.方式二： 先在意图管理区新增意图并输入好训练语句、参数标记等 -> 点击routes 右边的 加号 -> 在下拉列表中选中该意图 ->save
 
 
 
-![image-20220125154640816](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125154640816.png)
+![image-20220125154640816](./imgs/image-20220125154640816.png)
 
 
-
-
-
-
-
-
-
-
-
-
-![image-20220125103042968](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125103042968.png)
+![image-20220125103042968](./imgs/image-20220125103042968.png)
 
 1．      表示一个会话的state，通俗来讲就是该对话进行到哪一步了。
 
