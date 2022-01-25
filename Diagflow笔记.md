@@ -651,18 +651,17 @@ Prebuild Agent：
 
 ### 4.1.2 流的初始页面
 
-初始页面和普通的页面功能不一，在初始页里，你只可以：
+初始页面和普通的页面功能不一，在初始页里，你只可以：</br>
 
-1. 添加意图![image-20220125144512536](./imgs/image-20220125144512536.png)
+1. 添加意图 </br>
 
-2.不做任何操作，通过条件True执行其他操作
+2.不做任何操作，通过条件True执行其他操作</br>
 
-下面展示了如何在初始页添加条件True
+下面展示了如何在初始页添加条件True</br>
 
 ![image-20220125144904664](./imgs/image-20220125144904664.png)
 
-
-3. 自定义事件Event Handler 事件处理器
+3. 自定义事件Event Handler 事件处理器</br>
 
 ![image-20220125145157219](./imgs/image-20220125145157219.png)
 
@@ -678,7 +677,7 @@ Prebuild Agent：
 
 #### 4.1.3.1 增加流：
 
-在dialogflow cx 控制台 ->点击build-> 点击 + 号->点击create flow->输入流名 ->回车保存
+在dialogflow cx 控制台 ->点击build-> 点击 + 号->点击create flow->输入流名 ->回车保存</br>
 
 ![image-20220125161314942](./imgs/image-20220125161314942.png)
 
@@ -688,7 +687,7 @@ Prebuild Agent：
 
 建议的做法：</br>
 
-删除某个流的时候需要注意与之关联的页面、流等信息，要确保删除后其他页面或者流不受影响，如果该流以后可能需要，可以选择导出存到本地，或者为该流保存一个版本，关于流的版本，请参照流的版本控制。
+删除某个流的时候需要注意与之关联的页面、流等信息，要确保删除后其他页面或者流不受影响，如果该流以后可能需要，可以选择导出存到本地，或者为该流保存一个版本，关于流的版本，请参照流的版本控制。</br>
 
 ![image-20220125161726476](./imgs/image-20220125161726476.png)
 
@@ -711,7 +710,7 @@ Download：存到本地</br>
 
 这里仅展示将本地存储的流文件导入到代理。</br>
 
-步骤： 打开dialogflow cx 控制台 ->点击build -> 点击Flow 右边的 +号 ->选中upload local file -> 点击select file -> 选中本地存储的流文件点击“打开” -> 单击import 按钮
+步骤： 打开dialogflow cx 控制台 ->点击build -> 点击Flow 右边的 +号 ->选中upload local file -> 点击select file -> 选中本地存储的流文件点击“打开” -> 单击import 按钮</br>
 
 ![image-20220125164248196](./imgs/image-20220125164248196.png)
 
@@ -737,53 +736,56 @@ Download：存到本地</br>
 
 - 一个流可以由多个页面组成，每个流都有一个初始页面。
 
-所以页面分为初始页面和普通页面，两者的区别如下：</br>
+页面分为初始页面和普通页面，两者的区别如下：</br>
+</br>
+
 ![image](https://user-images.githubusercontent.com/30898964/151005998-1a5d23de-55b6-4810-934b-286713753a6b.png)
 
-![image-20220125154105480](./imgs/image-20220125154105480.png)
-![image](https://user-images.githubusercontent.com/30898964/151005053-02212624-31a7-4844-9f9a-6602ad403d12.png)
-![image](https://user-images.githubusercontent.com/30898964/151005099-5bbfe344-52ed-4b6b-9ed8-ef7b47d2675a.png)
 
+### 4.2.2 普通页面的功能
 
-### 4.2.2 页面的功能
-![image](https://user-images.githubusercontent.com/30898964/151007620-1b705164-7de0-4c8b-a477-2e014571ea30.png)
 当进入一个页面时候，页面的逻辑执行顺序为：</br>
 Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（如果有） -> EventHandler（如果我们为当前页设置了事件处理,如果没设置默认调Dafault Start Flow的事件处理）</br>
 
+![image](https://user-images.githubusercontent.com/30898964/151007620-1b705164-7de0-4c8b-a477-2e014571ea30.png)
+
 #### 4.2.2.1 Routes：
 ![image](https://user-images.githubusercontent.com/30898964/151006965-ebb7d14e-7f30-4b64-82ed-8bf86b7b1937.png)
+在页面单击"Routes"进入上图的显示界面。</br>
 上图的模块解释</br>
-- Intent： 选择意图，当用户
+- Intent： 选择意图，意思是在当会话进入当前页面时，该意图才有机会被命中，对于没有添加到该页的意图，一定不会当前页面被命中。
 - Condition: 判断条件
 
 - Fulfillment： 命中意图或条件的时候，代理的回复文字
 - Transition： 下一步的操作：
 Transition 决定了会话下一步的走向，在这里可以设置转移到某个Page或者Flow，或者结束对话。</br>
+
 1.选中Page单选按钮 </br>
+
 下拉框选项解释</br>
-+ new Page: 新增页 </br>
--- 不做什么操作</br>
-page1： 转移到其他页，这里page1为我设置的页面名，这个因您的情况而异</br>
-Start ：转移到该flow的start页 </br>
-End Flow：结束当前flow，使用该session id再次发生会话时，会话的会从Default start flow开始</br>
-End Session：结束会话。</br>
-Previous Page:转移到上一页
-Current Page：转移到本页，可能会导致死循环，慎用！
+- \+ new Page: 新增页 </br>
+- -- 不做什么操作</br>
+- page1： 转移到其他页，这里page1为我设置的页面名，这个因您的情况而异</br>
+- Start ：转移到该flow的start页 </br>
+- End Flow：结束当前flow，使用该session id再次发生会话时，会话的会从Default start flow开始</br>
+- End Session：结束会话。</br>
+- Previous Page:转移到上一页
+- Current Page：转移到本页，可能会导致死循环，慎用！
 
-1.选中Flow单选按钮 </br>
+2.选中Flow单选按钮 </br>
+
 下拉框选项解释</br>
-+ new Flow 新建流</br>
--- 不做什么操作</br>
-book table 转移到已有的自定义流</br>
-Default Start Flow 转移到代理默认开始流</br>
+- \+ new Flow 新建流</br>
+- -- 不做什么操作</br>
+- book table 转移到已有的自定义流</br>
+- Default Start Flow 转移到代理默认开始流</br>
 
-
-##### 4.2.1.1 Routes之添加意图
- 这里可以新增意图以及训练语句，或者加入已建立好的意图，非必选</br>
+##### 4.2.1.1 Routes -- 添加意图
+在这里可以你可以新增意图及其训练语句，或者加入已建立好的意图，非必选。</br>
 
 1.方式一： 直接新增</br>
 
-点击上图的Routes旁边的加号 -> 输入意图名以及训练语句、根据情况标题参数 ->选中该意图 -> save
+点击上图的Routes旁边的加号 -> 输入意图名以及训练语句、根据情况标题参数 ->选中该意图 -> save</br>
 
 ![image-20220125154450010](./imgs/image-20220125154450010.png)
 
@@ -793,7 +795,8 @@ Default Start Flow 转移到代理默认开始流</br>
 
 ![image-20220125103042968](./imgs/image-20220125103042968.png)
 
-##### 4.2.1.2 Routes之添加判断条件
+##### 4.2.1.2 Routes--添加判断条件
+
 
 
 
