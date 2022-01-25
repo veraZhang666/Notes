@@ -1,134 +1,95 @@
-- [1. 创建google cloud项目](#1---google-cloud--)
-  * [步骤](#--)
-    + [1. 1 登录google cloud platform](#1-1---google-cloud-platform)
-    + [1.2.新建项目](#12----)
-      - [1.2.1第一步：](#121----)
-      - [2.2 第二步：](#22-----)
-    + [2.3 第三步：](#23-----)
-    + [2.4 第四步：](#24-----)
-    + [基于本公司的项目管理方法：](#-------------)
-    + [3. 设置环境变量](#3-------)
-    + [3.1 windows+pycharm的环境变量设置。](#31-windows-pycharm--------)
-    + [2.2 linux, mac用户的环境变量设置](#22-linux--mac---------)
-- [2.代理、流、页面](#2-------)
-  * [2.1 创建dialogflow cx 代理](#21---dialogflow-cx---)
-- [3. dialogflow 控制台面板功能介绍](#3-dialogflow----------)
-      - [3.1 Build](#31-build)
-      - [3.2 Manage](#32-manage)
-    + [3.3 Agent Test](#33-agent-test)
-      - [3.4 Agent settings](#34-agent-settings)
-- [4. 流、页面、意图、实体、参数的概念](#4-----------------)
-  * [4.1 流](#41--)
-      - [4.1.1 流的特点](#411-----)
-      - [4.1.2 流的初始页面](#412-------)
-  * [4.2 页面](#42---)
-    + [4.2.1 页面的特点：](#421-------)
-      - [1.Routes：](#1routes-)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+# 1. 创建Google Cloud 项目
 
-
-Dialog flow cx 教程-简易版
-
----
-
-
-
-# 1. 创建google cloud项目
-[链接](https://cloud.google.com/docs/authentication/getting-started)
-
-## 步骤
-创建google cloud项目->为该项目创建服务账号->生成密匙
-
-### 1. 1 登录google cloud platform
+## 1.1 登录google cloud platform
 
 [登录链接](https://console.cloud.google.com/user-preferences/cloud-profile)
 
+## 1.2 新建项目
 
-### 1.2.新建项目
-
-#### 1.2.1第一步：
+### 1.2.1 步骤1：
 
 ![image-20220124194935803](./imgs/image-20220124194935803.png)
 
 
-#### 2.2 第二步：
+### 1.2.2 步骤2：
 
 ​			注：一个google 账号可以创建25个项目，如需要创建更多项目，需要申请开通。
 
-![image-20220124195545285](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220124195545285.png)
+![image-20220124195545285](./imgs/image-20220124195545285.png)
 
 ​				稍等几分钟，刷新 google cloud platform, 刚创建的项目已经展示在项目列表里
 
-​				![image-20220124200940218](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220124200940218.png)
+​				![image-20220124200940218](./imgs/image-20220124200940218.png)
 
 
 
-### 2.3 第三步：
+## 1.3 为该项目创建服务账号 
 
-创建服务账号
+### 1.3.1 什么是服务账号？
 
-什么是服务账号？
-计算机用的虚拟账号，用来访问google could资源。
+是一个供计算机用的虚拟账号，用来访问Google Cloud资源。
 [链接](https://cloud.google.com/iam/docs/service-accounts?hl=zh-cn&_ga=2.98308319.-139742340.1639388700)
 
+### 1.3.2 创建步骤
 
-![image-20220124201854459](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220124201854459.png)
+#### 1.3.2.1 步骤1
+![image-20220124201854459](./imgs/image-20220124201854459.png)
+
+#### 1.3.2.2 步骤2 
+
+![image-20220124202446756](./imgs/image-20220124202446756.png)
+
+#### 1.3.2.3 步骤3
+
+![image-20220124202551723](./imgs/image-20220124202551723.png)
 
 
+## 1.4 为该服务账号创建其密匙
 
-![image-20220124202446756](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220124202446756.png)
+### 1.4.1 步骤1
 
 
+![image-20220125084221441](./imgs/image-20220125084221441.png)
 
-![image-20220124202551723](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220124202551723.png)
-
-​		
-
-​			创建服务账号成功
-
-### 2.4 第四步：
-创建密匙
-
-​			![image-20220125084221441](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125084221441.png)
-
-![image-20220125084258081](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125084258081.png)
+### 1.4.2 步骤2
+![image-20220125084258081](./imgs/image-20220125084258081.png)
 
 
 选择json,点击创建后自动下载json格式的密匙，稍后将会用到。
 
-![image-20220125084341615](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125084341615.png)
+![image-20220125084341615](./imgs/image-20220125084341615.png)
 
+## 1.5 最佳做法与解决方案
 
-
-谷歌技术人员给出的建议：
+### 1.5.1 谷歌技术人员给出的建议：
 为一个谷歌项目创建其对应的服务账号，如果有多个谷歌项目，就需要多个服务账号，这样方便账单的计算。 这样基于最小权限原则，对项目管理也相对安全。 
 
-### 基于本公司的项目管理方法：
+基于公司的业务需求，服务账号该以如下方法进行管理。 
 
-影响因素：
-
+客观因素：
 1. 在linux环境变量中只能设置一个json密匙。
-
-2. 一个谷歌项目对应一个的dialogflow cx项目，一个谷歌项目需要一个与之对应的服务账号，一个服务账号可以选择生成或者不生成密匙，通过密匙，我们可以使用客户端或者API的方式访问该dialogflow cx项目的相关信息和功能，包括代理的操作。使用项目A的json密匙不可以访问项目B的任何信息，这导致了我们无法用一个把密匙访问多个dialogflow cx项目。
+2. 一个谷歌项目对应一个的dialogflow cx项目，一个谷歌项目需要一个与之对应的服务账号，一个服务账号可以选择生成或者不生成密匙。通过密匙，我们可以使用客户端或者API的方式访问该dialogflow cx项目的相关信息和功能，使用项目A的json密匙不可以访问项目B的任何信息，这导致了我们无法用一个把密匙访问多个dialogflow cx项目。
 
 解决方法：
 
-将其中一个服务账号作为父账号，其功能是生成json密匙，我们可以根据需求将父账号的作为owner的角色添加到子账号2-N。 谷歌的服务账号本身并没有父子等级关系，这样做完全的基于本公司的需求。
-这样就做到了用一把json密匙，访问到多个dialogflow cx项目
+将其中一个服务账号作为父账号，其功能是生成json密匙，我们可以根据需求将父账号的作为owner的角色添加到子账号。 谷歌的服务账号本身并没有父子等级关系，这样做完全基于公司的的业务管理需求。
+以此达到了使用一把json密匙，访问到多个dialogflow cx项目
 
-具体步骤：
-现在有两个project，分别为projectTest1，catering Robot，这两个项目都已经通过上面的方式建立了自己的服务账号。我们想要做到用catering Robot的密匙访问projectTest1.
+### 1.5.2 具体步骤：
+假如现在有两个project，分别为projectTest1，catering Robot。 这两个项目都已经通过上面的方式建立了自己的服务账号，我们想要做到用catering Robot的密匙访问projectTest1.
 
-1.复制catering Robot的服务账号。
+步骤1：
+复制catering Robot的服务账号。
 
-![image-20220125132231056](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125132231056.png)
+![image-20220125132231056](./imgs/image-20220125132231056.png)
 
-2. 添加catering robot的服务账号到projectTest1，并给予owner权限。
+步骤2：
+添加catering robot的服务账号到projectTest1，并给予owner权限。
 
-![image-20220125132427052](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125132427052.png)
+![image-20220125132427052](./imgs/image-20220125132427052.png)
 
-![image-20220125132619330](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125132619330.png)
+![image-20220125132619330](./imgs/image-20220125132619330.png)
 
 
 
