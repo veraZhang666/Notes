@@ -459,9 +459,6 @@ Download：存到本地
 
 
 
-
-
-
 ![image-20220125103042968](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20220125103042968.png)
 
 1．      表示一个会话的state，通俗来讲就是该对话进行到哪一步了。
