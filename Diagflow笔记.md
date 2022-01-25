@@ -243,12 +243,13 @@ language_code：代理所使用的主识别语言
 
 更新时间2022.1.25
 
-区域：
-us-central1 (Iowa, USA)
-us-east1 (South Carolina, USA)
-us-west1 (Oregon, USA)
-asia-northeast1 (Tokyo, Japan)
-asia-south1 (Mumbai, India)
+区域：<br/>
+```python
+us-central1 (Iowa, USA)<br/>
+us-east1 (South Carolina, USA)<br/>
+us-west1 (Oregon, USA)<br/>
+asia-northeast1 (Tokyo, Japan)<br/>
+asia-south1 (Mumbai, India)<br/>
 asia-southeast1 (Jurong West, Singapore)
 australia-southeast1 (Sydney, Australia)
 northamerica-northeast1 (Montréal, Québec, Canada)
@@ -256,6 +257,8 @@ europe-west1 (St. Ghislain, Belgium)
 europe-west2 (London, England, UK)
 europe-west3 (Frankfurt, Germany)
 global (Global serving, data-at-rest in US)
+```
+
 
 语言：
 af — Afrikaans
