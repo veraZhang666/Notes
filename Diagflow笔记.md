@@ -245,6 +245,7 @@ language_code：代理所使用的主识别语言
 
 区域：<br/>
 ```python
+'''
 us-central1 (Iowa, USA)<br/>
 us-east1 (South Carolina, USA)<br/>
 us-west1 (Oregon, USA)<br/>
@@ -257,6 +258,7 @@ europe-west1 (St. Ghislain, Belgium)
 europe-west2 (London, England, UK)
 europe-west3 (Frankfurt, Germany)
 global (Global serving, data-at-rest in US)
+'''
 ```
 
 
