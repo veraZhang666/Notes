@@ -142,7 +142,10 @@
 
 拿到上一步下载的json密匙绝对路径
 
-#### 3.1 windows+pycharm的环境变量设置。
+#### 3.1 windows 用户的环境变量设置
+
+前提：
+windows+pycharm 
 
 以下配置方法生效范围为整个pycharm项目目录
 
@@ -168,7 +171,7 @@
 
 
 
-#### 3.2 linux, mac用户的环境变量设置
+#### 3.2 linux, mac 用户的环境变量设置
 
 可以直接把json密匙路径配置到用户环境变量，生效范围为该linux系统的用户，当然你也可也设置linux系统级的环境变量（参照链接：https://www.cnblogs.com/lihao-blog/p/6945040.html）
 
@@ -192,8 +195,6 @@ export GOOGLE_APPLICATION_CREDENTIALS=/var/www_r/www_bot/catering-robot-aecbcb62
 
 ![image-20220125095852958](./imgs/image-20220125095852958.png)
 
-
-
 4 最后执行
 
 source ~/.bashrc
@@ -204,9 +205,9 @@ source ~/.bashrc
 
 # 2.代理的操作：
 ## 2.1 代理的创建
-
-[登录链接](https://dialogflow.cloud.google.com/cx/projects)
-
+我们可以通过API、客户端、控制台创建代理
+这里仅展示通过控制台、客户端创建代理。
+### 2.1.1 通过控制台创建
 登录后，在project下拉框，你会发现刚刚创建的google could 项目 projectTest已经显示到了这里。
 
 1.点击 Enable API ->create agent
@@ -232,10 +233,204 @@ dialogflow代理id为谷歌自动生成，创建代理成功后可以通过API�
 一个google dialogflow cx项目（也叫google cloud项目）下可以创建1000个代理，具体参数限制如下表。
 
 ![image-20220125101122308](./imgs/image-20220125101122308.png)
+### 2.1.2 通过客户端创建
+#### 2.1.2.1 创建代理需要传入参数
+project_id：项目id， 这个可以通过复制dialogflow控制台拿到
+location：代理所在的谷歌服务器区域，目前已经开通12个服务区域
+time_zone：代理所使用的时间
+language_code：代理所使用的主识别语言
+#### 2.1.2.2 代理的可选时区、语言、区域表
 
-## 2.2 代理的导入
-## 2.3 代理的导出
+更新时间2022.1.25
+
+区域：
+us-central1 (Iowa, USA)
+us-east1 (South Carolina, USA)
+us-west1 (Oregon, USA)
+asia-northeast1 (Tokyo, Japan)
+asia-south1 (Mumbai, India)
+asia-southeast1 (Jurong West, Singapore)
+australia-southeast1 (Sydney, Australia)
+northamerica-northeast1 (Montréal, Québec, Canada)
+europe-west1 (St. Ghislain, Belgium)
+europe-west2 (London, England, UK)
+europe-west3 (Frankfurt, Germany)
+global (Global serving, data-at-rest in US)
+
+语言：
+af — Afrikaans
+am — Amharic
+ar — Arabic
+az — Azerbaijani
+be — Belarusian
+bg — Bulgarian
+bn — Bengali
+bs — Bosnian
+ca — Catalan
+ceb — Cebuano
+co — Corsican
+cs — Czech
+cy — Welsh
+da — Danish
+de — German
+el — Greek
+en — English
+eo — Esperanto
+es — Spanish
+et — Estonian
+eu — Basque
+fa — Persian
+fi — Finnish
+fil — Filipino
+fr — French
+fy — Frisian
+ga — Irish
+gd — Scots
+gl — Galician
+gu — Gujarati
+ha — Hausa
+hi — Hindi
+hmn — Hmong
+hr — Croatian
+ht — Haitian
+hu — Hungarian
+hy — Armenian
+id — Indonesian
+ig — Igbo
+is — Icelandic
+it — Italian
+iw — Hebrew
+ja — Japanese
+jv — Javanese
+ka — Georgian
+kk — Kazakh
+km — Khmer
+kn — Kannada
+ko — Korean (South Korea)
+ku — Kurdish
+ky — Kyrgyz
+la — Latin
+lb — Luxembourgish
+lt — Lithuanian
+lv — Latvian
+mg — Malagasy
+mi — Maori
+mk — Macedonian
+ml — Malayalam
+mn — Mongolian
+mr — Marathi
+ms — Malay
+mt — Maltese
+ne — Nepali
+nl — Dutch
+no — Norwegian
+ny — Chichewa
+or — Odia
+pa — Punjabi
+pl — Polish
+ps — Pashto
+pt — Portuguese (European)
+pt-br — Portuguese (Brazilian)
+ro — Romanian
+ru — Russian
+rw — Kinyarwanda
+sd — Sindhi
+si — Sinhala
+sk — Slovak
+sl — Slovenian
+sm — Samoan
+sn — Shona
+so — Somali
+sq — Albanian
+sr — Serbian
+st — Sesotho
+su — Sundanese
+sv — Swedish
+sw — Swahili
+ta — Tamil
+te — Telugu
+tg — Tajik
+th — Thai
+tk — Turkmen
+tr — Turkish
+tt — Tatar
+ug — Uyghur
+uk — Ukrainian
+ur — Urdu
+uz — Uzbek
+vi — Vietnamese
+xh — Xhosa
+yi — Yiddish
+yo — Yoruba
+zh-cn — Chinese (Simplified)
+zh-hk — Chinese (Hong Kong)
+zh-tw — Chinese (Traditional)
+zu — Zulu
+
+时区：
+(GMT+1:00) Africa/Casablanca
+(GMT-9:00) America/Anchorage
+(GMT-4:00) America/Barbados
+(GMT-3:00) America/Buenos_Aires
+(GMT-6:00) America/Chicago
+(GMT-7:00) America/Denver
+(GMT-8:00) America/Los_Angeles
+(GMT-5:00) America/New_York
+(GMT+6:00) Asia/Almaty
+(GMT+7:00) Asia/Bangkok
+(GMT+5:30) Asia/Colombo
+(GMT+4:00) Asia/Dubai
+(GMT+8:00) Asia/Hong_Kong
+(GMT+4:30) Asia/Kabul
+(GMT+5:45) Asia/Kathmandu
+(GMT+6:30) Asia/Rangoon
+(GMT+9:00) Asia/Tokyo
+(GMT+5:00) Asia/Yekaterinburg
+(GMT-1:00) Atlantic/Cape_Verde
+(GMT-2:00) Atlantic/South_Georgia
+(GMT+9:30) Australia/Darwin
+(GMT+10:00) Australia/Sydney
+(GMT-12:00) Etc/GMT+12
+(GMT+2:00) Europe/Kaliningrad
+(GMT) Europe/London
+(GMT+1:00) Europe/Madrid
+(GMT+3:00) Europe/Moscow
+(GMT+12:00) Pacific/Fiji
+(GMT-10:00) Pacific/Honolulu
+(GMT-11:00) Pacific/Midway
+(GMT+11:00) Pacific/Noumea
+(GMT+13:00) Pacific/Tongatapu
+(GMT-9:00) US/Alaska
+
+#### 2.1.2.3 代码段
+```python
+def crateAgent(project_id='catering-robot',location='asia-northeast1',time_zone='Asia/Hong_Kong',language_code='en'):
+    agent_name_uuid = str(uuid.uuid4())
+    agent_name_base = 'cateringAgent'
+    agent_readable_name = agent_name_base + agent_name_uuid
+    agent_id = str(uuid.uuid4())
+    agent = Agent()
+    agent.display_name = agent_readable_name
+    agent.default_language_code = language_code
+    agent.time_zone = time_zone
+
+    parent = f'projects/catering-robot/locations/{location}'
+    create_agent_request = CreateAgentRequest(parent=parent,agent=agent)
+    agentClient = AgentsClient(client_options={"api_endpoint": f"{location}-dialogflow.googleapis.com"})
+    agent_response= agentClient.create_agent(create_agent_request)
+    print(agent_response)
+    return agent_response.name
+  
+```
+
+## 2.2 代理的导出
+### 2.3 使用控制台导出
+![image](https://user-images.githubusercontent.com/30898964/150994138-4e1a7d7a-3f05-46a4-91aa-bb2f5b4bf02c.png)
+
+
+## 2.3 代理的导入
 ## 2.4 代理的删除
+
 
 
 # 3. dialogflow 控制台面板功能介绍
