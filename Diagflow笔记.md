@@ -1,6 +1,6 @@
 - [1. 创建Google Cloud 项目](#1---google-cloud---)
-  * [1.1 登录google cloud platform](#11---google-cloud-platform)
-  * [1.2 新建项目](#12-----)
+  + [1.1 登录google cloud platform](#11---google-cloud-platform)
+  + [1.2 新建项目](#12-----)
     + [1.2.1 步骤1：](#121---1-)
     + [1.2.2 步骤2：](#122---2-)
   * [1.3 为该项目创建服务账号](#13-----------)
