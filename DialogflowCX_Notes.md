@@ -17,7 +17,7 @@
 &emsp;<a href="#14">1.5 最佳做法与解决方案</a>  
 &emsp;&emsp;<a href="#15">1.5.1 谷歌技术人员给出的建议</a>  
 &emsp;&emsp;<a href="#16">1.5.2 具体步骤</a>  
-&emsp;&emsp;<a href="#17">1.6 设置环境变量</a>  
+&emsp;<a href="#17">1.6 设置环境变量</a>  
 &emsp;&emsp;&emsp;<a href="#18">1.6.1 windows 用户的环境变量设置</a>  
 &emsp;&emsp;&emsp;<a href="#19">1.6.2 linux, mac 用户的环境变量设置</a>  
 <a href="#20">2.代理的操作</a>  
