@@ -159,10 +159,6 @@ windows+pycharm
 
 ![image-20220125094238473](./imgs/image-20220125094238473.png)
 
-
-
-![image-20220125094317033](./imgs/image-20220125094317033.png)
-
 在红色框出输入GOOGLE_APPLICATION_CREDENTIALS=C:\Users\admin\xxxx\xxxbcb6202b4.json
 
 点击apply，这样你就可以访问谷歌项目了。
@@ -235,11 +231,11 @@ dialogflow代理id为谷歌自动生成，创建代理成功后可以通过API�
 ![image-20220125101122308](./imgs/image-20220125101122308.png)
 ### 2.1.2 通过客户端创建
 #### 2.1.2.1 创建代理需要传入参数
-project_id：项目id， 这个可以通过复制dialogflow控制台拿到
-location：代理所在的谷歌服务器区域，目前已经开通12个服务区域
-time_zone：代理所使用的时间
-language_code：代理所使用的主识别语言
-display_name： 给代理取名，注意一个区域下的代理名字不能重复
+project_id：项目id， 这个可以通过复制dialogflow控制台拿到</br>
+location：代理所在的谷歌服务器区域，目前已经开通12个服务区域</br>
+time_zone：代理所使用的时间</br>
+language_code：代理所使用的主识别语言</br>
+display_name： 给代理取名，注意一个区域下的代理名字不能重复</br>
 #### 2.1.2.2 代理的可选时区、语言、区域表
 
 更新时间2022.1.25
@@ -450,13 +446,13 @@ def crateAgent(project_id='catering-robot',location='asia-northeast1',time_zone=
 ```
 
 ## 2.2 代理的导出
-### 2.3 使用控制台导出
-#### 2.3.1 步骤1
+### 2.2.1 使用控制台导出
+步骤1</br>
 ![image](https://user-images.githubusercontent.com/30898964/150994138-4e1a7d7a-3f05-46a4-91aa-bb2f5b4bf02c.png)
-#### 2.3.2 步骤2
+步骤2</br>
 ![image](https://user-images.githubusercontent.com/30898964/150997846-3822be2d-1bc7-49db-b099-822f6eec67dd.png)
 
-### 2.4 使用客户端库导出
+### 2.2.2 使用客户端库导出
 [文档链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/agents.html)
 
 这里只是为了展示代理导出的功能才使用while True，实际项目中，请不要这样使用。</br>
@@ -635,35 +631,20 @@ Prebuild Agent：
 ![image-20220125140729785](./imgs/image-20220125140729785.png)
 
 
-# 4. 流、页面、意图、实体、参数的概念
+# 4. 流、页面、意图、实体的概念和用法
 
 ## 4.1 流
 
 ### 4.1.1 流的特点
 
-每个代理都有一个名为[默认初始流](https://cloud.google.com/dialogflow/cx/docs/concept/flow#start)的流。对于简单的代理，您可能只需要这一个流。较复杂的代理可能需要更多的流，不同的开发团队成员可以负责构建和维护这些流。也就是当业务广或很复杂的时候，我们可以把功能抽象出来，用一个流执行一类的功能操作，这样方便流的管理和后期流的版本控制。
+- 每个代理有且仅有一个默认初始流Default start flow[默认初始流](https://cloud.google.com/dialogflow/cx/docs/concept/flow#start)的流，这是一轮对话的入口。对于简单的代理，您可能只需要这一个流。较复杂的代理可能需要更多的流，不同的开发团队成员可以负责构建和维护这些流。也就是当业务广或很复杂的时候，我们可以把功能抽象出来，用一个流执行一类的功能操作，这样方便流的管理和后期流的版本控制。
 
-多个流之间可以相互协作，数据可以共享。 
+- 多个流之间可以相互协作，数据可以共享。 
 
-每个代理仅有一个默认的初始流，初始流是对话的入口。初始流的ID为00000000-0000-0000-0000-000000000000
+- 默认初始流的ID为00000000-0000-0000-0000-000000000000
 
-每个流都有一个默认的start page，在调用该代理的API或使用客户端时，可以通过 pageId=START_PAGE 判断是否为开始流。
+- 每个流都有一个默认的start page，在调用该代理的API或使用客户端时，可以通过 pageId=START_PAGE 判断是否为开始流。
 
-### 4.1.2 流的初始页面
-
-初始页面和普通的页面功能不一，在初始页里，你只可以：</br>
-
-1. 添加意图 </br>
-
-2.不做任何操作，通过条件True执行其他操作</br>
-
-下面展示了如何在初始页添加条件True</br>
-
-![image-20220125144904664](./imgs/image-20220125144904664.png)
-
-3. 自定义事件Event Handler 事件处理器</br>
-
-![image-20220125145157219](./imgs/image-20220125145157219.png)
 
 
 
@@ -722,7 +703,6 @@ Download：存到本地</br>
 
 ![image-20220125153012686](./imgs/image-20220125153012686.png)
 
-[image-20220125170059852](./imgs/image-20220125170059852.png)
 
 ### 4.2.1 页面的特点：
 
@@ -736,51 +716,141 @@ Download：存到本地</br>
 
 - 一个流可以由多个页面组成，每个流都有一个初始页面。
 
+
 页面分为初始页面和普通页面，两者的区别如下：</br>
 </br>
 
 ![image](https://user-images.githubusercontent.com/30898964/151005998-1a5d23de-55b6-4810-934b-286713753a6b.png)
 
+### 4.2.2 初始页面的功能
 
-### 4.2.2 普通页面的功能
+初始页面和普通的页面功能不一，在初始页里，你只可以：</br>
 
-当进入一个页面时候，页面的逻辑执行顺序为：</br>
+1. 添加意图 </br>
+
+2.不做任何操作，通过条件True执行其他操作</br>
+
+下面展示了如何在初始页添加条件True</br>
+
+![image-20220125144904664](./imgs/image-20220125144904664.png)
+
+3. 自定义事件Event Handler 事件处理器</br>
+
+![image-20220125145157219](./imgs/image-20220125145157219.png)
+
+
+### 4.2.3 普通页面的功能
+
+当进入一个页面时候，页面的执行顺序为：</br>
 Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（如果有） -> EventHandler（如果我们为当前页设置了事件处理,如果没设置默认调Dafault Start Flow的事件处理）</br>
 
 ![image](https://user-images.githubusercontent.com/30898964/151007620-1b705164-7de0-4c8b-a477-2e014571ea30.png)
 
-#### 4.2.2.1 Routes：
+#### 4.2.3.1 Entry fulfillment 
+在这里你可以根据业务逻辑添加回复，或者介绍一类的语句。入口fulfillment会在进入该页时立即被调用。</br>
+
+
+#### 4.2.3.2 Parameters参数收集
+参数分为：</br>
+- 意图参数
+- 表单参数
+- 会话参数
+
+1.意图参数</br>
+意图参数在为意图添加训练语句时，系统会自动提取并添加。 </br>
+
+意图使用参数来提取在意图匹配时最终用户提供的数据。以下数据用于定义意图参数：
+- 名称（也称为 ID 或显示名）：用于标识参数的名称。
+- 实体类型：与参数关联的实体类型。
+- 为列表：如果为 true，则该参数会被视为值列表。
+- 在日志中隐去 (Redact in log)：如果设置为 true，最终用户提供的参数数据会隐去。</br>
+1.1名称
+见下图箭头 </br>
+我的实体类型为color，下图为color的实体集合
+![image](https://user-images.githubusercontent.com/30898964/151097170-0595a7ae-922e-4bf4-bf86-11e0963ead21.png)
+下图为意图训练语句。</br>
+![image](https://user-images.githubusercontent.com/30898964/151097364-6449150b-c65a-4bf3-9d5f-c17f2e2917fd.png)
+1.2.实体类型</br>
+实体类型，也就是上图中的Entity entype</br>
+1.3.为列表</br>
+当你想通过一个意图收集多个同类型实体时使用。</br>
+例子：我希望收集用户喜欢的颜色。</br>
+在上图训练语句中，我在一条训练语句中标记了color类型的实体中的两个参数,勾选了右边的is List方框。</br>
+效果是提取到了用户说的所有颜色实体。</br>
+![image](https://user-images.githubusercontent.com/30898964/151097723-2e21ce78-ef94-4871-9e68-75fd4c3aa17c.png)
+</br>
+1.4.在日志中隐去。</br>
+ 例如，假设最终用户输入“My address is 1600 Amphitheatre Parkway”，则 address 参数会设置为“1600 Amphitheatre Parkway”。日志记录的文字将为“My address is $address_redacted”。</br>
+意图参数的引用：</br>
+- $intent.params.parameter-id.original 引用实体原名
+- $intent.params.parameter-id.resolved 引用用户说出的实体名
+
+2.表单参数</br>
+- 为每个页面定义一个表单，该表单上列出应从该页面的最终用户处收集的参数，可以理解为槽位填充。</br>
+- 表单参数按照参数的顺序收集。</br>。
+- 当前页面可以访问其他页、流的表单参数。访问方式为$session.params.xxx, 访问当前页面的表单参数方式为$page.params.xxx</br>
+- 所有的表单参数都会被写入会话参数，在会话期间收集的参数，有效范围为一轮会话，当会话结束时，所有参数会被清空。</br>
+注意： 在收集参数的时候注意在先前页或者流中是否已经收集了这个参数，如果已经收集了，假设参数名为name，这时候你在当页再次收集同名参数，就不会产生一个参数收集的执行，系统认为参数已经被收集了，没必要再收集一次。如果在当前页在路由中你加入了参数收集完毕的条件路由，此时将会直接执行该路由。</br>
+2.1 表单参数的状态判断：</br>
+$page.params.status = "FINAL"  检查当前页面的整个表单是否已填充</br>
+$page.params.parameter-id.status = "UPDATED" 检查上轮对话中是否填充了特定表单参数</br>
+
+![image](https://user-images.githubusercontent.com/30898964/151092738-51cf7d58-8a31-44fb-a6ad-e5950ddc0a69.png)
+
+2.2 设置表单参数：</br>
+点击页面的Parameters->填写右侧的参数收集表</br>
+Requried的意思是如果你设置了参数的默认值，这里如果勾选Required，就会收集该参数值，而不使用默认值。</br>
+isList 和 Redact in Log 的意思请参照上面的解释。</br>
+
+3.会话参数：</br>
+当在运行时设置任何类型的参数时，该参数将被写入会话并成为会话参数。这些参数在设计时未明确定义。您可以在会话期间随时引用这些会话参数。</br>
+引用会话参数</br>
+会话参数引用可用于以下类型的 fulfillment 的静态响应消息中：</br>
+
+页面条目 fulfillment</br>
+路由 fulfillment</br>
+事件处理程序 fulfillment</br>
+表单提示 fulfillment</br>
+表单重新提示 fulfillment</br>
+引用方式：</br>
+$session.params.parameter-id
+
+如：$session.params.color color为收集参数的时候填写的参数名
+#### 4.2.3.2 Add state handler 状态处理
+![image](https://user-images.githubusercontent.com/30898964/151103822-5a52bed4-610e-47d5-9b4d-dd9312774a9e.png)
+
+state handler 共有三种（如上图）：</br>
+- Routes（路由） 决定了对话的逻辑
+- Routes groups  一组路由的封装
+- Event Handler  用于事件处理
+##### 4.2.2.2.1 Routes 路由
+1.Routes分为意图路由和条件路由。</br>
+什么时候系统将调用Routes？</br>
+- 当某个用户意图被命中时候。</br>
+- 当某个会话状态的条件被满足时。条件路由的使用情况：</br>
+当你需要做参数判断，比如你拿到了会话参数或页面参数，需要将其与一个特定数字做判断。</br>
+当你需要拿一个参数，你需要判断他是否在一个集合里。 </br>
+条件操作符： </br>
+HAS (:) </br>
+EQUALS (=) </br>
+NOT_EQUALS (!=) </br>
+LESS_THAN (<) </br>
+LESS_THAN_EQUALS (<=) </br>
+GREATER_THAN (>) </br>
+GREATER_THAN_EQUALS (>=) </br>
+
 ![image](https://user-images.githubusercontent.com/30898964/151006965-ebb7d14e-7f30-4b64-82ed-8bf86b7b1937.png)
 在页面单击"Routes"进入上图的显示界面。</br>
 上图的模块解释</br>
-- Intent： 选择意图，意思是在当会话进入当前页面时，该意图才有机会被命中，对于没有添加到该页的意图，一定不会当前页面被命中。
+- Intent： 选择意图
 - Condition: 判断条件
-
 - Fulfillment： 命中意图或条件的时候，代理的回复文字
 - Transition： 下一步的操作：
-Transition 决定了会话下一步的走向，在这里可以设置转移到某个Page或者Flow，或者结束对话。</br>
+- Transition 决定了会话下一步的走向，在这里可以设置转移到某个Page或者Flow，或者结束对话。</br>
 
-1.选中Page单选按钮 </br>
-
-下拉框选项解释</br>
-- \+ new Page: 新增页 </br>
-- -- 不做什么操作</br>
-- page1： 转移到其他页，这里page1为我设置的页面名，这个因您的情况而异</br>
-- Start ：转移到该flow的start页 </br>
-- End Flow：结束当前flow，使用该session id再次发生会话时，会话的会从Default start flow开始</br>
-- End Session：结束会话。</br>
-- Previous Page:转移到上一页
-- Current Page：转移到本页，可能会导致死循环，慎用！
-
-2.选中Flow单选按钮 </br>
-
-下拉框选项解释</br>
-- \+ new Flow 新建流</br>
-- -- 不做什么操作</br>
-- book table 转移到已有的自定义流</br>
-- Default Start Flow 转移到代理默认开始流</br>
-
-##### 4.2.1.1 Routes -- 添加意图
+具体用法：
+1.Intent：</br>
+意思是在当会话进入当前页面时，该意图才有机会被命中，对于没有添加到该页的意图，一定不会当前页面被命中。</br>
 在这里可以你可以新增意图及其训练语句，或者加入已建立好的意图，非必选。</br>
 
 1.方式一： 直接新增</br>
@@ -794,9 +864,128 @@ Transition 决定了会话下一步的走向，在这里可以设置转移到某
 ![image-20220125154640816](./imgs/image-20220125154640816.png)
 
 ![image-20220125103042968](./imgs/image-20220125103042968.png)
+2.Condition: </br>
+条件的三个逻辑选项： </br>
+2.1.OR</r>
+当你设置了多个条件，当其中一个条件被满足，这个路由就会被触发。</br>
+![image](https://user-images.githubusercontent.com/30898964/151087713-5aa0f331-62b2-4292-9cba-c7981acc27d0.png)
 
-##### 4.2.1.2 Routes--添加判断条件
+2.2 AND</br>
+当你设置了多个条件，所有的条件都满足，这个路由才会被触发。</br>
+例子：假设你在对话中收集了顾客年龄信息，你现在需要根据顾客的年龄给出不同的回复。</br>
+当满足条件 20<顾客年龄<30 才被触发  </br>
+![image](https://user-images.githubusercontent.com/30898964/151086934-4929d087-5224-4d89-bc19-9a8504697eb3.png)
 
+2.3.Customize expression</br>
+自定义表达式，请将条件判断语句写到这里。</br>
+[条件链接](https://cloud.google.com/dialogflow/cx/docs/reference/condition)
+![image](https://user-images.githubusercontent.com/30898964/151086144-9dfdeaf7-a3c4-4c8d-a60c-4dc82c7a5422.png)
+
+3.Fulfillment</br>
+代理的回复语句，如果你写了多行，将会以随机的方式选出一句作为回复语句。</br>
+
+4.Transition</br>
+当意图路由或者条件路由被触发的时候，页面的走向。</br>
+
+4.1.选中Page单选按钮 </br>
+下拉框选项解释</br>
+- \+ new Page: 新增页 </br>
+- -- 不做什么操作</br>
+- page1： 转移到其他页，这里page1为我设置的页面名，这个因您的情况而异</br>
+- Start ：转移到该flow的start页 </br>
+- End Flow：结束当前flow，使用该session id再次发生会话时，会话的会从Default start flow开始</br>
+- End Session：结束会话。</br>
+- Previous Page:转移到上一页</br>
+- Current Page：转移到本页，如果本页没有有效的转移，可能会导致死循环，慎用！</br>
+
+4.2 选中Flow单选按钮 </br>
+
+下拉框选项解释</br>
+- \+ new Flow 新建流</br>
+- -- 不做什么操作</br>
+- book table 转移到已有的自定义流</br>
+- Default Start Flow 转移到代理默认开始流</br>
+
+##### 4.2.3.2.2 Routes Groups 路由组
+Route Groups 为路由组，路由组打包了一组路由。当你在多个页面需要多个同样功能的路由时，你可以把这些路由添加到一个路由组。路由组的好处是为了方便移植，在页面A添加了路由组R后，其他页面都可以加入该路由组R，前提是需要加入该路由组到该页面，访问该页面时才会生效。</br>
+
+
+##### 4.2.3.2.3 Event Handler 事件处理</br>
+点击页面 "Add state handler" -》勾选Event Handler，如下图：</br>
+![image](https://user-images.githubusercontent.com/30898964/151100522-a96b7600-6197-45de-aa14-63e1617a0f49.png)
+
+![image](https://user-images.githubusercontent.com/30898964/151104323-75a365b3-c0d2-4b57-986c-417aa2f1f58a.png)
+
+上图为设置事件处理的页面，具体说明如下：</br>
+![image](https://user-images.githubusercontent.com/30898964/151104633-975c1b24-6334-4b8c-b189-c892f96b44e1.png)
+
+
+## 4.3 意图
+我们可以在控制台，或者通过API或Dialogflow客户端库对意图增删改。详情参照链接[链接](https://cloud.google.com/dialogflow/cx/docs/concept/intent)
+创建意图的方式：</br>
+点击manage -> create->填入意图名，收集参数（如需要）</br>
+![image](https://user-images.githubusercontent.com/30898964/151105237-624db33e-8422-4a1a-bf2f-ec26b9813631.png)
+
+### 4.3.1 意图匹配
+当最终用户输入或说出某些内容（称为“最终用户输入”）时，Dialogflow 会将该输入与意图训练短语进行比较，以找到最佳匹配。此过程称为“意图匹配”。只有与范围内的意图路由（具有意图要求的状态处理程序）关联的意图才会发生意图匹配。</br>
+在搜索匹配意图时，Dialogflow 根据“意图置信度分数”（也称“置信度分数”）为潜在匹配项评分。取值范围从 0.0（完全不确定）到 1.0（完全确定）。 在对意图进行评分后，可能会出现以下两种结果：</br>
+如果得分最高的意图的置信度得分大于或等于分类阈值设置，则系统会将其返回为匹配项。
+如果没有任何意图满足阈值，则系统会调用无匹配事件。</br>
+### 4.3.2 默认欢迎意图
+创建代理时，系统会为您创建默认欢迎意图。对于某些语言，意图具有简单的训练短语（例如“Hi”或“Hello”），旨在匹配初始最终用户输入。您可以根据需要修改此意图。</br>
+### 4.3.3 默认负意图
+创建代理时，系统会为您创建默认负意图。您可以将训练短语添加到此意图中作为反例</br>
+### 4.3.4 取消意图
+取消意图的训练短语应处理通用尝试和主题特有的尝试取消。例如：</br>
+取消</br>
+停止</br>
+我改主意了</br>
+不用了</br>
+返回</br>
+返回</br>
+我不想新建预约</br>
+取消新预约</br>
+删除新预约</br>
+
+
+## 4.4 实体
+### 4.4.1 实体类型
+实体分系统实体和自定义实体，这些系统实体可以匹配许多常见数据类型。例如，有用于匹配日期、时间、颜色、电子邮件地址等类型的系统实体。自定义实体是开发者根据需求自定义的实体。</br>
+### 4.4.2 “普通实体”和会话实体
+
+会话”表示 Dialogflow 代理与最终用户之间的对话。您可以在会话期间创建名为“会话实体”或“用户实体”的特殊实体。 会话实体可以扩展或替换自定义实体类型，并且仅在为其创建的会话期间存在。 Dialogflow 将所有会话数据（包括会话实体）存储 20 分钟，也就是说从当前会话结束的那一刻开始，在20分钟内，如果没有通过同样的session id来访问该代理，该会话的实体就被被清空。</br>
+"普通实体"为本人命名，这是相对会话实体而言的，意思是长期有效的实体。</br>
+# 5. 流的版本和环境
+## 5.1 概念
+草稿：没有环境的代理为草稿，我们在控制台编辑的代理叫草稿。</br>
+草稿流：草稿代理种的流为草稿流。</br>
+我们可以保存一个草稿流为一个版本，这个版本的流相当于一个快照，包含了该流中原有的实体、路由、意图、网络钩子等信息。</br>
+环境：</br>
+我们可以新建多个环境用来做开发和测试工作等，在一个环境中我们可以根据需要选择各种版本的流，这些流构成一个代理的版本。</br>
+- 每个代理的环境数量上限：20 个</br>
+- 每个流的版本数量限制：20个</br>
+
+## 5.2 创建建流版本
+关于代理的所有操作dialogflow都提供API、客户端库、控制台三种方式，流的版本创建亦是如此。
+![image](https://user-images.githubusercontent.com/30898964/151107494-aae0c51b-27bd-4acc-97fc-c1e8763a4304.png)
+
+![image](https://user-images.githubusercontent.com/30898964/151107615-3199c392-6867-44b1-b90c-8dbc7352f515.png)
+
+![image](https://user-images.githubusercontent.com/30898964/151107655-3296c338-d45b-4453-b22e-9109f9c4a33c.png)
+
+
+## 5.3 创建环境
+请根据下图步骤操作：</br>
+![image](https://user-images.githubusercontent.com/30898964/151107693-fe002a08-03a1-443b-a222-0413e077a1aa.png)
+
+![image](https://user-images.githubusercontent.com/30898964/151107905-73a1a33a-9610-4e32-bf55-9fe5e785ab74.png)
+
+拿到环境的id：</br>
+单击下图右侧中间的copy图标可复制环境的完整路径。</br>
+![image](https://user-images.githubusercontent.com/30898964/151108186-e1147d8f-1c63-490b-aef6-cd40c498ae19.png)
+
+
+待更新....</br>
 
 
 
