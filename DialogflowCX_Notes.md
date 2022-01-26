@@ -45,10 +45,10 @@
 &emsp;<a href="#42">4.1 流</a>  
 &emsp;&emsp;<a href="#43">4.1.1 流的特点</a>  
 &emsp;&emsp;<a href="#44">4.1.3 流的增、删、导出、导入</a>  
-&emsp;&emsp;&emsp;<a href="#45">4.1.3.1 增加流：</a>  
-&emsp;&emsp;&emsp;<a href="#46">4.1.3.2 删除流：</a>  
-&emsp;&emsp;&emsp;<a href="#47">4.1.3.3 导出流：</a>  
-&emsp;&emsp;&emsp;<a href="#48">4.1.3.2 导入流：</a>  
+&emsp;&emsp;&emsp;<a href="#45">4.1.3.1 增加流</a>  
+&emsp;&emsp;&emsp;<a href="#46">4.1.3.2 删除流</a>  
+&emsp;&emsp;&emsp;<a href="#47">4.1.3.3 导出流</a>  
+&emsp;&emsp;&emsp;<a href="#48">4.1.3.4 导入流</a>  
 &emsp;<a href="#49">4.2 页面 </a>  
 &emsp;&emsp;<a href="#50">4.2.1 页面的特点：</a>  
 &emsp;&emsp;<a href="#51">4.2.2 初始页面的功能</a>  
@@ -684,7 +684,7 @@ Prebuild Agent：
 3.通过控制台。 下面展示了通过控制台创建流。</br>
 
 
-#### <a name="45">4.1.3.1 增加流：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="45">4.1.3.1 增加流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 在dialogflow cx 控制台 ->点击build-> 点击 + 号->点击create flow->输入流名 ->回车保存</br>
 
@@ -701,7 +701,7 @@ Prebuild Agent：
 ![image-20220125161726476](./imgs/image-20220125161726476.png)
 
 
-#### <a name="47">4.1.3.3 导出流：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="47">4.1.3.3 导出流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 打开dialogflow cx 控制台 ->鼠标移到要导出的流->点击三个点->点击Export flow ->回车保存</br>
 
@@ -715,7 +715,7 @@ Download：存到本地</br>
 
 ![image-20220125163426361](./imgs/image-20220125163426361.png)
 
-#### <a name="48">4.1.3.4 导入流：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="48">4.1.3.4 导入流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 这里仅展示将本地存储的流文件导入到代理。</br>
 
