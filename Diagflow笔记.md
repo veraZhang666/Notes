@@ -103,6 +103,7 @@
 
 ![image-20220125084341615](./imgs/image-20220125084341615.png)
 
+
 ## 1.5 最佳做法与解决方案
 
 ### 1.5.1 谷歌技术人员给出的建议：
@@ -135,14 +136,13 @@
 ![image-20220125132619330](./imgs/image-20220125132619330.png)
 
 
-
-### 3. 设置环境变量
+### 1.6 设置环境变量
 
 [链接](https://cloud.google.com/iam/docs/service-accounts?hl=zh-cn&_ga=2.98308319.-139742340.1639388700)
 
 拿到上一步下载的json密匙绝对路径
 
-#### 3.1 windows 用户的环境变量设置
+#### 1.6.1 windows 用户的环境变量设置
 
 前提：
 windows+pycharm 
@@ -167,7 +167,7 @@ windows+pycharm
 
 
 
-#### 3.2 linux, mac 用户的环境变量设置
+#### 1.6.2 linux, mac 用户的环境变量设置
 
 可以直接把json密匙路径配置到用户环境变量，生效范围为该linux系统的用户，当然你也可也设置linux系统级的环境变量（参照链接：https://www.cnblogs.com/lihao-blog/p/6945040.html）
 
@@ -196,7 +196,6 @@ export GOOGLE_APPLICATION_CREDENTIALS=/var/www_r/www_bot/catering-robot-aecbcb62
 source ~/.bashrc
 
 搞定！
-
 
 
 # 2.代理的操作：
