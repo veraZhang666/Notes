@@ -975,6 +975,40 @@ Route Groups 为路由组，路由组打包了一组路由。当你在多个页�
 我不想新建预约</br>
 取消新预约</br>
 删除新预约</br>
+### <a name="64">4.3.5 上传训练句子的代码</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+``` python 
+from google.cloud.dialogflowcx_v3beta1.types import Intent,UpdateIntentRequest
+from google.cloud.dialogflowcx_v3beta1.services.intents import IntentsClient
+
+def get_trainingPhrase_obj_list():
+    generate = ['I am hungry','I am starving','I want to eat something'] # 即将被上传的训练句子
+    train_list = []
+    for phrase in generate:
+        part1 = Intent.TrainingPhrase.Part()
+        part1.text = phrase
+        train1 = Intent.TrainingPhrase()
+        train1.parts = [part1] # 一个训练句子由可以由很多个part组成，多个part的情况适用于需要标记实体，这里我不需要标记实体，所以列表里只有一个part
+        train1.repeat_count=1 # 训练句子在意图中出现的次数
+        train_list.append(train1)
+    print(f'=============训练句子的数量{len(train_list)}==============')
+    return train_list
+
+
+intent_id ='projects/catering-robot/locations/us-central1/agents/3005db1a-d681-4456-8647-4f3f0b7ca886/intents/74388479-beab-4e97-aa7a-641bf6b90ab3'
+intent = Intent()
+intent.name = intent_id # 意图的id
+intent.display_name = 'restaurant_foreign_want_to_eat' # 意图名字
+intent.training_phrases = get_trainingPhrase_obj_list()
+
+location = 'us-central1' # 这个location是intent_id的location
+request = UpdateIntentRequest(intent = intent)
+intent_client = IntentsClient(client_options={"api_endpoint": f"{location}-dialogflow.googleapis.com"})
+intent_client.update_intent(request=request)
+
+
+
+``` 
+
 
 
 ## <a name="64">4.4 实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
