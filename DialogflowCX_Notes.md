@@ -950,6 +950,7 @@ Route Groups 为路由组，路由组打包了一组路由。当你在多个页�
 
 ## <a name="59">4.3 意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 我们可以在控制台，或者通过API或Dialogflow客户端库对意图增删改。详情参照链接[链接](https://cloud.google.com/dialogflow/cx/docs/concept/intent)
+在 Dialogflow cx中一个意图最多只允许2000条训练语句。</br>
 创建意图的方式：</br>
 点击manage -> create->填入意图名，收集参数（如需要）</br>
 ![image](https://user-images.githubusercontent.com/30898964/151105237-624db33e-8422-4a1a-bf2f-ec26b9813631.png)
