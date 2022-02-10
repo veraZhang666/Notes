@@ -64,7 +64,6 @@
 &emsp;&emsp;<a href="#61">4.3.2 默认欢迎意图</a>  
 &emsp;&emsp;<a href="#62">4.3.3 默认负意图</a>  
 &emsp;&emsp;<a href="#63">4.3.4 取消意图</a>  
-&emsp;&emsp;<a href="#64.1">4.3.6 意图的误匹配情况</a>  
 &emsp;<a href="#64">4.4 实体</a>  
 &emsp;&emsp;<a href="#65">4.4.1 实体类型</a>  
 &emsp;&emsp;<a href="#66">4.4.2 “普通实体”和会话实体</a>  
