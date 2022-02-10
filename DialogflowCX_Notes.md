@@ -1011,10 +1011,10 @@ intent_client.update_intent(request=request)
 
 ``` 
 ### <a name="101">4.3.6 意图的误匹配情况</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-鸡蛋"eggs"为食品实体。
-卖鸡蛋意图的训练句子：I want some eggs
-查看以鸡蛋为食材的菜的意图：我想找鸡蛋做的菜 I want food that is made from eggs.
-用户只说： “eggs” 也会匹配到其中一个意图。
+鸡蛋"eggs"为食品实体。<br>
+卖鸡蛋意图的训练句子：I want some eggs<br>
+查看以鸡蛋为食材的菜的意图：我想找鸡蛋做的菜 I want food that is made from eggs.<br>
+用户只说： “eggs” 也会匹配到其中一个意图。<br>
 
 ## <a name="64">4.4 实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="65">4.4.1 实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
