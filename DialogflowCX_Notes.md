@@ -64,7 +64,7 @@
 &emsp;&emsp;<a href="#61">4.3.2 默认欢迎意图</a>  
 &emsp;&emsp;<a href="#62">4.3.3 默认负意图</a>  
 &emsp;&emsp;<a href="#63">4.3.4 取消意图</a> 
-&emsp;&emsp;<a href="#64.1">4.3.6 取消意图1</a>  
+&emsp;&emsp;<a href="#100">4.3.5 客户端代码</a>  
 &emsp;<a href="#64">4.4 实体</a>  
 &emsp;&emsp;<a href="#65">4.4.1 实体类型</a>  
 &emsp;&emsp;<a href="#66">4.4.2 “普通实体”和会话实体</a>  
@@ -976,7 +976,8 @@ Route Groups 为路由组，路由组打包了一组路由。当你在多个页�
 我不想新建预约</br>
 取消新预约</br>
 删除新预约</br>
-### <a name="64">4.3.5 上传训练句子的代码</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+### <a name="100">4.3.5 上传训练句子的代码</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ``` python 
 from google.cloud.dialogflowcx_v3beta1.types import Intent,UpdateIntentRequest
 from google.cloud.dialogflowcx_v3beta1.services.intents import IntentsClient
@@ -1008,12 +1009,11 @@ intent_client.update_intent(request=request)
 
 
 ``` 
-### <a name="64.1">4.3.6 意图的误匹配情况</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="101">4.3.6 意图的误匹配情况</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 鸡蛋"eggs"为食品实体。
 卖鸡蛋意图的训练句子：I want some eggs
 查看以鸡蛋为食材的菜的意图：我想找鸡蛋做的菜 I want food that is made from eggs.
 用户只说： “eggs” 也会匹配到其中一个意图。
-
 
 ## <a name="64">4.4 实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="65">4.4.1 实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
