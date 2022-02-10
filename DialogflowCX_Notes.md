@@ -63,8 +63,9 @@
 &emsp;&emsp;<a href="#60">4.3.1 意图匹配</a>  
 &emsp;&emsp;<a href="#61">4.3.2 默认欢迎意图</a>  
 &emsp;&emsp;<a href="#62">4.3.3 默认负意图</a>  
-&emsp;&emsp;<a href="#63">4.3.4 取消意图</a> 
-&emsp;&emsp;<a href="#100">4.3.5 客户端代码</a>  
+&emsp;&emsp;<a href="#63">4.3.4 取消意图</a><br>
+&emsp;&emsp;<a href="#100">4.3.5 代码--上传训练句子到意图</a><br>
+&emsp;&emsp;<a href="#101">4.3.6 意图的误匹配情况</a><br>
 &emsp;<a href="#64">4.4 实体</a>  
 &emsp;&emsp;<a href="#65">4.4.1 实体类型</a>  
 &emsp;&emsp;<a href="#66">4.4.2 “普通实体”和会话实体</a>  
@@ -977,7 +978,7 @@ Route Groups 为路由组，路由组打包了一组路由。当你在多个页�
 取消新预约</br>
 删除新预约</br>
 
-### <a name="100">4.3.5 上传训练句子的代码</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="100">4.3.5 上传训练句子到意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ``` python 
 from google.cloud.dialogflowcx_v3beta1.types import Intent,UpdateIntentRequest
 from google.cloud.dialogflowcx_v3beta1.services.intents import IntentsClient
