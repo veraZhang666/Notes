@@ -216,7 +216,7 @@ vim  .bashrc
 
 3 在.bashrc页面最后加上想要加的路径
 
-export GOOGLE_APPLICATION_CREDENTIALS=/var/www_r/www_bot/catering-robot-aecbcb6202b4.json
+export PATH=/var/www_r/www_bot/catering-robot-aecbcb6202b4.json
 
 请将json密匙的地址替换为你的绝对路径。
 
