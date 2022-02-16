@@ -266,6 +266,8 @@ location：代理所在的谷歌服务器区域，目前已经开通12个服务�
 time_zone：代理所使用的时间</br>
 language_code：代理所使用的主识别语言</br>
 display_name： 给代理取名，注意一个区域下的代理名字不能重复</br>
+注意：当通过API或客户端创建代理时，如果报错：Location settings have to be initialized before creating the agent in location: asia-northeast1. Code: FAILED_PRECONDITION</br>
+请将该项目的代理location初始化，初始化方法为：在dialogflow cx控制台 -> 新建代理 -> 点击location右边的edit->点击save，对每个location下拉列表都做同样的操作。 </br>
 #### <a name="25">2.1.2.2 代理的可选时区、语言、区域表</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 更新时间2022.1.25
