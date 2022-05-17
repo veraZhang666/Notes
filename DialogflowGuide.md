@@ -2,94 +2,21 @@
 <a name="index">**目录**</a>
 </br>
 <a href="#0">1. 概念解释</a> </br>
-&emsp;<a href="#1">1.1 谷歌名词概念解释</a>  
-&emsp;&emsp;<a href="#2">1.1.1 什么是谷歌项目</a>  
-
-&emsp;&emsp;<a href="#3">1.1.2 STT、TTS、谷歌地图</a>  
-&emsp;&emsp;<a href="#4">1.1.3 什么是代理</a>  
-&emsp;&emsp;<a href="#5">1.1.4 流</a></br>
-&emsp;&emsp;<a href="#5">1.1.4 意图</a></br>
-&emsp;&emsp;<a href="#5">1.1.4 实体</a></br>
-
-&emsp;<a href="#6">1.2 公司业务的概念解释</a> </br>
-&emsp;&emsp;<a href="#7">1.2.1 公司场景</a> </br>
-&emsp;&emsp;<a href="#8">1.2.2 公司项目</a> </br>
-&emsp;<a href="#9">1.3 公司业务与谷歌服务的融合</a>
-
-<a href="#0">1. 实践操作</a> </br>
+&emsp;<a href="#1">1.1公司业务的概念解释</a> </br>
+&emsp;&emsp;<a href="#2">1.1.1 公司场景</a> </br>
+&emsp;&emsp;<a href="#3">1.1.2 公司项目</a> </br>
+&emsp;<a href="#4">1.2 谷歌名词概念解释</a>  
+&emsp;&emsp;<a href="#5">1.2.1 什么是谷歌项目</a>  
+&emsp;&emsp;<a href="#6">1.2.2 STT、TTS、谷歌地图</a>  
+&emsp;&emsp;<a href="#7">1.2.3 代理</a>  
+&emsp;&emsp;<a href="#8">1.2.4 流</a></br>
+&emsp;&emsp;<a href="#9">1.2.5 意图</a></br>
+&emsp;&emsp;<a href="#10">1.2.6 实体</a></br>
+&emsp;<a href="#11">1.3 公司业务与谷歌服务的融合</a>
 
 
+# <a name="0">1. 概念解释</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-<a href="#0">1. 创建Google Cloud 项目</a>  
-&emsp;<a href="#1">1.1 登录google cloud platform</a>  
-&emsp;<a href="#2">1.2 新建项目</a>  
-&emsp;&emsp;<a href="#3">1.2.1 步骤1</a>  
-&emsp;&emsp;<a href="#4">1.2.2 步骤2</a>  
-&emsp;<a href="#5">1.3 为该项目创建服务账号 </a>  
-&emsp;&emsp;<a href="#6">1.3.1 什么是服务账号？</a>  
-&emsp;&emsp;<a href="#7">1.3.2 创建步骤</a>  
-&emsp;&emsp;&emsp;<a href="#8">1.3.2.1 步骤1</a>  
-&emsp;&emsp;&emsp;<a href="#9">1.3.2.2 步骤2 </a>  
-&emsp;&emsp;&emsp;<a href="#10">1.3.2.3 步骤3</a>  
-&emsp;<a href="#11">1.4 为该服务账号创建其密匙</a>  
-&emsp;&emsp;<a href="#12">1.4.1 步骤1</a>  
-&emsp;&emsp;<a href="#13">1.4.2 步骤2</a>  
-&emsp;<a href="#14">1.5 最佳做法与解决方案</a>  
-&emsp;&emsp;<a href="#15">1.5.1 谷歌技术人员给出的建议</a>  
-&emsp;&emsp;<a href="#16">1.5.2 具体步骤</a>  
-&emsp;<a href="#17">1.6 设置环境变量</a>  
-&emsp;&emsp;&emsp;<a href="#18">1.6.1 windows 用户的环境变量设置</a>  
-&emsp;&emsp;&emsp;<a href="#19">1.6.2 linux, mac 用户的环境变量设置</a>  
-<a href="#20">2.代理的操作</a>  
-&emsp;<a href="#21">2.1 代理的创建</a>  
-&emsp;&emsp;<a href="#22">2.1.1 通过控制台创建</a>  
-&emsp;&emsp;<a href="#23">2.1.2 通过客户端创建</a>  
-&emsp;&emsp;&emsp;<a href="#24">2.1.2.1 创建代理需要传入参数</a>  
-&emsp;&emsp;&emsp;<a href="#25">2.1.2.2 代理的可选时区、语言、区域表</a>  
-&emsp;&emsp;&emsp;<a href="#26">2.1.2.3 代码段</a>  
-&emsp;<a href="#27">2.2 代理的导出</a>  
-&emsp;&emsp;<a href="#28">2.2.1 使用控制台导出</a>  
-&emsp;&emsp;<a href="#29">2.2.2 使用客户端库导出</a>  
-&emsp;<a href="#30">2.3 代理的导入</a>  
-&emsp;&emsp;<a href="#31">2.3.1 通过控制台导入</a>  
-&emsp;&emsp;<a href="#32">2.3.2 通过客户端库导入</a>  
-&emsp;<a href="#33">2.4 代理的删除</a>  
-&emsp;&emsp;<a href="#34">2.4.1 通过控制台删除</a>  
-&emsp;&emsp;<a href="#35">2.4.2 通过客户端库删除</a>  
-<a href="#36">3. Dialogflow 控制台面板功能介绍</a>  
-&emsp;<a href="#37">3.1 Build</a>  
-&emsp;<a href="#38">3.2 Manage</a>  
-&emsp;<a href="#39">3.3 Agent Test</a>  
-&emsp;<a href="#40">3.4 Agent settings</a>  
-<a href="#41">4. 流、页面、意图、实体的概念和用法</a>  
-&emsp;<a href="#42">4.1 流</a>  
-&emsp;&emsp;<a href="#43">4.1.1 流的特点</a>  
-&emsp;&emsp;<a href="#44">4.1.3 流的增、删、导出、导入</a>  
-&emsp;&emsp;&emsp;<a href="#45">4.1.3.1 增加流</a>  
-&emsp;&emsp;&emsp;<a href="#46">4.1.3.2 删除流</a>  
-&emsp;&emsp;&emsp;<a href="#47">4.1.3.3 导出流</a>  
-&emsp;&emsp;&emsp;<a href="#48">4.1.3.4 导入流</a>  
-&emsp;<a href="#49">4.2 页面 </a>  
-&emsp;&emsp;<a href="#50">4.2.1 页面的特点：</a>  
-&emsp;&emsp;<a href="#51">4.2.2 初始页面的功能</a>  
-&emsp;&emsp;<a href="#52">4.2.3 普通页面的功能</a>  
-&emsp;&emsp;&emsp;<a href="#53">4.2.3.1 Entry fulfillment </a>  
-&emsp;&emsp;&emsp;<a href="#54">4.2.3.2 Parameters参数收集</a>  
-&emsp;&emsp;&emsp;<a href="#55">4.2.3.3 Add state handler 状态处理</a>  
-&emsp;&emsp;&emsp;&emsp;<a href="#56">4.2.3.3.1 Routes 路由</a>  
-&emsp;&emsp;&emsp;&emsp;<a href="#57">4.2.3.3.2 Routes Groups 路由组</a>  
-&emsp;&emsp;&emsp;&emsp;<a href="#58">4.2.3.3.3 Event Handler 事件处理</a>  
-&emsp;<a href="#59">4.3 意图</a>  
-&emsp;&emsp;<a href="#60">4.3.1 意图匹配</a>  
-&emsp;&emsp;<a href="#61">4.3.2 默认欢迎意图</a>  
-&emsp;&emsp;<a href="#62">4.3.3 默认负意图</a>  
-&emsp;&emsp;<a href="#63">4.3.4 取消意图</a><br>
-&emsp;&emsp;<a href="#100">4.3.5 代码--上传训练句子到意图</a><br>
-&emsp;&emsp;<a href="#101">4.3.6 意图的误匹配情况</a><br>
-&emsp;<a href="#64">4.4 实体</a>  
-&emsp;&emsp;<a href="#65">4.4.1 实体类型</a>  
-&emsp;&emsp;<a href="#66">4.4.2 “普通实体”和会话实体</a>  
-<a href="#67">5. 流的版本和环境</a>  
-&emsp;<a href="#68">5.1 概念</a>  
-&emsp;<a href="#69">5.2 创建建流版本</a>  
-&emsp;<a href="#70">5.3 创建环境</a>  
+## <a name="1">1.1公司业务的概念解释</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+### <a name="1">1.1.1 公司场景</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
