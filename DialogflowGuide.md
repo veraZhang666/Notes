@@ -12,7 +12,7 @@
 &emsp;&emsp;&emsp;<a href="#8">1.2.4.1 为什么要设置多个模板代理</a>  <br>
 &emsp;&emsp;&emsp;<a href="#9">1.2.4.2 模板代理的版本控制</a>  <br>
 &emsp;&emsp;&emsp;<a href="#10">1.2.4.3 父模板代理与“复制品”的关系</a> <br>
-&emsp;&emsp;&emsp;<a href="#11">1.2.4.4  谷歌项目和代理命名规则</a>  <br>
+&emsp;&emsp;&emsp;<a href="#11">1.2.4.4  谷歌项目、代理、意图的命名规范</a>  <br>
 &emsp;&emsp;<a href="#12">1.3 公司业务与谷歌服务的融合</a><br>
 &emsp;&emsp;&emsp;<a href="#13">1.3.1 父模板代理及其环境</a><br>
 &emsp;&emsp;&emsp;<a href="#14">1.3.2 公司业务与谷歌服务的融合</a><br>
@@ -234,6 +234,19 @@ projects/future-area-343501/locations/asia-southeast1/agents/89346e48-8fb0-4b7b-
 - Usa_Office_English_Template <br>
 - Hk_Hotel_English_Template <br>
 - Usa_Hotel_English_Template <br>
+
+
+#### 意图命名规范 
+- 意图命名规范： 语言+场景+行为意图名 <br>
+如，“english_restaurant_want_to_book_table” 为餐饮英语场景下“想要预订”的意图。
+
+- 否定意图命名规范： 正向意图的全名+“_neg”  <br>
+如下的两个意图为英语餐饮项目的“想吃”意图,其否定形式在结尾加"_neg"<br>
+english_restaurant_want_to_eat <br>
+english_restaurant_return_to_xxx_neg <br>
+
+- 公共意图命名规范：语言+public+行为意图名<br>
+如：“english_public_exit” 为英语场景的公共意图，这是一个公共意图，即所有场景的机器都支持的意图。 
 
 
 #### 谷歌项目的命名约定
