@@ -1426,9 +1426,17 @@ intent_client.update_intent(request=request)
         3、偶尔出现更新实体并自动train成功后，新增实体不能识别；
         4、我们业务中的动态实体所在的训练语句泛化性不如静态实体;
         主要体现在：
-        意图中使用同样的句式，使用稍微泛化的问法测试时，动态实体可能就提取不出来。例如对于whether_have_xxx意图中，有训  练语句is there dyn_company_name和is there company，其中
-        dyn_company_name和company是槽。若使用is there microsoft in building(microsoft是动态公司名称)和is there company in building时，is there microsoft in building这句话就
-        无法提取出microsoft实体，但is there company in building就可以提取出company实体<br>
+        意图中使用同样的句式，使用稍微泛化的问法测试时，动态实体可能就提取不出来。例如对于whether_have_xxx意图中，有训  练语句is there dyn_company_name和is there company，
+        其中dyn_company_name和company是槽。若使用is there microsoft in building(microsoft是动态公司名称)和is there company in building时，is there microsoft in 
+        building这句话就无法提取出microsoft实体，但is there company in building就可以提取出company实体<br>
+        
+        
+        
+ #### 语料利器
+ 
+ 查同义词：https://www.thesaurus.com/browse/
+ 句子转述：https://app.wordtune.com/ 
+ 
 
 
 
