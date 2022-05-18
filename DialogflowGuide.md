@@ -16,7 +16,6 @@
 &emsp;&emsp;<a href="#12">1.3 公司业务与谷歌服务的融合</a><br>
 &emsp;&emsp;&emsp;<a href="#13">1.3.1 父模板代理及其环境</a><br>
 &emsp;&emsp;&emsp;<a href="#14">1.3.2 公司业务与谷歌服务的融合</a><br>
-
 <a href="#15">2. 实践操作</a>  
 &emsp;<a href="#16">2.1 登录google cloud platform</a>  
 &emsp;<a href="#17">2.2 新建项目</a>  
@@ -25,7 +24,6 @@
 &emsp;<a href="#20">2.3 为该项目创建服务账号 </a>  
 &emsp;&emsp;<a href="#21">2.3.1 什么是服务账号？</a>  
 &emsp;&emsp;<a href="#22">2.3.2 服务账号创建步骤</a>  
-
 &emsp;<a href="#29">2.4 最佳做法与解决方案</a>  
 &emsp;&emsp;<a href="#30">2.4.1 谷歌技术人员给出的建议</a>  
 &emsp;&emsp;<a href="#31">2.4.2 具体步骤</a>  
