@@ -157,11 +157,12 @@
     我们可以在Dialogflow控制台(简称控制台）建立环境，环境的名字由我们自定义，代理环境可以被理解为一个文件夹，它对各个版本的流只是一个指向关系。在环境页面，我们需要指定每个流的版本（详细操作流程），如果不指定该流的版本，那么该代理就不具备这个流的功能。 
 
 #### 草稿和环境有什么区别？
-    从版本的角度来讲，代理可草稿和环境代理。开发人员在控制台编辑的代理叫草稿，环境代理是上述中我们自定义环境中指向的各个版本的流组成的代理。开发人员将草稿代理调试通过后，我们才将该流打版本。 我们需要自定义环境，方便公司研发、生产、测试时访问不同的代理（稍后会讲解具体做法）。
 
-    草稿和环境代理在字段上的区别：<br>
-    草稿代理: 地址没有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx <br>
-    环境代理：地址中有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx/environments/xxxx<br>
+从版本的角度来讲，代理可草稿和环境代理。开发人员在控制台编辑的代理叫草稿，环境代理是上述中我们自定义环境中指向的各个版本的流组成的代理。开发人员将草稿代理调试通过后，我们才将该流打版本。 我们需要自定义环境，方便公司研发、生产、测试时访问不同的代理（稍后会讲解具体做法）。
+
+草稿和环境代理在字段上的区别：<br>
+草稿代理: 地址没有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx <br>
+环境代理：地址中有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx/environments/xxxx<br>
 
 
 ![image](https://user-images.githubusercontent.com/30898964/168820871-44ad95c2-0ff2-493d-9b72-09bee7b07a82.png)
