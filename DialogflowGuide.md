@@ -789,12 +789,12 @@ zu — Zulu
 
 ### <a name="44">2.6.2.2 使用客户端库导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 [文档链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/agents.html)
+![image](https://user-images.githubusercontent.com/30898964/151000104-690ec26e-ffa7-43ff-adbd-4b56956a6148.png)
 
 这里只是为了展示代理导出的功能才使用while True，在实际项目中，请不要这样使用。</br>
 下面代码段的功能是导出指定环境的代理,当然如果不指定环境，你导出的将是草稿代理。</br>
 拿到指定环境的代理最直接的方法是从控制台复制，如下图：</br>
 
-![image](https://user-images.githubusercontent.com/30898964/151000104-690ec26e-ffa7-43ff-adbd-4b56956a6148.png)
 
 
 ```python
@@ -804,7 +804,7 @@ from google.cloud.dialogflowcx_v3beta1.services.agents import AgentsClient
 import time
 
 
-# 此段代码的的功能是目标代理导出为二进制文件，导出的为在自定义环境中的代理
+# 此段代码的的功能是将代理导出为二进制文件，导出的代理为在自定义环境中的代理
 def exportAgent2binary_from_environment(agent_path_environment):
     agent_binary_document=''
 
@@ -822,7 +822,7 @@ def exportAgent2binary_from_environment(agent_path_environment):
     return agent_binary_document
 
 
-# 此段代码的的功能是目标代理导出为二进制文件，导出的为草稿
+# 此段代码的的功能是将代理导出为二进制文件，导出的代理为草稿
 def exportAgent2binary_from_draft(from_agent_path):
     agent_binary_document=''
 
