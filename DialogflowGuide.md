@@ -789,12 +789,11 @@ zu — Zulu
 
 ### <a name="44">2.6.2.2 使用客户端库导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 [文档链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/agents.html)
-![image](https://user-images.githubusercontent.com/30898964/151000104-690ec26e-ffa7-43ff-adbd-4b56956a6148.png)
 
 这里只是为了展示代理导出的功能才使用while True，在实际项目中，请不要这样使用。</br>
 下面代码段的功能是导出指定环境的代理,当然如果不指定环境，你导出的将是草稿代理。</br>
-拿到指定环境的代理最直接的方法是从控制台复制，如下图：</br>
-
+拿到指定环境的代理地址最直接的方法是从控制台复制，如下图：</br>
+![image](https://user-images.githubusercontent.com/30898964/151000104-690ec26e-ffa7-43ff-adbd-4b56956a6148.png)
 
 
 ```python
