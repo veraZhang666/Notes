@@ -41,8 +41,6 @@
 代理的创建 加入地理区域初始化 
 提前新增空项目
 
-
-
 &emsp;&emsp;&emsp;<a href="#37">通过控制台创建</a>  
 &emsp;&emsp;&emsp;<a href="#38">通过客户端创建</a>  
 &emsp;&emsp;&emsp;<a href="#39">创建代理需要传入的参数</a>  
@@ -501,9 +499,9 @@ source ~/.bashrc
 ## <a name="36">2.6.1 代理的创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 我们可以通过API、客户端、控制台创建代理
 这里仅展示通过控制台、客户端创建代理。
-### <a name="37">通过控制台创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-登录后，在project下拉框，你会发现刚刚创建的google could 项目 projectTest已经显示到了这里。
+### <a name="37">2.6.1.1 通过控制台创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
+登录后，在project下拉框，你会发现刚刚创建的google could 项目 projectTest已经显示到了这里。
 1.点击 Enable API ->create agent
 
 下面截图说明：
@@ -527,20 +525,88 @@ dialogflow代理id为谷歌自动生成，创建代理成功后可以通过API�
 一个google dialogflow cx项目（也叫google cloud项目）下可以创建1000个代理，具体参数限制如下表。
 
 ![image-20220125101122308](./imgs/image-20220125101122308.png)
-### <a name="38">通过客户端创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-#### <a name="39">创建代理需要传入的参数</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-project_id：项目id， 这个可以通过复制dialogflow控制台拿到</br>
-location：代理所在的谷歌服务器区域，目前已经开通12个服务区域</br>
-time_zone：代理所使用的时间</br>
-language_code：代理所使用的主识别语言</br>
+
+### <a name="370">2.6.1.2 代理地区的手动初始化</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+为什么要初始化代理的地区？
+
+我们需要先初始化代理地区，然后才能新建位于该地区的谷歌代理。代理地区初始化必须在控制台手动完成。如果不初始化某个地区，当我们使用api创建位于该地区的代理时，会发生代理创建失败的错误！
+在控制台“新建代理”的页面就可以把该谷歌项目下的所有代理地区初始化。 所以每次新建一个谷歌项目（用于存放代理的项目）第一件要做的事就是初始化代理地区。<br>
+具体操作如下：<br>
+step1.在控制台点击“Create Agent”<br>
+step2.对于代理的“location”下拉列表中的每一个地区都执行下面两张图的操作。如果该地区没有初始化，当选中这个location的时候会出现“You have selected a location that has not been configured yet.”<br>
+
+<img width="604" alt="截屏2022-05-24 下午2 18 13" src="https://user-images.githubusercontent.com/30898964/169962078-93a295dd-1e9e-48d7-8ac9-9b0af1009b17.png">
+
+<img width="604" alt="截屏2022-05-24 下午2 18 12" src="https://user-images.githubusercontent.com/30898964/169962164-a6709f75-11df-4a66-852a-1ab2413e3fc4.png">
+
+
+### <a name="38">2.6.1.3 通过客户端创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+通过客户端创建代理需要传入的参数：</br>
+project_id：项目id， 最简单的方法是直接复制Dialogflow控制台导航栏的url并截取相关部分。</br>
+location：代理所在的谷歌服务器区域，目前已经开通12个服务区域，见下表。</br>
+time_zone：代理所使用的时区，这会直接影响到系统时间类实体的返回结果，因为系统时间实体的提取是依靠当前代理选取的timezone为准。</br>
+language_code：代理所使用的主识别语言。</br>
 display_name： 给代理取名，注意一个区域下的代理名字不能重复</br>
-注意：当通过API或客户端创建代理时，如果报错：Location settings have to be initialized before creating the agent in location: asia-northeast1. Code: FAILED_PRECONDITION</br>
-请将该项目的代理location初始化，初始化方法为：在dialogflow cx控制台 -> 新建代理 -> 点击location右边的edit->点击save，对每个location下拉列表都做同样的操作。 </br>
-#### <a name="40">代理的可选时区、语言、区域表</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-更新时间2022.1.25
+注：当通过API或客户端创建代理时，如果报错：“Location settings have to be initialized before creating the agent in location: asia-northeast1. Code: FAILED_PRECONDITION“，请将该项目的代理location初始化，初始化方法见上一小节 </br>
 
-区域：<br/>
+运行代码前须知：<br>
+> 先安装客户端库，安装命令为：$pip install google-cloud-dialogflow-cx <br>
+> 确保已经配置好该代理所属项目的json密匙，并将密匙下载到本地，然后加入到环境变量（见”最佳做法与解决方案“）。  <br>
+
+无权限的几种情况：<br>
++ 没把该代理所属项目的密匙添加到环境换辆。见”最佳做法与解决方案“<br>
++ 把其他项目的密匙加入了环境变量。<br>
+解决：<br>
+方法1：将一个项目的密匙作为唯一的访问谷歌代理的密匙，在其他谷歌项目给予这个项目owner权限（见”最佳做法与解决方案“） <br>
+方法2：使用本项目的密匙，使用”一次性环境“变量。<br>
+mac或linux用户， 在终端或命令行输入：$export GOOGLE_APPLICATION_CREDENTIALS=“{密匙的绝对路径}",<br>
+如：export GOOGLE_APPLICATION_CREDENTIALS="/Users/xxx/xx/xxx/xxxx801182eb71.json" 然后通过命令行运行谷歌dialogflow相关代码，关掉该终端的窗口后，GOOGLE_APPLICATION_CREDENTIALS环境变量失效。下次需要重新打开终端并输入命令。<br>
+
+请根根据实际情况传入参数。<br>
+[文档链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/agents.html)
+
+新建代理的示例代码：<br>
+
+```python
+from google.cloud.dialogflowcx_v3beta1.types import CreateAgentRequest,CreateAgentRequest,Agent
+from google.cloud.dialogflowcx_v3beta1.types.agent import ListAgentsRequest,ExportAgentRequest,RestoreAgentRequest
+from google.cloud.dialogflowcx_v3beta1.services.agents import AgentsClient
+import uuid
+
+def crateAgent(project_id='catering-robot',location='asia-northeast1',time_zone='Asia/Hong_Kong',language_code='en'):
+    agent = Agent()
+    agent.display_name = 'AgentExampleName' # 自定义代理的名字
+    agent.default_language_code = language_code
+    agent.time_zone = time_zone
+    parent = f'projects/{project_id}/locations/{location}'
+    create_agent_request = CreateAgentRequest(parent=parent,agent=agent)
+    agentClient = AgentsClient(client_options={"api_endpoint": f"{location}-dialogflow.googleapis.com"})
+    agent_response= agentClient.create_agent(create_agent_request)
+    return agent_response
+    
+```
+返回结果：<br>
+name: 为代理的id，全局唯一，为谷歌自动生成。 <br>
+display_name：我们刚为代理取的名字<br>
+
+    name: "projects/catering-robot/locations/asia-northeast1/agents/af11663a-757a-4067-bd7d-78aed12a7750"
+    display_name: "AgentExampleName"
+    default_language_code: "en"
+    time_zone: "Asia/Hong_Kong"
+    start_flow: "projects/catering-robot/locations/asia-northeast1/agents/af11663a-757a-4067-bd7d-78aed12a7750/flows/00000000-0000-0000-0000-000000000000"
+    advanced_settings {
+      logging_settings {
+      }
+    }
+
+
+#### <a name="40">代理的时区、语言、区域表</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+请查看谷歌官方文档以得到最新列表，此附录跟新时间为2022.5.24<br>
+区域：<br>
 ```python
 '''
 us-central1 (Iowa, USA)<br/>
@@ -558,7 +624,7 @@ global (Global serving, data-at-rest in US)
 '''
 ```
 
-语言：<br/>
+语言：<br>
 ```python
 '''
 af — Afrikaans
@@ -672,9 +738,7 @@ zu — Zulu
 '''
 ```
 
-
-
-时区：
+时区：<br>
 ``` python
 '''
 (GMT+1:00) Africa/Casablanca
@@ -713,51 +777,23 @@ zu — Zulu
 '''
 ```
 
-#### <a name="41">代码段</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-只要使用 dialogflow 客户端，就必须先安装客户端库：</br>
-安装命令为：</br>
-$pip install google-cloud-dialogflow-cx
-
-请根根据实际情况传入参数。
-[文档链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/agents.html)
-
-```python
-from google.cloud.dialogflowcx_v3beta1.types import CreateAgentRequest,CreateAgentRequest,Agent
-from google.cloud.dialogflowcx_v3beta1.types.agent import ListAgentsRequest,ExportAgentRequest,RestoreAgentRequest
-from google.cloud.dialogflowcx_v3beta1.services.agents import AgentsClient
-import uuid
-
-def crateAgent(project_id='catering-robot',location='asia-northeast1',time_zone='Asia/Hong_Kong',language_code='en'):
-    agent_name_uuid = str(uuid.uuid4())
-    agent_name_base = 'cateringAgent'
-    agent_readable_name = agent_name_base + agent_name_uuid
-    agent_id = str(uuid.uuid4())
-    agent = Agent()
-    agent.display_name = agent_readable_name
-    agent.default_language_code = language_code
-    agent.time_zone = time_zone
-
-    parent = f'projects/{project_id}/locations/{location}'
-    create_agent_request = CreateAgentRequest(parent=parent,agent=agent)
-    agentClient = AgentsClient(client_options={"api_endpoint": f"{location}-dialogflow.googleapis.com"})
-    agent_response= agentClient.create_agent(create_agent_request)
-    print(agent_response)
-    
-```
 
 ## <a name="42">2.6.2 代理的导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-### <a name="43">使用控制台导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-步骤1</br>
+### <a name="43">2.6.2.1 使用控制台导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+步骤1：</br>
+</br>
 ![image](https://user-images.githubusercontent.com/30898964/150994138-4e1a7d7a-3f05-46a4-91aa-bb2f5b4bf02c.png)
-步骤2</br>
+步骤2：</br>
+</br>
 ![image](https://user-images.githubusercontent.com/30898964/150997846-3822be2d-1bc7-49db-b099-822f6eec67dd.png)
 
-### <a name="44">2.2.2 使用客户端库导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="44">2.6.2.2 使用客户端库导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 [文档链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/agents.html)
 
-这里只是为了展示代理导出的功能才使用while True，实际项目中，请不要这样使用。</br>
+这里只是为了展示代理导出的功能才使用while True，在实际项目中，请不要这样使用。</br>
 下面代码段的功能是导出指定环境的代理,当然如果不指定环境，你导出的将是草稿代理。</br>
-拿到指定环境的代理最直接的方法是从控制台复制，如下图</br>
+拿到指定环境的代理最直接的方法是从控制台复制，如下图：</br>
+
 ![image](https://user-images.githubusercontent.com/30898964/151000104-690ec26e-ffa7-43ff-adbd-4b56956a6148.png)
 
 
@@ -765,33 +801,49 @@ def crateAgent(project_id='catering-robot',location='asia-northeast1',time_zone=
 from google.cloud.dialogflowcx_v3beta1.types import CreateAgentRequest,CreateAgentRequest,Agent
 from google.cloud.dialogflowcx_v3beta1.types.agent import ListAgentsRequest,ExportAgentRequest,RestoreAgentRequest
 from google.cloud.dialogflowcx_v3beta1.services.agents import AgentsClient
-import uuid
 import time
 
-def exportAgent(agent_path_environment):
+
+# 此段代码的的功能是目标代理导出为二进制文件，导出的为在自定义环境中的代理
+def exportAgent2binary_from_environment(agent_path_environment):
+    agent_binary_document=''
+
     agent_path = agent_path_environment.split('/environment')[0]
     location = AgentsClient.parse_agent_path(agent_path)['location']
     agentClient = AgentsClient(client_options={"api_endpoint": f"{location}-dialogflow.googleapis.com"})
-
-
     request = ExportAgentRequest(name=agent_path,environment=agent_path_environment)
     export_operation = agentClient.export_agent(request)
-
-
-
     while export_operation.done==False:
         time.sleep(1)
         print('not completed yet')
-
     else:
         response =export_operation.result()
-        response_content = response.agent_content
-        print(response_content)
+        agent_binary_document = response.agent_content
+    return agent_binary_document
+
+
+# 此段代码的的功能是目标代理导出为二进制文件，导出的为草稿
+def exportAgent2binary_from_draft(from_agent_path):
+    agent_binary_document=''
+
+    location = AgentsClient.parse_agent_path(to_agent_path)['location']
+    agentClient = AgentsClient(client_options={"api_endpoint": f"{location}-dialogflow.googleapis.com"})
+    request = ExportAgentRequest(name=to_agent_path)
+    export_operation = agentClient.export_agent(request)
+    while export_operation.done==False:
+        time.sleep(1)
+        print('not completed yet')
+    else:
+        response =export_operation.result()
+        agent_binary_document = response.agent_content
+    return agent_binary_document
 
 if __name__ == '__main__':
-    agent_path = 'projects/catering-robot/locations/asia-northeast1/agents/8329fd03-417c-43fd-9520-ed5c8ae0d1d6/environments/573b3604-5d72-4b91-9374-c9f226e6800c'
-    exportAgent(agent_path)
-    
+    # 请将您的实际代理路径传入
+    from_agent_path_draft = 'projects/catering-robot/locations/asia-northeast1/agents/45486b7f-c80c-447e-b41d-73bcdfa33ded'
+    from_agent_path_env='projects/catering-robot/locations/asia-northeast1/agents/45486b7f-c80c-447e-b41d-73bcdfa33ded/environments/dea15f7d-1ef8-4bd5-8892-1331670a6fd8'
+    exportAgent2binary_from_environment(from_agent_path_env)
+    exportAgent2binary_from_draft(from_agent_path_draft)
 
 
 ```
@@ -1288,32 +1340,316 @@ intent_client.update_intent(request=request)
 ## <a name="76">2.11实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="77">实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 实体分系统实体和自定义实体，这些系统实体可以匹配许多常见数据类型。例如，有用于匹配日期、时间、颜色、电子邮件地址等类型的系统实体。自定义实体是开发者根据需求自定义的实体。</br>
-### <a name="78">“普通实体”和会话实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="78">2.11.1“普通实体”和会话实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
     会话”表示 Dialogflow 代理与最终用户之间的对话。您可以在会话期间创建名为“会话实体”或“用户实体”的特殊实体。 会话实体可以扩展或替换自定义实体类型，并且仅在为其创建的会话期间存在。   
     Dialogflow 将所有会话数据（包括会话实体）存储 20 分钟，也就是说从当前会话结束的那一刻开始，在20分钟内，如果没有通过同样的session id来访问该代理，该会话的实体就被被清空。
     "普通实体"为本人命名，这是相对会话实体而言的，意思是长期有效的实体。
-### <a name="101">实体的original值和resolved值</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-  谷歌内置名词动词的单复数转换、动词时态的转换。有些时候用户说出的单词不在训练语料中，但通过词型的自动转换，谷歌能找出该单词的其他词形。我们可以查看谷歌的响应字符串来判断单词的原始值（用户发言）和该单词在语料中的形式。<br>
-  <br>
-  大概分为如下几种情况讨论： <br>
- 情况 1: 输入句子的实体值在实体类型中能找到。<br>
+### <a name="763">2.11.2 系统实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+系统实体为Dialogflow系统自带的实体，我们只需要标记系统实体类型中的一个实体，dialogflow就会帮我们识别该实体类型下其他的实体。常用的系统实体包括数字、日期、 地址、城市没名等，详情参照官方文档 https://cloud.google.com/dialogflow/cx/docs/reference/
+
+### <a name="763">2.11.3 系统实体表</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+```python
+'''
+@sys.address
+@sys.airport
+@sys.any
+@sys.cardinal
+@sys.color
+@sys.currency-name
+@sys.date
+@sys.date-period
+@sys.date-time
+@sys.duration
+@sys.email
+@sys.flight-number
+@sys.geo-capital
+@sys.geo-city
+@sys.geo-city-gb
+@sys.geo-city-us
+@sys.geo-country
+@sys.geo-country-code
+@sys.geo-county-gb
+@sys.geo-county-us
+@sys.geo-state
+@sys.geo-state-gb
+@sys.geo-state-us
+@sys.given-name
+@sys.language
+@sys.last-name
+@sys.location
+@sys.music-artist
+@sys.music-genre
+@sys.number
+@sys.number-integer
+@sys.number-sequence
+@sys.ordinal
+@sys.percentage
+@sys.person
+@sys.phone-number
+@sys.place-attraction
+@sys.place-attraction-gb
+@sys.place-attraction-us
+@sys.street-address
+@sys.temperature
+@sys.time
+@sys.time-period
+@sys.unit-area
+@sys.unit-area-name
+@sys.unit-currency
+@sys.unit-information
+@sys.unit-information-name
+@sys.unit-length
+@sys.unit-length-name
+@sys.unit-speed
+@sys.unit-speed-name
+@sys.unit-volume
+@sys.unit-volume-name
+@sys.unit-weight
+@sys.unit-weight-name
+@sys.url
+@sys.zip-code
+```
+### <a name="764">2.11.4 日期和时间系统实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+Dialogflow 日期时间类实体大致分为五类： <br>
+
+#### 2.11.4.1 单个日期实体（sys.date）
+<p>
+返回结果中参数为“月、日、年”
+例1：
+I want to book for today. 标记today为sys.date
+</p>
+
+
+                "date-time": {
+                  "type": "@sys.date-time",
+                  "original": "today",
+                  "resolved": {
+                    "year": 2022,
+                    "day": 24,
+                    "month": 5
+                  }
+                }
+
+<p>
+例2：
+I want to book for May 2nd
+I want to book for May second 
+I want to book for May 2 
+标记 May 2 nd、May second、May 2为sys.date 
+
+注：如果当前代理的时间已经过了5月2号，返回的结果为下一年的5月2号，如：
+Dialogflow参数返回示例：
+</p>
+    
+
+
+          "date": {
+            "resolved": {
+              "month": 5,
+              "day": 2,
+              "year": 2023
+            }}   
+
+
+<p>
+当前代理时间已经超过了要用户所说的时间，但是我们想要提取今年该如何做到？
+加上“今年”，即 ”I want to book for May 2 this year“. 
+</p>
+
+#### 2.11.4.2.单个时间实体（sys.time）
+
+<p>
+返回结果中参数为“时、分、秒、毫秒”
+例1： I want to book at 3 pm 
+Dialogflow参数返回示例：
+</p>
+
+
+    "time": {
+                "type": "@sys.time",
+                "resolved": {
+                  "hours": 15,
+                  "minutes": 0,
+                  "nanos": 0,
+                  "seconds": 0
+                }
+                }
+
+<p>
+可以标记下面的任意一种表达作为时间实体类型sys.time，谷歌会自动识别。 
+4:30:00 PM、4 pm、4:30:00 AM、4:30 pm、4, three thirty
+注：类似“3 o’clock”的特殊表达，谷歌并未针对“o’clock”做时间解析，但是，我们可以通过标记整数为实体类型“sys.time”达到效果，但存在一定问题，比如下面这三句都提取到了同样时间实体：
+I want to book for 3 视情况而定
+I want to book for 3 o’clock 正确
+I want to book for 3 animals 不合理
+</p>
+
+#### 2.11.4.3.日期+时间组合实体类型（sys.date-time）
+<p>
+这是日期和时间的组合实体类型，日期和时间实体可只出现一个，或两个同时出现。
+先需要在训练句子中标记任何时间、日期、完整日期时间为系统实体类型"sys.date-time",这样Dialogflow就会解析用户说的日期时间，并把用户说的日期时间作为一个参数返回。
+标记后，谷歌返回的实体类型都为“sys.date-time”，参数字段分为下面三种情况：
+
+- 如果用户发言包含日期和时间，返回字段有“月、日、年、时、分、秒、毫秒”
+- 如果用户发言只包含日期，返回字段有“月、日、年”
+- 如果用户发言只包时间，返回字段有“时、分、秒、毫秒”
+
+例子1：
+I want to book today at 4:30 pm 
+返回参数结果：
+</p>
+
+    "date-time": {
+                      "type": "@sys.date-time",
+                      "original": "tomorrow at 4:30 pm",
+                      "resolved": {
+                        "month": 5,
+                        "year": 2022,
+                        "seconds": 0,
+                        "hours": 16,
+                        "nanos": 0,
+                        "minutes": 30,
+                        "day": 24
+                      }
+                    }
+
+<p>
+例子2:
+I want to book for today
+返回参数结果：
+</p>
+
+
+            "date-time": {
+                  "type": "@sys.date-time",
+                  "original": "today",
+                  "resolved": {
+                    "year": 2022,
+                    "day": 24,
+                    "month": 5
+                  }
+                }
+
+<p>
+例子3：
+I want to book for 4:30 pm
+返回参数结果：
+</p>
+
+    "date-time": {
+                "type": "@sys.date-time",
+                "original": "4:30 pm",
+                "resolved": {
+                  "seconds": 0,
+                  "nanos": 0,
+                  "hours": 16,
+                  "minutes": 30
+                }}
+
+#### 2.11.4.4.日期区间实体(sys.date-period)
+<p>
+日期区间实体为两个日期的组合，建议标记“from {日期1} to {日期2} ”等英文表达为sys.date-period实体类型。返回字的实体类型为“sys.date-period”,参数里有“endDate”、“startDate”，分别为结束日期、开始日期。
+
+例句1: 
+I want to book from Monday to Friday
+
+返回参数结果:
+</p>
+
+    "type": "@sys.date-period",
+                "original": "from monday to friday",
+                "resolved": {
+                  "endDate": {
+                    "day": 27,
+                    "month": 5,
+                    "year": 2022
+                  },
+                  "startDate": {
+                    "month": 5,
+                    "day": 23,
+                    "year": 2022
+                  }
+                }
+              }
+            }
+
+<p>
+例句2: 
+I want to book from May 24 to May 26.
+返回参数结果:
+</p>
+
+          "date-period": {
+            "resolved": {
+              "endDate": {
+                "month": 5,
+                "year": 2022,
+                "day": 26
+              },
+              "startDate": {
+                "month": 5,
+                "year": 2022,
+                "day": 24
+              }
+            }}
+
+
+#### 2.11.4.5．时间区间实体（sys.time-period）
+<p>
+时间区间实体是两个时间实体类型的组合，比如，从下午3点到下午4点， “from 3pm to 4 pm”，只返回一个实体类型，返回参数的字段包含”startTime” 和”endTime”
+例1：
+I want to book from 4pm to 5pm
+返回参数结果: <br>
+</p>
+
+    "time-period": {
+                    "startTime": {
+                      "minutes": 0,
+                      "nanos": 0,
+                      "hours": 16,
+                      "seconds": 0
+                    },
+                    "endTime": {
+                      "minutes": 0,
+                      "hours": 17,
+                      "seconds": 0,
+                      "nanos": 0
+                    }
+                  }
+                }
+
+
+### <a name="101">2.11.5 实体的original值和resolved值</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+<p>
+谷歌内置名词动词的单复数转换、动词时态的转换、动词变名词（suggest->suggestion)。 有些时候用户说出的单词不在训练语料中，但通过词型的自动转换，谷歌能找出该单词的其他词形。我们可以查看谷歌的响应字符串来判断单词的原始值（用户发言）和该单词在语料中的形式。
+大概分为如下几种情况讨论： 
+</p>   
+
+ - 情况 1: 输入句子的实体值在实体类型中能找到。
     original 为用户输入的原实体值 resolved 为谷歌实体类型里的值,如下图:<br>
     例句:let me know your ability<br>
-    谷歌返回结: "Parameters": {<br>
-    "skills": {<br>
-    "original": "ability", "resolved": "ability", "type": "@gra_skills"<br>
-    } },<br>
+    谷歌返回结果: <br>
+
+
+            "Parameters": {
+            "skills": {
+            "original": "ability", 
+            "resolved": "ability",
+            "type": "@gra_skills"
+            } },
 
 
 <img width="468" alt="截屏2022-05-18 下午2 47 47" src="https://user-images.githubusercontent.com/30898964/168975318-82e3f3b3-bffb-471a-905f-a15f4a081031.png">
 
-  情况 2: 输入句子的实体值经过谷歌自动处理单复数后，在实体类型中能找到，见下图。 <br>
+  - 情况 2: 输入句子的实体值经过谷歌自动处理单复数后，在实体类型的实体集中能找到。
+
       例句:let me know your powers<br>
+      截图说明：
       powers 不在实体类型 GRA_SKILLS 里，但是谷歌做了单数转换，powers 的单数 power 在实 体类型 GRA_SKILLS 里。<br>
-      original 为用户输入的原实体值(powers) resolved 为谷歌实体类型里的值(power)<br>
-      original 为用户输入的原实体值 resolved 为谷歌实体类型里的值<br>
-    
+      original 为用户输入的原实体值(powers) resolved 为谷歌实体类型里的值(power)。<br>
+      original 为用户输入的原实体值 resolved 为谷歌实体类型里的值。<br>
  
  <img width="600" alt="截屏2022-05-18 下午2 49 48" src="https://user-images.githubusercontent.com/30898964/168975604-99dac0a8-95e4-4695-ab61-e2e7be8bc5dc.png">
 
