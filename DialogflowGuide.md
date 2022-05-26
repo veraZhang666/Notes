@@ -16,7 +16,7 @@
 &emsp;&emsp;&emsp;<a href="#11">1.2.4.5 谷歌项目、代理、意图的命名规范</a>  <br>
 &emsp;<a href="#12">1.3 公司业务与谷歌服务的融合</a><br>
 &emsp;&emsp;<a href="#13">1.3.1 父模板代理及其环境</a><br>
-&emsp;&emsp;<a href="#14">1.3.2 公司业务c</a><br>
+
 <a href="#15">2. 实践操作</a>  
 &emsp;<a href="#16">2.1 登录google cloud platform</a>  
 &emsp;<a href="#17">2.2 新建项目</a>  
@@ -113,49 +113,45 @@
 - 机器人id：所有场景下的机器人都有唯一的设备id <br>
 公司语义服务器根据该器人id，和其所属的商家项目id来请求对应的谷歌代理（稍后会讲到），并返回结果给APP。<br>
 <br>
-以下为一个语义的请求字段：<br>
-其中“project”字段为商家项目id，“deviceID”为机器人设备id <br>
+以下为一个语义请求字段：<br>
+其中“project”字段为商家项目id，“deviceID”为机器人设备id,"ask"为用户发言 <br>
 
-```python
-'''
-{
-    "type": 0,
-    "project": "62342feb4a6c213fc8c09632",
-    "deviceID": "YHPR1120B00811SZGM4321020142",
-    "area": "",
-    "ask": "hi here",
-    "userData": "{{$timestamp}}",
-    "robotType": 4,
-    "pageID": 0,
-    "requestID": "",
-    "version": "v1.0.0"
-}
-```
-'''
+    {
+        "type": 0,
+        "project": "62342feb4a6c213fc8c09632",
+        "deviceID": "YHPR1120B00811SZGM4321020142",
+        "area": "",
+        "ask": "hi here",
+        "userData": "{{$timestamp}}",
+        "robotType": 4,
+        "pageID": 0,
+        "requestID": "",
+        "version": "v1.0.0"
+    }
 
 
 ## <a name="3">1.2 谷歌名词概念解释</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="4">1.2.1 谷歌项目与代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-#### 什么是谷歌项目？
+#### 1.2.1.1 什么是谷歌项目？
 
     简单来说，这是谷歌为了用户使用他们的服务而设立的。为了使用谷歌的服务，如谷歌地图、STT、TTS,必须建立一个谷歌项目，想要使用谷歌的某服务必须开启对应服务的API。
     关于项目管理我们的做法：
     目前我们的做法是将谷歌项目当作一类服务的容器，这样便于项目管理和账单查看。 比如,谷歌项目“项目1”只用于Dialoflow CX 代理，“项目2”只用于STT、TTS,“项目3”只用于Google map，注意“项目1”、“项目2”、“项目3”为自定义项目名字，请读者根据规范建立项目名
 
 
-#### 什么是代理？
+#### 1.2.1.2 什么是代理？
     谷歌代理（Agent)是一个功能的抽象，比如订票代理、订房代理、订餐代理，其中订票机器人只负责订票的业务。
     本文档所说的代理是Dialogflow CX的代理（Agent)，我们可以在通过代理实现对话机器人搭建。一个谷歌项目下最多可创建1000个代理，谷歌在全球设立了12个大区，创建代理时需选择一个区域，区域代表了该代理存放的地理位置，这将影响到服务访问速度。
 
-#### 什么是流？
+#### 1.2.1.3 什么是流？
     流决定了对话的走向，一个代理可以由一个或多个流组成。谷歌提供流级别的版本控制，即可以为每个流打一个或多个版本。 
 
-#### 什么是代理环境？
+#### 1.2.1.4 什么是代理环境？
 
     谷歌代理本身没有版本可言，只有流才有版本控制，那么谷歌怎么做到代理的版本控制呢？
     我们可以在Dialogflow控制台(简称控制台）建立环境，环境的名字由我们自定义，代理环境可以被理解为一个文件夹，它对各个版本的流只是一个指向关系。在环境页面，我们需要指定每个流的版本（详细操作流程），如果不指定该流的版本，那么该代理就不具备这个流的功能。 
 
-#### 草稿和环境有什么区别？
+#### 1.2.1.5 草稿和环境有什么区别？
 
 从版本的角度来讲，代理可草稿和环境代理。开发人员在控制台编辑的代理叫草稿，环境代理是上述中我们自定义环境中指向的各个版本的流组成的代理。开发人员将草稿代理调试通过后，我们才将该流打版本。 我们需要自定义环境，方便公司研发、生产、测试时访问不同的代理（稍后会讲解具体做法）。
 
@@ -168,7 +164,7 @@
 
 ### <a name="5">1.2.2 谷歌的服务</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-#### 我们用到了哪些谷歌服务？
+#### 1.2.2.1 我们用到了哪些谷歌服务？
 
     - STT服务，即语音识别，谷歌提供多语种的语音识别、语种识别。
     - TTS服务，即语音播报，谷歌提供多语种的男女生播报，截止当前谷歌尚未支持童声（2022-5)
@@ -179,24 +175,24 @@
 
 <img width="1135" alt="截屏2022-05-17 下午9 07 05" src="https://user-images.githubusercontent.com/30898964/168818016-2584397a-9196-4d13-beca-915867373164.png">
 
-### <a name="6">1.2.3 谷歌代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="6">1.2.3 谷歌代理与公司项目</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-### 商家代理和谷歌代理的对应关系
+### 1.2.3.1 商家代理和谷歌代理的对应关系
 
     每个商家项目对应唯一一个谷歌代理，代理名为商家项目id，下图中代理的“Display name”为商家项目ID。
 <br>
-
+ 
 <img width="1015" alt="截屏2022-05-17 下午11 53 26" src="https://user-images.githubusercontent.com/30898964/168855043-86d8a211-b28b-4860-a5e3-bc7d8cad06c8.png">
 
 
 
-### <a name="7">1.2.4 公司项目和谷歌代理的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="7">1.2.3.2 公司项目和谷歌代理的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
     一个公司场景的项目对应同一种功能的谷歌代理，比如餐饮场景对应餐饮代理，餐饮代理只具有餐饮业务的语义功能。该代理存放了餐饮场景下该商家项目的意图、实体数据（比如菜名、菜口味等)。 
     根据公司研发管理流程，我们现有研发、测试、生产环境，因此我们需要基于此来划分谷歌项目和代理。 
 
 
-#### <a name="701">1.2.4.1 何为模板代理？</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="701">1.2.3.3 何为模板代理？</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
     在理解模板代理之前先要弄清楚什么是动态实体和静态实体
@@ -221,7 +217,7 @@
     谷歌代理。
 
 
-#### <a name="8">1.2.4.2 为什么要设置多个模板代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="8">1.2.3.4 为什么要设置多个模板代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 <p>
 
@@ -238,25 +234,27 @@ c.为了语义服务响应速度
 </p>
 
 
-#### <a name="9">1.2.4.3 模板代理的版本控制</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="9">1.2.3.5 模板代理的版本控制</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-    上面提到一个谷歌代理具有流级别的版本控制功能，我们为每个流保存一个版本，然后我们自定义环境来指向不同版本的流，这样达到了代理版本的控制，现在我们的做法是，在模板代理流设置3个环境，即研发、生产、测试。 每个环境的代理有唯一的地址，我们可以通过环境id来访问不同版本的代理。如下图：<br>
+上面提到一个谷歌代理具有流级别的版本控制功能，我们为可以为每个流保存一个或多个版本，然后自定义环境来指向每个流的其中一个版本，这样就达到了代理版本的控制。现在我们的做法是，在模板代理里设置3个环境，即研发、生产、测试，然后根据开发情况指向所需要流的版本。因为每个环境的代理都有唯一的地址，我们可以通过环境id来访问不同版本的代理。如下图：<br>
 
 <img width="1005" alt="截屏2022-05-18 上午8 56 00" src="https://user-images.githubusercontent.com/30898964/168935522-30b98997-4b73-423c-a60f-6ea94a25b94e.png">
 <img width="1016" alt="截屏2022-05-18 上午8 57 14" src="https://user-images.githubusercontent.com/30898964/168935620-be5bf150-6abd-4253-8ebc-b940e735a43e.png">
 
 
-
-#### <a name="10">1.2.4.4 父模板代理与“复制品”的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="10">1.2.3.6 父模板代理与“复制品”的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 ##### 什么是父模板代理？
 <p>
-   父模板代理是bot开发人员的主要操作对象，是根据公司业务取名而来，谷歌本身没有父模板代理或模板代理概念。在一个公司场景、一个语言下，我们只设置一个父模板代理，其他地区的同样场景和语言的代理是从父模板处复制而来。我们约定将香港的模板代理作为父模板代理，而全球其他地区的同场景同语言的模板代理只从父模板代理处复制。比如“香港（英文）餐饮代理”是父模板，“美国（英文）餐饮代理"就是香港英文餐饮代理的复制品。
+   父模板代理是bot开发人员的主要操作对象，是根据公司业务取名而来，谷歌本身没有父模板代理或模板代理概念。对于一个语言下的公司场景，我们只设置一个父模板代理，其他地区的同样场景和同样语言的代理是从父模板复制而来。我们约定将香港的模板代理作为父模板代理，而全球其他地区的同场景同语言的模板代理只从父模板代理复制。比如“香港（英文）餐饮代理”是父模板，“美国（英文）餐饮代理"就是香港英文餐饮代理的复制品。
+</p>
+   
 ##### 父模板代理的环境
-    当前我们在父模板代理中自定义研发、生产、测试环境，但其“复制品”代理无环境，复制品从父模板代理复制后默认保存在草稿代理。简单来说，“复制品”代理存在的意义只是为了地区访问速度而设置。为每个复制品代理设置环境无意义。商家项目的代理会遵从地理位置就近的原则，从最近的模板代理的草稿拉去数据。 因此在每次语义版本迭代的时候，代理通过研发和测试无误后，我们将生产环境指向该代理。然后将该代理导出，再手动导入到“复制品”代理。</p>
+<p>
+当前我们在父模板代理中自定义研发、生产、测试环境，但其“复制品”代理无环境，复制品从父模板代理复制后默认保存在草稿代理。简单来说，“复制品”代理存在的意义只是为了地区访问速度而设置。为每个复制品代理设置环境无意义。商家项目的代理会遵从地理位置就近的原则，从最近的模板代理的草稿拉去数据。 因此在每次语义版本迭代的时候，代理通过研发和测试无误后，我们将生产环境指向该代理。然后将该代理导出，再手动导入到“复制品”代理。
+</p>
 
-
-#### <a name="11">1.2.4.5 谷歌项目、代理、意图的命名规范</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="11">1.2.3.7 谷歌项目、代理、意图的命名规范</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
     a.模板代理的命名约定
     
@@ -273,8 +271,9 @@ c.为了语义服务响应速度
     b.意图命名约定
     
     意图命名规范： 语言+场景+行为意图名 <br>
-    第一部分为语言，english“代表英语，其他语言请参照英文翻译
-    第二部分为场景，第二部分由公司场景或“public"组成，其中公司场景
+    第一部分为语言，如“english“代表英语，其他语言请参照英文翻译
+    第二部分为场景，第二部分由公司场景名或“public"组成，
+        其中公司场景名为：
         餐饮 对应 ”restaurant“ 
         酒店 对应 "hotel" 
         写字楼 对应 "office"
@@ -283,8 +282,8 @@ c.为了语义服务响应速度
         展厅 对应 ”exhibition“    
         展厅 对应 ”exhibition“
         ”public“为机器人所有场景机器人公有意图，如： ”返回“、”开灯“、”问机器人名字“，”打招呼“。
-    第三部分是行为表达，如查询、预约、取号等。查询类意图用 query_xxx, ”xxx“为对象名，如查询英语查询营业时间的意图命名为 "english_public_query_businiess_time",因为查询营业时
-    间是公共意图，所以这里用”public“。其他意图根据情况取名，但是注意取名要要统一，表达要简要。意图取名不能重复，全小写。
+    第三部分是行为表达的英语，如查询、预约、取号等。查询类意图用 query_xxx, ”xxx“为对象名。如英语查询营业时间的意图命名为 "english_public_query_businiess_time",因为查询营业    
+    时间是公共意图，所以这里用”public“。其他意图根据情况取名，但是注意取名要要统一，表达要简要。意图取名不能重复，全小写。
     对于每个意图，如果有否定意图，其否定意图的命名为直接在肯定意图的结尾加”_neg“, 如”english_public_query_businiess_time_neg“是查询营业时间的否定意图。
     
     
@@ -297,20 +296,23 @@ c.为了语义服务响应速度
 
 
     d.谷歌项目的命名约定
-
+    
+    模板代理的存放位置:
+    现在公司的做法是只设立一个谷歌项目用于存放所有代理的父模板和“复制品”代理。将一个语言一个场景下的香港模板代理作为父模板代理。
+    如：HkRestaurantEnglishTemplate、HkHoteltEnglishTemplate 分别为餐饮场景、酒店场景的父模板代理。
+    
+    项目的取名：
     谷歌地图项目：名字固定为“GoogleMap”
     
     语音识别、语音播报项目：名字固定为 “STTProject”
-    
-    模板代理的谷歌项目:用于存放父模板代理和其“复制品”代理，请根据情况取名。只设立一个项目存放所有模板代理。 建议选择同一个地区的模板代理作为父模板代理，
-    如：HkRestaurantEnglishTemplate、HkHoteltEnglishTemplate 分别为餐饮场景、酒店场景的父模板代理。
     
     测试环境谷歌项目：名字固定为“TestProject”，用于存放所有场景下测试环境的商家代理。
     
     研发环境谷歌项目：名字固定为“DevelopmentProject”，用于存放所有场景下研发环境的商家代理。
     
-    生产环境的谷歌项目: 地区名+公司场景名+语言+Project”，一个谷歌项目最多能建立1000个代理，生产环境的谷歌项目用于商家代理，随着商家的客户的新增，谷歌代理数量同比增多。
-    所以，商家谷歌代理会存在多个。当一个生产环境谷歌项目的代理占用数量到达一定比例的时候，需要提前建立好谷歌项目并初始化代理地区（见目录“代理的创建”）
+    生产环境的谷歌项目: 地区名+公司场景名+语言+Project”.
+    注:一个谷歌项目最多能建立1000个代理，生产环境的谷歌项目用于商家代理，随着商家的客户的新增，谷歌代理数量同比增多。所以，商家谷歌代理会存在多个。
+    当一个生产环境谷歌项目的代理占用量到达一定比例的时候，需要提前新建谷歌项目并初始化代理地区（初始化代理区域见目录“代理的创建”）
     
     命名例子如下：
     UsaRestaurantEnglishProject 美国餐饮英语生产环境项目
@@ -324,32 +326,28 @@ c.为了语义服务响应速度
 
 ### <a name="13">1.3.1 父模板代理及其环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-我们设立研发环境的谷歌项目（DevelopmentProject）和测试环境的谷歌项目（TestProject）、生产环境的谷歌项目。那么这三个项目从哪里复制模板代理数据？
 
-在上面提到了我们只在父模板代理里自定义研发、测试、生产环境，谷歌研发项目中所有的代理只从父模板代理的研发环境复制。同理，谷歌测试项目中所有代理只从父模板代理的测试环境复制。而生产环境的谷歌代理处理方式则不同，我们需要把父模板的生产环境的代理导入到各大区的“复制品”模板代理。语义服务数据库存有一表，该表指明了生产环境的某商家项目该从哪个模板代理去复制。<br>
-从模板代理处拉取代理数据后，该商家代理会清空所有数据并把模板代理的数据更新到当前代理(包括意图、实体等)。然后，该商家代理会自动更新动态实体，并完成自动训练。<br>
-<br>
+#### 我们设立研发环境的谷歌项目（DevelopmentProject）和测试环境的谷歌项目（TestProject）、生产环境的谷歌项目。那么这三个项目从哪里复制模板代理数据？
+<p>
+在上面提到了我们只在父模板代理里自定义研发、测试、生产环境，谷歌研发项目中所有的代理只从父模板代理的研发环境复制。同理，谷歌测试项目中所有代理只从父模板代理的测试环境复制。而生产环境的谷歌代理处理方式则不同，我们需要把父模板的生产环境的代理导入到各大区的“复制品”模板代理。语义服务数据库存有一表，该表指明了生产环境的某商家项目该从哪个模板代理复制。从模板代理处拉取代理数据后，该商家代理会清空所有数据并用模板代理的数据直接覆盖当前代理(包括意图、实体等)。然后，该商家代理会自动更新动态实体，并自动训练。
+</p>
 
 <img width="333" alt="image" src="https://user-images.githubusercontent.com/30898964/168944420-3f23efa7-dc45-4624-9e2c-a511c64cedea.png">
 
-
-### <a name="14">1.3.2 公司业务与谷歌服务的融合</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-
-我们有六大场景，每个场景都有与之对应的模板代理项目、研发环境谷歌项目、测试环境谷歌项目、生产环境谷歌项目。具体关系如下图所示。
-其中，模板代理项目的用于存放父模板代理和“复制品”代理，研发环境谷歌项目用于存放公司研发环境的代理，测试环境谷歌项目用于存放公司测试环境的代理，测试环境谷歌项目主要为测试部同事新建。
+<p>
+我们有六大场景，每个场景都有与之对应的模板代理项目、研发环境谷歌项目、测试环境谷歌项目、生产环境谷歌项目。具体关系如下图所示。其中，模板代理项目的用于存放父模板代理和“复制品”代理，研发环境谷歌项目用于存放公司研发环境的代理，测试环境谷歌项目（TestProject）用于存放公司测试环境的代理，这些代理一般是由测试部门同事新建。
+</p>
     
-
 <img width="862" alt="截屏2022-05-18 下午3 04 13" src="https://user-images.githubusercontent.com/30898964/168977930-25642ff0-02ef-4828-95b8-5d1e2320f51f.png">
 
 
+## <a name="15">2 实践操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-## <a name="15">2. 实践操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-
-## <a name="16">2.1 登录google cloud platform</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="16">2.1 登录google cloud platform</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 [登录链接](https://console.cloud.google.com/user-preferences/cloud-profile)
 
-## <a name="17">2.2 新建项目</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="17">2.2 新建谷歌项目</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 ### <a name="18">2.2.1 步骤1：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
@@ -375,7 +373,7 @@ c.为了语义服务响应速度
 是一个供计算机用的虚拟账号，用来访问Google Cloud资源。
 [链接](https://cloud.google.com/iam/docs/service-accounts?hl=zh-cn&_ga=2.98308319.-139742340.1639388700)
 
-### <a name="22">2.3.2 服务账号创建步骤</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="22">2.3.2 创建服务账号</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 - 步骤1
 ![image-20220124201854459](./imgs/image-20220124201854459.png)
 
@@ -433,13 +431,13 @@ c.为了语义服务响应速度
 ![image-20220125132619330](./imgs/image-20220125132619330.png)
 
 
-### <a name="32">2.5 设置环境变量</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="32">2.5 设置环境变量</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 [链接](https://cloud.google.com/iam/docs/service-accounts?hl=zh-cn&_ga=2.98308319.-139742340.1639388700)
 
 拿到上一步下载的json密匙绝对路径
 
-#### <a name="33">2.5.1 windows 用户的环境变量设置</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="33">2.5.1 windows 用户的环境变量设置</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 前提：
 windows+pycharm 
@@ -464,7 +462,7 @@ windows+pycharm
 
 
 
-#### <a name="34">2.5.1 linux, mac 用户的环境变量设置</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="34">2.5.1 linux, mac 用户的环境变量设置</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 可以直接把json密匙路径配置到用户环境变量，生效范围为该linux系统的用户，当然你也可也设置linux系统级的环境变量（参照链接：https://www.cnblogs.com/lihao-blog/p/6945040.html）
 
@@ -495,11 +493,11 @@ source ~/.bashrc
 搞定！
 
 
-# <a name="35">2.6代理的操作：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-## <a name="36">2.6.1 代理的创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="35">2.6 代理的操作 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="36">2.6.1 代理的创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 我们可以通过API、客户端、控制台创建代理
 这里仅展示通过控制台、客户端创建代理。
-### <a name="37">2.6.1.1 通过控制台创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="37">2.6.1.1 通过控制台创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 登录后，在project下拉框，你会发现刚刚创建的google could 项目 projectTest已经显示到了这里。
 1.点击 Enable API ->create agent
@@ -526,7 +524,7 @@ dialogflow代理id为谷歌自动生成，创建代理成功后可以通过API�
 
 ![image-20220125101122308](./imgs/image-20220125101122308.png)
 
-### <a name="370">2.6.1.2 代理地区的手动初始化</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="370">2.6.1.2 代理地区的手动初始化</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 为什么要初始化代理的地区？
 
@@ -541,7 +539,7 @@ step2.对于代理的“location”下拉列表中的每一个地区都执行下
 <img width="604" alt="截屏2022-05-24 下午2 18 12" src="https://user-images.githubusercontent.com/30898964/169962164-a6709f75-11df-4a66-852a-1ab2413e3fc4.png">
 
 
-### <a name="38">2.6.1.3 通过客户端创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="38">2.6.1.3 通过客户端创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 通过客户端创建代理需要传入的参数：</br>
 project_id：项目id， 最简单的方法是直接复制Dialogflow控制台导航栏的url并截取相关部分。</br>
@@ -778,8 +776,8 @@ zu — Zulu
 ```
 
 
-## <a name="42">2.6.2 代理的导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-### <a name="43">2.6.2.1 使用控制台导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="42">2.6.2 代理的导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="43">2.6.2.1 使用控制台导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 步骤1：</br>
 </br>
 ![image](https://user-images.githubusercontent.com/30898964/150994138-4e1a7d7a-3f05-46a4-91aa-bb2f5b4bf02c.png)
@@ -787,7 +785,7 @@ zu — Zulu
 </br>
 ![image](https://user-images.githubusercontent.com/30898964/150997846-3822be2d-1bc7-49db-b099-822f6eec67dd.png)
 
-### <a name="44">2.6.2.2 使用客户端库导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="44">2.6.2.2 使用客户端库导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 [文档链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/agents.html)
 
 这里只是为了展示代理导出的功能才使用while True，在实际项目中，请不要这样使用。</br>
@@ -847,8 +845,8 @@ if __name__ == '__main__':
 
 ```
 
-## <a name="45">2.6.3 代理的导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-### <a name="46">2.3.1 通过控制台导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="45">2.6.3 代理的导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="46">2.6.3.1 通过控制台导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 步骤1：
 ![image](https://user-images.githubusercontent.com/30898964/151000728-1e3709d1-e8e3-41de-8522-c01a2979176f.png)
 步骤2：
@@ -857,7 +855,7 @@ if __name__ == '__main__':
 ![image](https://user-images.githubusercontent.com/30898964/151000911-11d2ff7b-c764-4bd4-8074-e40ee51181ef.png)
 
 
-### <a name="47">2.3.2 通过客户端库导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="47">2.6.3.2 通过客户端库导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 步骤：</br>
 - 先导出一个代理，那到该代理的二进制文件
 - 通过新建一个代理或者使用现有的代理，然后执行导入操作。
@@ -887,25 +885,24 @@ def restore_agent(agent,agent_binary):
         print(f'agent updated, timeout:{end-start}')
         
 if __name__ == '__main__':
-    agent_path = 'projects/catering-robot/locations/asia-northeast1/agents/8329fd03-417c-43fd-9520-ed5c8ae0d1d6/environments/573b3604-5d72-4b91-9374-c9f226e6800c'
-    agent_binary = exportAgent(agent_path)
-    agent_to_be_restored= 'projects/catering-robot/locations/asia-northeast1/agents/15439d0d-2893-42da-bbba-cc85c4825675'
+    agent_binary_document = exportAgent2binary_from_draft(from_agent_path_draft) # 被导出的代理二进制，可以为从草稿代理导出或环境代理导出
+    agent_to_be_restored= 'projects/catering-robot/locations/asia-northeast1/agents/XXXX' # 被导入的草稿代理地址，注意只能导入到草稿代理，不能导入到环境代理。
+    restore_agent(agent_to_be_restored,agent_binary_document)
 
 
 ```
 
-## <a name="48">2.6.4 代理的删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-### <a name="49">通过控制台删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="48">2.6.4 代理的删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="49">2.6.4.1 通过控制台删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 步骤1：
 ![image](https://user-images.githubusercontent.com/30898964/151003260-1087ad8a-5bf7-4a7e-a9e7-719578b717c8.png)
 步骤2：
 ![image](https://user-images.githubusercontent.com/30898964/151003345-e5242c6d-2154-450b-92ac-560c9648f050.png)
 
 
-### <a name="50">通过客户端库删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="50">2.6.4.2 通过客户端库删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 待更新......</r>
-通过客户端库删除代理的方法可参照代理的创建代码段， 
-
+通过客户端库删除代理的方法和创建代理类似，可参照谷歌文档。 
 
 # <a name="51">2.7 Dialogflow 控制台面板功能介绍</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
@@ -938,7 +935,27 @@ Prebuild Agent：
 
 ![image-20220125142022121](./imgs/image-20220125142022121.png)
 
-## <a name="39">3.3 Agent Test</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+- Agent settings
+
+点击控制台右上角Agent setting->ML </br>
+
+参数说明：</br>
+
+- NLU type：</br>
+
+这里是默认选择了标准NLU, 标准NLU会在更改草稿后自动训练，如果选择Advanced NLU，每次更新流就必须手动训练，这个选项适合大型流。 </br>
+
+- Classification thredshould：<br>
+
+意图检测的阈值，如果意图匹配的置信度分数小于阈值，则会调用[无匹配事件](https://cloud.google.com/dialogflow/cx/docs/concept/handler#event-built-in)
+
+![image-20220125140729785](./imgs/image-20220125140729785.png)
+
+
+
+
+### <a name="39">2.7.1 在控制台测试代理 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 点击右边test Agent可对创作好的代理进行测试。
 
@@ -965,31 +982,33 @@ Prebuild Agent：
 ![image-20220125141552260](./imgs/image-20220125141552260.png)
 
 
-- Agent settings
 
-点击控制台右上角Agent setting->ML </br>
+## <a name="52">2.8 流、页面、意图、实体、实体类型的概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+- 意图：表达用户的意图，一个代理可以定义多个意图，我们需要根据业务对用户意图进行分类，意图分类也叫意图匹配。比如餐饮场景下的用户意图有查看菜单、查看菜品等。
+- 实体：一类食物是
+- 实体类型
+- 页面：
+- - 反映一个对话当前在什么状态，下图为一个简单的订餐bot，这里有三个页面，每个页面反应了订餐的状态。
+- - 页面是一个容器，一个页面可以“装”很多意图，只有把意图加入了该页面，当对话进行到该页面时候，这些意图才可能被触发。
+- - 一个页面包含了导向对话的逻辑操作。
+- - 在一个页面可以设置初始回复（intro conversation)和其他回复用户的话（fulfilment)，可以将初始回复理解为进入该页面的导向语句，比如顾客在上一步完成了点餐，现在进入了下订单的页面，在下订单的页面初始流中，我们可以设置这样的说法：“现在我将帮助您支付订单”。 如果设置了初始回复进入该页面就被触发。 其他回复用户的话包括填槽时的追问话术、完成该流的结束话术。
 
-参数说明：</br>
-
-- NLU type：</br>
-
-这里是默认选择了标准NLU, 标准NLU会在更改草稿后自动训练，如果选择Advanced NLU，每次更新流就必须手动训练，这个选项适合大型流。 </br>
-
-- Classification thredshould：<br>
-
-意图检测的阈值，如果意图匹配的置信度分数小于阈值，则会调用[无匹配事件](https://cloud.google.com/dialogflow/cx/docs/concept/handler#event-built-in)
-
-![image-20220125140729785](./imgs/image-20220125140729785.png)
+<img width="968" alt="截屏2022-05-26 上午10 44 57" src="https://user-images.githubusercontent.com/30898964/170404965-73bc2721-a977-49a8-9a73-045e35b1d633.png">
+<img width="773" alt="截屏2022-05-26 上午10 51 49" src="https://user-images.githubusercontent.com/30898964/170405835-01618a83-1ca6-45e3-a0f8-49fc1de35176.png">
 
 
-# <a name="52">2.8 流、页面、意图、实体的概念和用法</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+- 流 一类业务的抽象 <img width="411" alt="截屏2022-05-26 上午10 39 03" src="https://user-images.githubusercontent.com/30898964/170404318-8afd749a-b553-43a9-8f21-132a197af856.png">
 
 
-### <a name="53">流的特点</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+![image](https://user-images.githubusercontent.com/30898964/170402753-6e40d385-d9ba-4968-b2a6-e091f5512d93.png)
 
-- 每个代理有且仅有一个默认初始流Default start flow[默认初始流](https://cloud.google.com/dialogflow/cx/docs/concept/flow#start)的流，这是一轮对话的入口。对于简单的代理，您可能只需要这一个流。较复杂的代理可能需要更多的流，不同的开发团队成员可以负责构建和维护这些流。也就是当业务广或很复杂的时候，我们可以把功能抽象出来，用一个流执行一类的功能操作，这样方便流的管理和后期流的版本控制。
 
-- 多个流之间可以相互协作，数据可以共享。 
+
+### <a name="53">2.8.1 流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+- 每个代理有且仅有一个默认初始流“Default start flow”[链接](https://cloud.google.com/dialogflow/cx/docs/concept/flow#start)，这是一轮对话的入口。对于构造简单的代理，您可能只需要这一个流。对于较复杂的代理可能需要设计更多流，也就是当业务很复杂的时候，我们可以把功能抽象出来，用一个流执行一类的功能操作，这样方便流的管理和后期流的版本控制。比如你想搭建一个定外卖的bot，点餐、下订单、支付为三个独立的业务处理，那么对于每个业务我们用一个流完成功能，负责点餐的开发人员只需要维护点餐的流。
+
+- 多个流之间可以相互协作，可以共享这个对话的数据。 
 
 - 默认初始流的ID为00000000-0000-0000-0000-000000000000
 
@@ -997,22 +1016,18 @@ Prebuild Agent：
 
 
 
-
-### <a name="54">4.1.3 流的增、删、导出、导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="54">2.8.1.1 增加流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 流的操作有三种方式:</br>
 1.通过API ([链接](https://cloud.google.com/dialogflow/cx/docs/concept/flow))。 </br>
 2.通过客户端([链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/services.html#google.cloud.dialogflowcx_v3beta1.services.flows.FlowsClient))。</br>
 3.通过控制台。 下面展示了通过控制台创建流。</br>
 
-
-#### <a name="55">增加流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-
 在dialogflow cx 控制台 ->点击build-> 点击 + 号->点击create flow->输入流名 ->回车保存</br>
 
 ![image-20220125161314942](./imgs/image-20220125161314942.png)
 
-#### <a name="56">删除流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="56">2.8.1.2 删除流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 打开dialogflow cx 控制台 ->点击build-> 点击 + 号->点击Delete->输入流名 ->回车保存 </br>
 
@@ -1041,7 +1056,7 @@ Download：存到本地</br>
 
 这里仅展示将本地存储的流文件导入到代理。</br>
 
-步骤： 打开dialogflow cx 控制台 ->点击build -> 点击Flow 右边的 +号 ->选中upload local file -> 点击select file -> 选中本地存储的流文件点击“打开” -> 单击import 按钮</br>
+步骤： 打开dialogflow cx 控制台 ->点击build ->选中upload local file -> 点击select file -> 选中本地存储的流文件点击“打开” -> 单击import 按钮</br>
 
 ![image-20220125164248196](./imgs/image-20220125164248196.png)
 
@@ -1050,6 +1065,7 @@ Download：存到本地</br>
 
 
 ## <a name="59">2.9 页面 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 
 ![image-20220125153012686](./imgs/image-20220125153012686.png)
 
