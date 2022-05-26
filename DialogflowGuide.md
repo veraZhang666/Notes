@@ -906,53 +906,18 @@ if __name__ == '__main__':
 
 # <a name="51">2.7 Dialogflow 控制台面板功能介绍</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-- Build
-
-![image-20220125133721423](./imgs/image-20220125133721423.png)
+![image](https://user-images.githubusercontent.com/30898964/170485518-591c8bca-c00e-4575-be6b-eb24ad5babfb.png)
 
 
-- Manage
-
-- Resources:
-
-在这里可以管理意图、实体类型、网络钩子、路由组
-
-- Test & Feedback：
-
-这里包含了代理的测试和分析功能
-
-- TESTING $DEPLOYMENT:
-
-在这里可以进行流的版本控制，代理的环境管理等操作。
-
-- INTERGRETION:
-
-代理与第三方平台的集成
-
-Prebuild Agent：
-
-谷歌预设好的代理。 
-
-![image-20220125142022121](./imgs/image-20220125142022121.png)
+![image](https://user-images.githubusercontent.com/30898964/170485532-260b6d0e-c661-4683-aed1-7fe860f4d18e.png)
 
 
-- Agent settings
-
-点击控制台右上角Agent setting->ML </br>
-
-参数说明：</br>
-
-- NLU type：</br>
-
+按钮说明：<br>
+Agent settings中的NLU type：<br>
 这里是默认选择了标准NLU, 标准NLU会在更改草稿后自动训练，如果选择Advanced NLU，每次更新流就必须手动训练，这个选项适合大型流。 </br>
 
-- Classification thredshould：<br>
-
+Classification thredshould：<br>
 意图检测的阈值，如果意图匹配的置信度分数小于阈值，则会调用[无匹配事件](https://cloud.google.com/dialogflow/cx/docs/concept/handler#event-built-in)
-
-![image-20220125140729785](./imgs/image-20220125140729785.png)
-
-
 
 
 ### <a name="39">2.7.1 在控制台测试代理 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -963,23 +928,22 @@ Prebuild Agent：
 
 测试窗口:</br>
 
-- - Default start flow 代表流名字，这里指页面Strore Hours所在的流名。
+- Default start flow ：代表流名字，这里指页面Strore Hours所在的流名。
 
-- - Strore Hours 代表页面名字,这里指意图store.hours所在的页面名字。
+- Strore Hours： 代表页面名字,这里指意图store.hours所在的页面名字。
 
-- - store.hours 是当如输入测试语句后所命中的意图名。
+- store.hours： 是当如输入测试语句后所命中的意图名。
 
-- - 点击小本本图标可以看到当前会话返回的详细json参数。
+- 点击小本本图标可以看到当前会话返回的详细json参数。
 
-- - 点击垃圾箱的图标会清除当前会话的所有数据，再次输入语句测试的时候就会生成一个新的session id测试控制台的代理。
+- 点击垃圾箱的图标会清除当前会话的所有数据，再次输入语句测试的时候就会生成一个新的session id测试控制台的代理。
 
-- - Execution steps： 点击下拉框可以看到当前会话的从开始到当前状态的执行步骤。
+- Execution steps： 点击下拉框可以看到当前会话的从开始到当前状态的执行步骤。
 
-- - Environment: Draft:  这里的意思是当前测试的是草稿代理，如果您建立了代理版本打开测试代理就会弹出代理版本供您选择测试。
+- Environment: Draft:  这里的意思是当前测试的是草稿代理，如果您建立了代理版本打开测试代理就会弹出代理版本供您选择测试。
 
-![image-20220125134259588](./imgs/image-20220125134259588.png)
-
-![image-20220125141552260](./imgs/image-20220125141552260.png)
+![image](https://user-images.githubusercontent.com/30898964/170486137-03db21a3-2caf-48d2-98b1-13f16f507ee5.png)
+![image](https://user-images.githubusercontent.com/30898964/170486141-da3acd67-0387-4379-a3bb-603368b9386e.png)
 
 
 
@@ -1236,62 +1200,154 @@ $session.params.parameter-id
 ![image](https://user-images.githubusercontent.com/30898964/170476862-f0f162da-55c9-4a56-94b7-ca8cc9543f09.png)
 方式二：通过python库
 
+本次将代理、流、页面的地址写入到配置文件（ "mypackage/__init__.py"），方便管理。将流加入页面的意图的py文件为"flowManager.py"
+
+__init__.py 
+
+```python
+from google.cloud.dialogflowcx_v3beta1.services.agents import AgentsClient
+from google.api_core.client_options import ClientOptions
+import sys
+sys.path.append('..')
 
 
+# 要操作的代理,替换为你的代理
+AGENT="projects/future-area-343501/locations/asia-southeast1/agents/xxxx" 
+PROJECT_ADDRESS = "projects/future-area-343501/locations/asia-southeast1/agents/"
+PROJECT_ID = AgentsClient.parse_agent_path(AGENT)['project']
+LOCATION_ID=AgentsClient.parse_agent_path(AGENT)['location']
+AGENT_ID = AgentsClient.parse_agent_path(AGENT)['agent']
+OPTIONS = ClientOptions(api_endpoint=LOCATION_ID + "-dialogflow.googleapis.com")
+# 代理的ID
+PARENT = "projects/" + PROJECT_ID + "/locations/" + LOCATION_ID + "/agents/" + AGENT_ID
 
 
+# 初始流ID
+FLOW_ID = "00000000-0000-0000-0000-000000000000"
 
+# 流ID，FLOW_NAME为初始流ID
+FLOW_NAME = "projects/" + PROJECT_ID + "/locations/" + LOCATION_ID + "/agents/" + AGENT_ID + "/flows/" + FLOW_ID
+# 初始流的初始页面ID
+PAGE = FLOW_NAME+ "/pages/" + "END_SESSION"
+
+# 代理语言
+LANGUAGE_CODE='en'
+
+client_options = None
+agent_components = AgentsClient.parse_agent_path(AGENT)
+location_id = agent_components["location"]
+if location_id != "global":
+    api_endpoint = f"{location_id}-dialogflow.googleapis.com:443"
+    client_options = {"api_endpoint": api_endpoint}
+
+
+```
+
+flowManager.py
+这段代码的功能是将当前代理的所有意图加入默认初始流的开始页面。
+
+```python
+
+from google.cloud.dialogflowcx_v3beta1.services.flows import FlowsClient
+from google.cloud.dialogflowcx_v3beta1.types import Flow,TransitionRoute,Fulfillment,ResponseMessage,EventHandler
+from google.cloud.dialogflowcx_v3beta1.types import UpdateFlowRequest
+import  intentManager
+from google.cloud.dialogflowcx_v3beta1.types.intent import ListIntentsRequest
+from google.cloud.dialogflowcx_v3beta1.services.intents import IntentsClient
+from mypackage import *
+
+def list_intent_id_display_name():
+    '''
+    :return: {'意图名'：'意图id'}
+    '''
+    intentClient = IntentsClient(client_options=OPTIONS)
+    list_intent_request = ListIntentsRequest(parent=PARENT)
+    intent_pager = intentClient.list_intents(request=list_intent_request)
+    intent_lists = intent_pager.intents
+    d = {}
+    for intent in intent_lists:
+        d[intent.display_name] = intent.name
+    return d
+
+
+def update_flow_all():
+    # 获取当前代理的所有意图display name和意图id
+    intent_map = intentManager.list_intent_id_display_name()
+    intent_list = list(intent_map.keys()) # 拿到意图display name 组成的列表
+
+    intent_list.remove('Default Negative Intent')
+
+    flowsclient = FlowsClient(client_options=OPTIONS)
+
+    routes_list = []
+
+    for i,intent_name in enumerate(intent_list):
+
+        print(f'已将{intent_name}加入初始流中')
+        intent_id = intent_map[intent_name]
+
+        # 设置fulfilment的回复文字，这里设置为意图名
+        fulfillment = Fulfillment(messages=[ResponseMessage(text=ResponseMessage.Text(text=[intent_name]))])
+        routes = TransitionRoute(intent = intent_id,trigger_fulfillment = fulfillment,target_page=PAGE)
+        routes_list.append(routes)
+
+    routes_list.append(TransitionRoute(intent = PROJECT_ADDRESS+AGENT_ID+"/intents/00000000-0000-0000-0000-000000000000",trigger_fulfillment = Fulfillment(messages=[ResponseMessage(text=ResponseMessage.Text(text=["default"]))]),target_page=PAGE))
+    event_handlers_list = []
+    # 为该页面注册事件处理程序
+    event1 = EventHandler(event="sys.no-match-default", trigger_fulfillment=Fulfillment(
+        messages=[ResponseMessage(text=ResponseMessage.Text(text=["I didn't get that. Can you say it again?"]))]))
+    event2 = EventHandler(event="sys.no-input-default", trigger_fulfillment=Fulfillment(
+        messages=[ResponseMessage(text=ResponseMessage.Text(text=["I didn't get that. Can you say it again?"]))]))
+    event_handlers_list.append(event1)
+    event_handlers_list.append(event2)
+
+    #加入意图的目标流，这里为默认初始流
+    flow = Flow(name=FLOW_NAME,transition_routes = routes_list,display_name="Default Start Flow",event_handlers=event_handlers_list)
+    request = UpdateFlowRequest(flow=flow)
+    flowsclient.update_flow(request=request)
+
+    return
+
+
+if __name__ == '__main__':
+  
+    update_flow_all()
+
+
+```
 
 
 #### 2.9.4 条件设置
-2.Condition: </br>
-条件的三个逻辑选项： </br>
-2.1.OR</r>
+
+a. 条件“或”</br>
+
 当你设置了多个条件，当其中一个条件被满足，这个路由就会被触发。</br>
 ![image](https://user-images.githubusercontent.com/30898964/151087713-5aa0f331-62b2-4292-9cba-c7981acc27d0.png)
 
-2.2 AND</br>
+b. 条件“和”</br>
+
 当你设置了多个条件，所有的条件都满足，这个路由才会被触发。</br>
 例子：假设你在对话中收集了顾客年龄信息，你现在需要根据顾客的年龄给出不同的回复。</br>
 当满足条件 20<顾客年龄<30 才被触发  </br>
 ![image](https://user-images.githubusercontent.com/30898964/151086934-4929d087-5224-4d89-bc19-9a8504697eb3.png)
 
-2.3.Customize expression</br>
+c. 自定义表达式 Customize expression</br>
+
 自定义表达式，请将条件判断语句写到这里。</br>
-[条件链接](https://cloud.google.com/dialogflow/cx/docs/reference/condition)
+自定义表达式请参照链接： [链接](https://cloud.google.com/dialogflow/cx/docs/reference/condition)</br>
 ![image](https://user-images.githubusercontent.com/30898964/151086144-9dfdeaf7-a3c4-4c8d-a60c-4dc82c7a5422.png)
 
-3.Fulfillment</br>
-代理的回复语句，如果你写了多行，将会以随机的方式选出一句作为回复语句。</br>
+d. Fulfillment</br>
 
-4.Transition</br>
+在这里设置代理的回复语句，如果你写了多行，将会以随机的方式选出一句作为回复语句。</br>
+
+e.Transition</br>
+
 当意图路由或者条件路由被触发的时候，页面的走向。</br>
 
-4.1.选中Page单选按钮 </br>
-下拉框选项解释</br>
-- \+ new Page: 新增页 </br>
-- -- 不做什么操作</br>
-- page1： 转移到其他页，这里page1为我设置的页面名，这个因您的情况而异</br>
-- Start ：转移到该flow的start页 </br>
-- End Flow：结束当前flow，使用该session id再次发生会话时，会话的会从Default start flow开始</br>
-- End Session：结束会话。</br>
-- Previous Page:转移到上一页</br>
-- Current Page：转移到本页，如果本页没有有效的转移，可能会导致死循环，慎用！</br>
+#### 2.9.5 添加事件处理
 
-4.2 选中Flow单选按钮 </br>
-
-下拉框选项解释</br>
-- \+ new Flow 新建流</br>
-- -- 不做什么操作</br>
-- book table 转移到已有的自定义流</br>
-- Default Start Flow 转移到代理默认开始流</br>
-
-##### <a name="67">Routes Groups 路由组</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-Route Groups 为路由组，路由组打包了一组路由。当你在多个页面需要多个同样功能的路由时，你可以把这些路由添加到一个路由组。路由组的好处是为了方便移植，在页面A添加了路由组R后，其他页面都可以加入该路由组R，前提是需要加入该路由组到该页面，访问该页面时才会生效。</br>
-
-
-##### <a name="68">4.2.3.3.3 Event Handler 事件处理</br></a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-点击页面 "Add state handler" -》勾选Event Handler，如下图：</br>
+点击页面 "Add state handler" -> 勾选Event Handler，如下图：</br>
 ![image](https://user-images.githubusercontent.com/30898964/151100522-a96b7600-6197-45de-aa14-63e1617a0f49.png)
 
 ![image](https://user-images.githubusercontent.com/30898964/151104323-75a365b3-c0d2-4b57-986c-417aa2f1f58a.png)
@@ -1299,45 +1355,46 @@ Route Groups 为路由组，路由组打包了一组路由。当你在多个页�
 上图为设置事件处理的页面，具体说明如下：</br>
 ![image](https://user-images.githubusercontent.com/30898964/151104633-975c1b24-6334-4b8c-b189-c892f96b44e1.png)
 
-### <a name="61">2.9.2 添加意图到页面 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-
-### <a name="61">2.9.2 页面的执行顺序 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="61">2.9.6 页面的执行顺序 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 当进入一个页面时候，页面的执行顺序为：</br>
-Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（如果有） -> EventHandler（如果我们为当前页设置了事件处理,如果没设置默认调Dafault Start Flow的事件处理）</br>
+Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（如果有） -> EventHandler（如果我们为当前页设置了事件处理,如果没设置默认调Dafault Start Flow的事件处理。</br>
 
 ![image](https://user-images.githubusercontent.com/30898964/151007620-1b705164-7de0-4c8b-a477-2e014571ea30.png)
 
 
+### <a name="69">2.9.7 意图的操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+####  <a name="69">2.9.7.1 新建意图 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-## <a name="69">意图的操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-我们可以在控制台，或者通过API或Dialogflow客户端库对意图增删改。详情参照链接[链接](https://cloud.google.com/dialogflow/cx/docs/concept/intent)</br>
-在 Dialogflow cx中一个意图最多只允许2000条训练语句。</br>
+当用户输入或说出某些内容时，Dialogflow 会将该输入与意图训练短语进行比较，以找到最佳匹配。此过程称为“意图匹配”。只有与范围内的意图路由（具有意图要求的状态处理程序）关联的意图才会发生意图匹配。</br>
+
+在搜索匹配意图时，Dialogflow 根据“意图置信度分数”（也称“置信度分数”）为潜在匹配项评分。取值范围从 0.0（完全不确定）到 1.0（完全确定）。 在对意图进行评分后，可能会出现以下两种结果：</br>
+
+- 如果得分最高的意图的置信度得分大于或等于分类阈值设置，则系统会将其返回为匹配项。
+- 如果没有任何意图满足阈值，则系统会调用无匹配事件。
+
+
+我们可以在控制台，或者通过API或Dialogflow客户端库对意图增删改。详情参照链接[链接](https://cloud.google.com/dialogflow/cx/docs/concept/intent) </br>
+注： 在Dialogflow cx中一个意图最多只允许2000条训练语句,一个意图只能标记<=19个实体类型。 </br>
+
 创建意图的方式：</br>
 点击manage -> create->填入意图名，收集参数（如需要）</br>
+
 ![image](https://user-images.githubusercontent.com/30898964/151105237-624db33e-8422-4a1a-bf2f-ec26b9813631.png)
 
-### <a name="70">4.3.1 意图匹配</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-当最终用户输入或说出某些内容（称为“最终用户输入”）时，Dialogflow 会将该输入与意图训练短语进行比较，以找到最佳匹配。此过程称为“意图匹配”。只有与范围内的意图路由（具有意图要求的状态处理程序）关联的意图才会发生意图匹配。</br>
-在搜索匹配意图时，Dialogflow 根据“意图置信度分数”（也称“置信度分数”）为潜在匹配项评分。取值范围从 0.0（完全不确定）到 1.0（完全确定）。 在对意图进行评分后，可能会出现以下两种结果：</br>
-如果得分最高的意图的置信度得分大于或等于分类阈值设置，则系统会将其返回为匹配项。
-如果没有任何意图满足阈值，则系统会调用无匹配事件。</br>
-### <a name="71">默认欢迎意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-创建代理时，系统会为您创建默认欢迎意图。对于某些语言，意图具有简单的训练短语（例如“Hi”或“Hello”），旨在匹配初始最终用户输入。您可以根据需要修改此意图。</br>
-### <a name="72">默认负意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+
+
+#### <a name="71">2.9.7.1  默认的意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+#### <a name="71">2.9.7.1  默认的意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+创建代理时，系统会为您创建默认欢迎意图和对于某些语言，意图具有简单的训练短语（例如“Hi”或“Hello”），旨在匹配初始最终用户输入。您可以根据需要修改此意图。</br>
+#### <a name="71">2.9.7.1  默认的意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="72">2.9.8.2 默认负意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 创建代理时，系统会为您创建默认负意图。您可以将训练短语添加到此意图中作为反例</br>
-### <a name="73">取消意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-取消意图的训练短语应处理通用尝试和主题特有的尝试取消。例如：</br>
-取消</br>
-停止</br>
-我改主意了</br>
-不用了</br>
-返回</br>
-返回</br>
-我不想新建预约</br>
-取消新预约</br>
-删除新预约</br>
+
+
 
 ### <a name="74">上传训练句子到意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ``` python 
