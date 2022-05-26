@@ -1365,7 +1365,15 @@ Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（
 
 
 ### <a name="69">2.9.7 意图的操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-####  <a name="69">2.9.7.1 新建意图 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+
+#### <a name="71">2.9.7.1  默认的意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+创建代理时，系统会为您创建默认欢迎意图、和默认的负意图。这两个意图都不能被删除。 
+当预料中存在大量的重复句子，导致用户输入无意义的短句误触发意图，我们把这些所谓无意义的短句加入到负意图后，这些表达就不会触发任何意图了，谷歌官方提醒我们不要把太多的短句加入负意图，因为加入大量的短句会对模型造成负面影响。 在探索Dialogflow初期，
+
+
+####  <a name="69">2.9.7.2 新建意图 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 当用户输入或说出某些内容时，Dialogflow 会将该输入与意图训练短语进行比较，以找到最佳匹配。此过程称为“意图匹配”。只有与范围内的意图路由（具有意图要求的状态处理程序）关联的意图才会发生意图匹配。</br>
 
@@ -1384,19 +1392,17 @@ Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（
 ![image](https://user-images.githubusercontent.com/30898964/151105237-624db33e-8422-4a1a-bf2f-ec26b9813631.png)
 
 
-
-
-#### <a name="71">2.9.7.1  默认的意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-
-#### <a name="71">2.9.7.1  默认的意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-创建代理时，系统会为您创建默认欢迎意图和对于某些语言，意图具有简单的训练短语（例如“Hi”或“Hello”），旨在匹配初始最终用户输入。您可以根据需要修改此意图。</br>
-#### <a name="71">2.9.7.1  默认的意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-### <a name="72">2.9.8.2 默认负意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-创建代理时，系统会为您创建默认负意图。您可以将训练短语添加到此意图中作为反例</br>
+批量新建意图的代码
 
 
 
-### <a name="74">上传训练句子到意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+####  <a name="69">2.9.7.3  上传训练句子到意图 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+
+
+
+
+
 ``` python 
 from google.cloud.dialogflowcx_v3beta1.types import Intent,UpdateIntentRequest
 from google.cloud.dialogflowcx_v3beta1.services.intents import IntentsClient
@@ -1428,14 +1434,10 @@ intent_client.update_intent(request=request)
 
 
 ``` 
-### <a name="75">意图的误匹配情况</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-鸡蛋"eggs"为食品实体。<br>
-卖鸡蛋意图的训练句子：I want some eggs<br>
-查看以鸡蛋为食材的菜的意图：我想找鸡蛋做的菜 I want food that is made from eggs.<br>
-用户只说： “eggs” 也会匹配到其中一个意图。<br>
+
 
 ## <a name="76">2.11实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-### <a name="77">实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="77">2.11 实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 实体分系统实体和自定义实体，这些系统实体可以匹配许多常见数据类型。例如，有用于匹配日期、时间、颜色、电子邮件地址等类型的系统实体。自定义实体是开发者根据需求自定义的实体。</br>
 ### <a name="78">2.11.1“普通实体”和会话实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
