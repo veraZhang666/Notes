@@ -102,12 +102,12 @@
 括语义服务。 <br>
 - 商家项目id：所有场景下的商家都有唯一的项目id，机器人id和商家项目id具有绑定关系，比如一家餐厅购买了4台餐饮服务机器人，那么该商家的项目对应了4个机器人id。<br>
 - 机器人id：所有场景下的机器人都有唯一的设备id <br>
-公司语义服务器根据该器人id，和其所属的商家项目id来请求对应的谷歌代理（稍后会讲到），并返回结果给APP。<br>
+<br>
+公司语义服务器根据该器人id，和其所属的商家项目id来请求对应的谷歌代理，并返回结果给APP。<br>
 <br>
 以下为一个语义请求字段：<br>
 其中“project”字段为商家项目id，“deviceID”为机器人设备id,"ask"为用户发言 <br>
 ```python
-'''
  {
         "type": 0,
         "project": "62342feb4a6c213fc8c09632",
@@ -124,8 +124,8 @@
 ```
 ## <a name="3">1.2 谷歌名词概念解释</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="4">1.2.1 谷歌项目与代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-1. 什么是谷歌项目？<br>
 
+1. 什么是谷歌项目？<br>
 简单来说，这是谷歌为了用户使用他们的服务而设立的。为了使用谷歌的服务，如谷歌地图、STT、TTS,必须建立一个谷歌项目，想要使用谷歌的某服务必须开启对应服务的API。<br>
 关于项目管理我们的做法：<br>
 目前我们的做法是将谷歌项目当作一类服务的容器，这样便于项目管理和账单查看。 比如,谷歌项目“项目1”只用于Dialoflow CX 代理，“项目2”只用于STT、TTS,“项目3”只用于Google map，注意“项目1”、“项目2”、“项目3”为自定义项目名字，请读者根据规范建立项目名。<br>
@@ -136,17 +136,14 @@
 本文档所说的代理是Dialogflow CX的代理（Agent)，我们可以在通过代理实现对话机器人搭建。一个谷歌项目下最多可创建1000个代理，谷歌在全球设立了12个大区，创建代理时需选择一个区域，区域代表了该代理存放的地理位置，这将影响到服务访问速度。<br>
 
 3. 什么是流？<br>
-
 流决定了对话的走向，一个代理可以由一个或多个流组成。谷歌提供流级别的版本控制，即可以为每个流打一个或多个版本。 <br>
 
 4. 什么是代理环境？<br>
-
 谷歌代理本身没有版本可言，只有流才有版本控制，那么谷歌怎么做到代理的版本控制呢？<br>
 
 我们可以在Dialogflow控制台(简称控制台）建立环境，环境的名字由我们自定义，代理环境可以被理解为一个文件夹，它对各个版本的流只是一个指向关系。在环境页面，我们需要指定每个流的版本（详细操作流程），如果不指定该流的版本，那么该代理就不具备这个流的功能。 <br>
 
 5. 草稿和环境有什么区别？<br>
-
 从版本的角度来讲，代理可草稿和环境代理。开发人员在控制台编辑的代理叫草稿，环境代理是上述中我们自定义环境中指向的各个版本的流组成的代理。开发人员将草稿代理调试通过后，我们才将该流打版本。 我们需要自定义环境，方便公司研发、生产、测试时访问不同的代理（稍后会讲解具体做法）。<br>
 
 草稿和环境代理在字段上的区别：<br>
@@ -163,7 +160,8 @@
 - TTS服务，即语音播报，谷歌提供多语种的男女生播报，截止当前谷歌尚未支持童声（2022-5)
 - Dialogflow CX，即谷歌的对话搭建平台，提供意图识别、对话搭建。
 - 谷歌地图
-注意使用这些服务需要先建立谷歌项目，然后开通对应的API （见目录“如何开通谷歌API”）
+<pr>
+注：使用这些服务需要先建立谷歌项目，然后开通对应的API。
 
 
 <img width="1135" alt="截屏2022-05-17 下午9 07 05" src="https://user-images.githubusercontent.com/30898964/168818016-2584397a-9196-4d13-beca-915867373164.png">
@@ -192,8 +190,7 @@
 
     动态实体： 指的是商家在管理平台自定义的字段。如商家名、菜名名、客房名、公司名等。我们约定动态实体命名以“DYN_” 开头。
     静态实体： 静态实体是相对动态而言的，可分为武汉人机协作平台（简称平台）预设的实体和语法用途的实体，平台预设的实体命名以“DEF_”开头，比如在餐饮场景中，食材和口味是我们预设的，在平台
-    商家
-    菜品配置页面中，以下拉列表呈现，商家只能选择，不能填写。语料用途的实体以“GRA_"开头。这是为了优化训练句子而设置的，比如， "do you have an empty table? "在这句话中，empty有
+    商家菜品配置页面中，以下拉列表呈现，商家只能选择，不能填写。语料用途的实体以“GRA_"开头。这是为了优化训练句子而设置的，比如， "do you have an empty table? "在这句话中，empty有
     很多近义词,下面句子的表达了同样的意思。
     do you have a vacant table?
     do you have a free table?
@@ -213,19 +210,18 @@
 
 #### <a name="9">1.2.3.3 为什么要设置多个模板代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-<p>
 
-一个场景且一个语言的代理只有一个父模板代理，如香港(英文)餐饮模板代理（名：HkRestaurantEnglishTemplate），但有多个“复制品”。如美国（英文）餐饮模板代理（名：UsaRestaurantEnglishTemplate)。
+一个场景且一个语言的代理只有一个父模板代理，如香港(英文)餐饮模板代理（名：HkRestaurantEnglishTemplate），但有多个“复制品”。如美国（英文）餐饮模板代理（名：UsaRestaurantEnglishTemplate)。 <br>
 
-a.为了区分公司场景
-每个公司场景的机器人都有有不同的业务需求，餐饮代理只负责餐饮相关业务，酒店代理只负责酒店相关业务，在命名上也要区分开（见目录“谷歌项目和代理命名规则”）。
+a.为了区分公司场景<br>
+每个公司场景的机器人都有有不同的业务需求，餐饮代理只负责餐饮相关业务，酒店代理只负责酒店相关业务，在命名上也要区分开（见目录“谷歌项目和代理命名规则”）。<br>
 
-b.为了区分代理的语言 
-谷歌代理支持多语种意图服务，虽然可以在一个意图里可以放入多个语言的训练句子，但是这样的做法谷歌不建议，我们当前的做法是一个代理只”说“语种语言，意思一个代理的语料只能是一种语言。
+b.为了区分代理的语言 <br>
+谷歌代理支持多语种意图服务，虽然可以在一个意图里可以放入多个语言的训练句子，但是这样的做法谷歌不建议，我们当前的做法是一个代理只”说“语种语言，意思一个代理的语料只能是一种语言。<br>
 
-c.为了语义服务响应速度 
-在新建代理的时候我们必须选择一个地理区域，这个地理区域决定了该代理的响应速度。举个例子，比如餐饮机器人被部署在美国，那么该餐饮模板代理的位置该是美国或者靠近美国的地区（见目录“代理的创建”。
-</p>
+c.为了语义服务响应速度 <br>
+在新建代理的时候我们必须选择一个地理区域，这个地理区域决定了该代理的响应速度。举个例子，比如餐饮机器人被部署在美国，那么该餐饮模板代理的位置该是美国或者靠近美国的地区（见目录“代理的创建”。<br>
+
 
 
 #### <a name="10">1.2.3.4 模板代理的版本控制</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -337,7 +333,7 @@ c.为了语义服务响应速度
 
 # <a name="15">2 实践操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-### <a name="16">2.1 登录google cloud platform</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="16">2.1 登录google cloud platform</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 [登录链接](https://console.cloud.google.com/user-preferences/cloud-profile)
 
@@ -347,10 +343,10 @@ c.为了语义服务响应速度
 
 <img width="1009" alt="截屏2022-05-27 上午11 31 07" src="https://user-images.githubusercontent.com/30898964/170623635-7753fef3-3908-4b89-9580-4eaff12d0d55.png">
 
-
 ### <a name="19">2.2.2 步骤2：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 注：一个google 账号可以创建25个项目，如需要创建更多项目，需要申请开通。<br>
+ <br>
 <img width="612" alt="截屏2022-05-27 上午11 32 20" src="https://user-images.githubusercontent.com/30898964/170623753-6b752cb9-03e8-40cc-b95c-73b8f019b160.png">
 
 
@@ -367,21 +363,23 @@ c.为了语义服务响应速度
 [链接](https://cloud.google.com/iam/docs/service-accounts?hl=zh-cn&_ga=2.98308319.-139742340.1639388700)
 
 ### <a name="22">2.3.2 创建服务账号</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-- 步骤1
+步骤1:<br>
 
 <img width="859" alt="截屏2022-05-27 上午11 33 23" src="https://user-images.githubusercontent.com/30898964/170623865-9d8fa7d9-7ed0-4f8e-a396-193c0afae741.png">
 
-- 步骤2 
+步骤2:<br> 
 
 <img width="604" alt="截屏2022-05-27 上午11 33 46" src="https://user-images.githubusercontent.com/30898964/170623888-1b0fad4d-b758-4f89-b7be-d9f8a8f59deb.png">
 
-- 步骤3
+步骤3:<br>
 
 <img width="624" alt="截屏2022-05-27 上午11 33 57" src="https://user-images.githubusercontent.com/30898964/170623910-3477cf31-af02-4284-b123-faea3f17233b.png">
 
 
-- 步骤4
+步骤4:<br>
+ 
 为该服务账号创建其密匙 <br>
+ <br>
 <img width="1008" alt="截屏2022-05-27 上午11 34 14" src="https://user-images.githubusercontent.com/30898964/170623953-ad07d4d3-8614-467c-b225-cd89b0be19a6.png">
 
 <img width="1011" alt="截屏2022-05-27 上午11 34 52" src="https://user-images.githubusercontent.com/30898964/170624027-14587c6d-2a20-4e5d-8510-cf200d3420e3.png">
@@ -393,16 +391,10 @@ c.为了语义服务响应速度
 ## <a name="23">2.4 最佳做法与解决方案</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 ### <a name="24">2.4.1 谷歌技术人员给出的建议：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-为一个谷歌项目创建其对应的服务账号，如果有多个谷歌项目，就需要多个服务账号，这样方便账单的计算。 这样基于最小权限原则，对项目管理也相对安全。  <br>
+为一个谷歌项目创建其对应的服务账号，如果有多个谷歌项目，就需要多个服务账号，这样方便账单的计算。 这样基于最小权限原则，对项目管理也相对安全。 <br>
+虽然基于最小原则会更安全，但因在linux环境变量中只能设置一个json密匙。我们用到了多个谷歌项目，多把服务账号密匙会造成不好管理。所以我们只生成其中一个谷歌项目的服务账号密匙，这一个密匙用来做所有谷歌代理项目的访问密匙。<br>
 
-基于公司的业务需求，服务账号该以如下方法进行管理。  <br>
- <br>
-客观因素： <br>
-1. 在linux环境变量中只能设置一个json密匙。 <br>
-2. 一个谷歌项目对应一个的dialogflow cx项目，一个谷歌项目需要一个与之对应的服务账号，一个服务账号可以选择生成或者不生成密匙。通过密匙，我们可以使用客户端或者API的方式访问该dialogflow cx项目的相关信息和功能，使用项目A的json密匙不可以访问项目B的任何信息，这导致了我们无法用一个把密匙访问多个dialogflow cx项目。 <br>
-
-解决方法： <br>
-
+： <br>
 将其中一个服务账号作为父账号，其功能是生成json密匙，我们可以根据需求将父账号的作为owner的角色添加到子账号。 谷歌的服务账号本身并没有父子等级关系，这样做完全基于公司的的业务管理需求。
 以此达到了使用一把json密匙，访问到多个dialogflow cx项目 <br>
 
@@ -601,7 +593,7 @@ display_name：我们刚为代理取的名字<br>
 '''
 us-central1 (Iowa, USA)
 us-east1 (South Carolina, USA)
-us-west1 (Oregon, USA)<br/>
+us-west1 (Oregon, USA)
 asia-northeast1 (Tokyo, Japan)
 asia-south1 (Mumbai, India)
 asia-southeast1 (Jurong West, Singapore)
