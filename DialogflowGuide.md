@@ -239,8 +239,8 @@ c.为了语义服务响应速度
 
 上面提到一个谷歌代理具有流级别的版本控制功能，我们为可以为每个流保存一个或多个版本，然后自定义环境来指向每个流的其中一个版本，这样就达到了代理版本的控制。现在我们的做法是，在模板代理里设置3个环境，即研发、生产、测试，然后根据开发情况指向所需要流的版本。因为每个环境的代理都有唯一的地址，我们可以通过环境id来访问不同版本的代理。如下图：<br>
 
-<img width="1005" alt="截屏2022-05-18 上午8 56 00" src="https://user-images.githubusercontent.com/30898964/168935522-30b98997-4b73-423c-a60f-6ea94a25b94e.png">
-<img width="1016" alt="截屏2022-05-18 上午8 57 14" src="https://user-images.githubusercontent.com/30898964/168935620-be5bf150-6abd-4253-8ebc-b940e735a43e.png">
+<img width="900" alt="截屏2022-05-18 上午8 56 00" src="https://user-images.githubusercontent.com/30898964/168935522-30b98997-4b73-423c-a60f-6ea94a25b94e.png">
+<img width="900" alt="截屏2022-05-18 上午8 57 14" src="https://user-images.githubusercontent.com/30898964/168935620-be5bf150-6abd-4253-8ebc-b940e735a43e.png">
 
 
 #### <a name="10">1.2.3.6 父模板代理与“复制品”的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -352,19 +352,18 @@ c.为了语义服务响应速度
 
 ### <a name="18">2.2.1 步骤1：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-![image-20220124194935803](./imgs/image-20220124194935803.png)
+<img width="1009" alt="截屏2022-05-27 上午11 31 07" src="https://user-images.githubusercontent.com/30898964/170623635-7753fef3-3908-4b89-9580-4eaff12d0d55.png">
 
 
 ### <a name="19">2.2.2 步骤2：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-​			注：一个google 账号可以创建25个项目，如需要创建更多项目，需要申请开通。
+注：一个google 账号可以创建25个项目，如需要创建更多项目，需要申请开通。<br>
+<img width="612" alt="截屏2022-05-27 上午11 32 20" src="https://user-images.githubusercontent.com/30898964/170623753-6b752cb9-03e8-40cc-b95c-73b8f019b160.png">
 
-![image-20220124195545285](./imgs/image-20220124195545285.png)
 
-​				稍等几分钟，刷新 google cloud platform, 刚创建的项目已经展示在项目列表里
+稍等几分钟，刷新 google cloud platform, 刚创建的项目已经展示在项目列表里。<br>
 
-​				![image-20220124200940218](./imgs/image-20220124200940218.png)
-
+<img width="1000" alt="截屏2022-05-27 上午11 32 35" src="https://user-images.githubusercontent.com/30898964/170623781-7928d887-a6bb-4c58-bf17-5c3c6770ffd9.png">
 
 
 ## <a name="20">2.3 为该项目创建服务账号 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -376,29 +375,27 @@ c.为了语义服务响应速度
 
 ### <a name="22">2.3.2 创建服务账号</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 - 步骤1
-![image-20220124201854459](./imgs/image-20220124201854459.png)
+
+<img width="859" alt="截屏2022-05-27 上午11 33 23" src="https://user-images.githubusercontent.com/30898964/170623865-9d8fa7d9-7ed0-4f8e-a396-193c0afae741.png">
 
 - 步骤2 
 
-![image-20220124202446756](./imgs/image-20220124202446756.png)
+<img width="604" alt="截屏2022-05-27 上午11 33 46" src="https://user-images.githubusercontent.com/30898964/170623888-1b0fad4d-b758-4f89-b7be-d9f8a8f59deb.png">
 
 - 步骤3
 
-![image-20220124202551723](./imgs/image-20220124202551723.png)
+<img width="624" alt="截屏2022-05-27 上午11 33 57" src="https://user-images.githubusercontent.com/30898964/170623910-3477cf31-af02-4284-b123-faea3f17233b.png">
 
 
 - 步骤4
 为该服务账号创建其密匙 <br>
+<img width="1008" alt="截屏2022-05-27 上午11 34 14" src="https://user-images.githubusercontent.com/30898964/170623953-ad07d4d3-8614-467c-b225-cd89b0be19a6.png">
 
-![image-20220125084221441](./imgs/image-20220125084221441.png)
-
-![image-20220125084258081](./imgs/image-20220125084258081.png)
-
+<img width="1011" alt="截屏2022-05-27 上午11 34 52" src="https://user-images.githubusercontent.com/30898964/170624027-14587c6d-2a20-4e5d-8510-cf200d3420e3.png">
 
 选择json,点击创建后自动下载json格式的密匙，稍后将会用到。
 
-![image-20220125084341615](./imgs/image-20220125084341615.png)
-
+<img width="1008" alt="截屏2022-05-27 上午11 35 20" src="https://user-images.githubusercontent.com/30898964/170624066-77a692fb-ee53-4b03-a4c9-46b61b566c88.png">
 
 ## <a name="29">2.4 最佳做法与解决方案</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
@@ -422,14 +419,14 @@ c.为了语义服务响应速度
 步骤1：
 复制catering Robot的服务账号。
 
-![image-20220125132231056](./imgs/image-20220125132231056.png)
+<img width="1011" alt="截屏2022-05-27 上午11 36 07" src="https://user-images.githubusercontent.com/30898964/170624145-fedb0daf-9b19-4a86-b8c8-8cd7189a06b5.png">
 
 步骤2：
-添加catering robot的服务账号到projectTest1，并给予owner权限。
+添加catering robot的服务账号到projectTest1，并给予owner权限。<br>
 
-![image-20220125132427052](./imgs/image-20220125132427052.png)
+<img width="915" alt="截屏2022-05-27 上午11 36 45" src="https://user-images.githubusercontent.com/30898964/170624208-f5861569-8126-4254-8d00-4865e5c8902a.png">
 
-![image-20220125132619330](./imgs/image-20220125132619330.png)
+<img width="899" alt="截屏2022-05-27 上午11 36 57" src="https://user-images.githubusercontent.com/30898964/170624230-549199fd-74ed-428c-83d7-d4fe8e847c31.png">
 
 
 ## <a name="32">2.5 设置环境变量</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -451,15 +448,15 @@ windows+pycharm
 
 选中pycharm项目中任一py文件，单击右上角。
 
-![image-20220125094055760](./imgs/image-20220125094055760.png)
+<img width="798" alt="截屏2022-05-27 上午11 37 41" src="https://user-images.githubusercontent.com/30898964/170624314-67d15d8b-9927-490b-98be-0b7d063d5bf7.png">
 
-![image-20220125094238473](./imgs/image-20220125094238473.png)
+<img width="463" alt="截屏2022-05-27 上午11 38 03" src="https://user-images.githubusercontent.com/30898964/170624344-82857484-4870-4bf9-aaeb-88f428bad0c2.png">
 
 在红色框出输入GOOGLE_APPLICATION_CREDENTIALS=C:\Users\admin\xxxx\xxxbcb6202b4.json
 
 点击apply，这样你就可以访问谷歌项目了。
 
-![image-20220125094441290](./imgs/image-20220125094441290.png)
+<img width="1011" alt="截屏2022-05-27 上午11 38 24" src="https://user-images.githubusercontent.com/30898964/170624384-2ab9d5f2-3b66-425c-9970-e1b70641e54e.png">
 
 
 
@@ -485,7 +482,8 @@ export PATH=/var/www_r/www_bot/catering-robot-aecbcb6202b4.json
 
 请将json密匙的地址替换为你的绝对路径。
 
-![image-20220125095852958](./imgs/image-20220125095852958.png)
+<img width="544" alt="截屏2022-05-27 上午11 39 11" src="https://user-images.githubusercontent.com/30898964/170624451-3c7241aa-3b2e-4d6b-8d5a-16dcd809d015.png">
+
 
 4 最后执行
 
@@ -512,18 +510,18 @@ location：代理所在的google服务器的区域，这会影响到意图识别
 Default language：代理使用的语言，这决定了意图识别、实体的主要语言，一个代理只能选中一门语言作为主识别语言。 虽然你可以把多国语言作为训练语句加入意图，但这样做不利于管理。 
 
 Time zone：代理所用的时区，美国
+<img width="609" alt="截屏2022-05-27 上午11 39 43" src="https://user-images.githubusercontent.com/30898964/170624528-e2d0367a-9702-4bff-978b-09e33f5a5d23.png">
 
-![image-20220125102649971](./imgs/image-20220125102649971.png)
 
 代理创建说明：
 dialogflow代理id为谷歌自动生成，创建代理成功后可以通过API或者客户端库拿到代理的id，也可以在控制台的导航栏查看代理的id。
 
-![image-20220125133337809](./imgs/image-20220125133337809.png)
+<img width="1014" alt="截屏2022-05-27 上午11 40 04" src="https://user-images.githubusercontent.com/30898964/170624565-66ad98a2-51ab-43fb-a7c8-fab2410fa6cb.png">
 
 
 一个google dialogflow cx项目（也叫google cloud项目）下可以创建1000个代理，具体参数限制如下表。
+<img width="873" alt="截屏2022-05-27 上午11 40 20" src="https://user-images.githubusercontent.com/30898964/170624598-e75db3ec-03c0-4b6f-9a14-72e10a513296.png">
 
-![image-20220125101122308](./imgs/image-20220125101122308.png)
 
 #### <a name="370">2.6.1.2 代理地区的手动初始化</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
@@ -943,19 +941,20 @@ Classification thredshould：<br>
 
 - Environment: Draft:  这里的意思是当前测试的是草稿代理，如果您建立了代理版本打开测试代理就会弹出代理版本供您选择测试。
 
-![image](https://user-images.githubusercontent.com/30898964/170486137-03db21a3-2caf-48d2-98b1-13f16f507ee5.png)
-![image](https://user-images.githubusercontent.com/30898964/170486141-da3acd67-0387-4379-a3bb-603368b9386e.png)
-
-
+<img width="600" alt="截屏2022-05-26 上午1050" src="https://user-images.githubusercontent.com/30898964/170486137-03db21a3-2caf-48d2-98b1-13f16f507ee5.png">
+<img width="400" alt="截屏2022-05-26 上午10 450" src="https://user-images.githubusercontent.com/30898964/170486141-da3acd67-0387-4379-a3bb-603368b9386e.png">
 
 ## <a name="52">2.8 代理各组件概念与操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-### 2.8.1 概念
-#### 2.8.1.1 意图
+### <a name="52"> 2.8.1 概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="52"> 2.8.1.1 意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 意图：表达用户的意图，一个代理可以定义多个意图，我们需要根据业务对用户意图进行分类，意图分类也叫意图匹配。比如餐饮场景下的用户意图有查看菜单、查看菜品等。
-#### 2.8.1.2 实体类型
+
+#### <a name="52"> 2.8.1.2 实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 - 实体类型：可以认为是某一个概念，比如人名、地名、公司名、菜名、店铺名。
 - 实体：某一个概念的实例，比如张三、深圳、科卫机器人、红烧肉、星巴克。张三属于人名实体类型，深圳属于地名实体类型。
-#### 2.8.1.3 流
+- 
+#### <a name="52"> 2.8.1.3 流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 流分为默认初始流（Default start flow）和非初始流，非初始流也是开发人员自定义的流（见下图）。<br>
 <p>
@@ -967,7 +966,8 @@ Classification thredshould：<br>
 
 ![image](https://user-images.githubusercontent.com/30898964/170424511-0bc514da-287c-4c12-87f9-620029d3136a.png)
 
-#### 2.8.1.4 页面
+#### <a name="52"> 2.8.1.4 页面</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 <p>
 页面可以分为默认初始流的开始页面、自定义流开始页面、非开始页面，开始页面无法删除。非开始页面指的是默认初始流和自定义流中的非开始页面，非开始页面的功能都一样。 而默认初始流和自定义初始流的功能不一样，其主要区别如下：
 </p>
@@ -987,16 +987,17 @@ Classification thredshould：<br>
 - 在一个页面可以设置回复语句。
 
 <img width="300" alt="截屏2022-05-26 上午10 44 50" src="https://user-images.githubusercontent.com/30898964/170402753-6e40d385-d9ba-4968-b2a6-e091f5512d93.png">
+#### <a name="52"> 2.8.1.5 状态处理程序 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-
-#### 2.8.1.5 状态处理程序
 
 状态处理程序包含路线和事件处理，路线包括路线和路线组。事件处理用于接收各种预期外的事件发生，比如匹配不到意图时该如何响应，网络钩子请求超时该如何响应。
 
 <img width="600" alt="截屏2022-05-26 上午10 44 50" src="https://user-images.githubusercontent.com/30898964/170443310-49574722-c87d-4a3f-9113-9571e69c8d8f.png">
 
 
-##### 2.8.1.5.1 路由
+
+##### <a name="52"> 2.8.1.5.1 路由 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 
 当用户的输入匹配某个意图和/或会话状态的某个条件得以满足时，系统将调用路由。本文档所说的路由和路线可以理解为一个东西。
 下图为路由设置页面：<br>
@@ -1046,7 +1047,8 @@ Classification thredshould：<br>
 
 
 
-##### 2.8.1.5.2 路由组
+##### <a name="52"> 2.8.1.5.2 路由组 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 
 路由组可被理解为一“打包袋”，要打包的是路由，这里举两个例子说明。<br>
 
@@ -1072,15 +1074,14 @@ Classification thredshould：<br>
 ![image](https://user-images.githubusercontent.com/30898964/170458400-6df0cb2f-82ec-4342-bfba-e4cf24722b19.png)
 
 
-##### 2.8.1.5.3 事件处理
+##### <a name="52">  2.8.1.5.3 事件处理 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
         
 事件处理程序用于处理非预期的事件，比如用户无输入、意图无匹配等，分为流级别和页面级别的处理程序，流级别的事件处理需要在流的初始页面设置，生效范围为整个流的所有页面。 页面级的时间处理程序生效范围为当前页面。 页面和流事件处理程序有优先级之分，如果某个事件被触发，在当前页中如果没设置该事件的处理程序，那么代理区寻找在流中是否设置了该事件的处理程序。<br>
 每个流都有针对 no-match 和 no-input 内置事件的事件处理脚本。这些事件处理脚本会在您创建流时自动创建，并且不能删除。<br>
 内置事件的列表链接： https://cloud.google.com/dialogflow/cx/docs/concept/handler?hl=zh-cn <br>
 
-
-
-#### 2.8.1.6 页面、流、意图的关系
+#### <a name="52">  2.8.1.6 页面、流、意图的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 简单的来说，页面是包含意图的容器，流是页面的容器。页面决定了对话的走向。<br>
 <br>
@@ -1318,7 +1319,7 @@ if __name__ == '__main__':
 ```
 
 
-#### 2.9.4 条件设置
+### <a name="590">2.9.4 条件设置 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 a. 条件“或”</br>
 
@@ -1355,7 +1356,6 @@ e.Transition</br>
 
 上图为设置事件处理的页面，具体说明如下：</br>
 ![image](https://user-images.githubusercontent.com/30898964/151104633-975c1b24-6334-4b8c-b189-c892f96b44e1.png)
-
 
 ### <a name="61">2.9.6 页面的执行顺序 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
@@ -1836,7 +1836,8 @@ if __name__ == '__main__':
 
 Dialogflow 日期时间类实体大致分为五类： <br>
 
-#### 2.11.6.1 单个日期实体（sys.date）
+#### <a name="764">2.11.6.1 单个日期实体（sys.date）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 <p>
 返回结果中参数为“月、日、年”
 例1：
@@ -1880,7 +1881,8 @@ Dialogflow参数返回示例：
 加上“今年”，即 ”I want to book for May 2 this year“. 
 </p>
 
-#### 2.11.6.2.单个时间实体（sys.time）
+#### <a name="590">2.11.6.2 单个时间实体（sys.time）（sys.date-time）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 
 <p>
 返回结果中参数为“时、分、秒、毫秒”
@@ -1908,7 +1910,8 @@ I want to book for 3 o’clock 正确
 I want to book for 3 animals 不合理
 </p>
 
-#### 2.11.6.3.日期+时间组合实体类型（sys.date-time）
+#### <a name="590">2.11.6.3 日期+时间组合实体类型（sys.date-time）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 <p>
 这是日期和时间的组合实体类型，日期和时间实体可只出现一个，或两个同时出现。
 先需要在训练句子中标记任何时间、日期、完整日期时间为系统实体类型"sys.date-time",这样Dialogflow就会解析用户说的日期时间，并把用户说的日期时间作为一个参数返回。
@@ -1970,7 +1973,8 @@ I want to book for 4:30 pm
                   "minutes": 30
                 }}
 
-#### 2.11.6.4 日期区间实体(sys.date-period)
+#### <a name="590"> 2.11.6.4 日期区间实体(sys.date-period)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 <p>
 日期区间实体为两个日期的组合，建议标记“from {日期1} to {日期2} ”等英文表达为sys.date-period实体类型。返回字的实体类型为“sys.date-period”,参数里有“endDate”、“startDate”，分别为结束日期、开始日期。
 
@@ -2018,7 +2022,8 @@ I want to book from May 24 to May 26.
             }}
 
 
-#### 2.11.6.5．时间区间实体（sys.time-period）
+#### <a name="590"> 2.11.6.5 时间区间实体（sys.time-period）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 <p>
 时间区间实体是两个时间实体类型的组合，比如，从下午3点到下午4点， “from 3pm to 4 pm”，只返回一个实体类型，返回参数的字段包含”startTime” 和”endTime”
 例1：
@@ -2042,8 +2047,8 @@ I want to book from 4pm to 5pm
                   }
                 }
 
+### <a name="590"> 2.11.6 实体的original值和resolved值（sys.time-period）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-### <a name="101">2.11.7 实体的original值和resolved值</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 <p>
 谷歌内置名词动词的单复数转换、动词时态的转换、动词变名词（suggest->suggestion)。 有些时候用户说出的单词不在训练语料中，但通过词型的自动转换，谷歌能找出该单词的其他词形。我们可以查看谷歌的响应字符串来判断单词的原始值（用户发言）和该单词在语料中的形式。
 大概分为如下几种情况讨论： 
@@ -2077,8 +2082,8 @@ I want to book from 4pm to 5pm
 
 
 
-# <a name="79">2.12 流的版本和环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-## <a name="80">2.12.1 概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="79">2.12 流的版本和环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="80">2.12.1 概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 草稿：没有环境的代理为草稿，我们在控制台编辑的代理叫草稿。</br>
 草稿流：草稿代理种的流为草稿流。</br>
 我们可以保存一个草稿流为一个版本，这个版本的流相当于一个快照，包含了该流中原有的实体、路由、意图、网络钩子等信息。</br>
@@ -2087,7 +2092,7 @@ I want to book from 4pm to 5pm
 - 每个代理的环境数量上限：20 个</br>
 - 每个流的版本数量限制：20个</br>
 
-## <a name="81">2.12.2 创建建流版本</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="81">2.12.2 创建建流版本</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
  关于代理的所有操作dialogflow都提供API、客户端库、控制台三种方式，流的版本创建亦是如此。
 ![image](https://user-images.githubusercontent.com/30898964/151107494-aae0c51b-27bd-4acc-97fc-c1e8763a4304.png)
 
@@ -2096,7 +2101,7 @@ I want to book from 4pm to 5pm
 ![image](https://user-images.githubusercontent.com/30898964/151107655-3296c338-d45b-4453-b22e-9109f9c4a33c.png)
 
 
-## <a name="82">2。12.3 创建环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="82">2.12.3 创建环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 请根据下图步骤操作：</br>
 ![image](https://user-images.githubusercontent.com/30898964/151107693-fe002a08-03a1-443b-a222-0413e077a1aa.png)
 
@@ -2109,56 +2114,85 @@ I want to book from 4pm to 5pm
 
 # <a name="83">3 最佳做法与避坑指南</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a> <br>
 ## <a name="84">3.1 语料收集方法</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>  <br>
-   语料的收集与创建需遵循一定原则，为了保证意图识别模型的收敛，需要注意以下几点:<br>
-### 3.1.1 包含俚语或口语化的说法<br>
+   
+    语料的收集与创建需遵循一定原则，为了保证意图识别模型的收敛，需要注意以下几点:
+    
+    1.包含口语化说法
     Yo (hi)
     Sup (what’s up 你怎么样) Bro (brother 兄弟)
     
-### 3.1.2 包含正式用语<br>
+    2. 包含正式用语
     I require xx 我需要 xx
     I don't detest xx 我厌恶 xx I don't despise xx 我厌恶 xx
     
-### 3.1.3 尽量只用一句话作训练句子<br>
+    3.尽量只用一句话作训练句子
     正确:I’d like the see the menu. 
     错误:I wise to see the menu, may I ?
     
-### 3.1.4 尽量用句子主干部分作为训练句子
+    原因分析： may I 这里可以省略，因为 I wish to see the menu 已经足够表达用户意图。 
+    
+    
+    4. 尽量用句子主干部分作为训练句子
     错误:
     Can I please see the menu.
     Is it possible for me to see the menu.
-    正确:
-    See the menu
     
-### 3.1.5 去掉程度词、量词、副词等非表达句子主要意思的句子成分。
-如下图红色部分的字体，我们需要把它们从训练句子中去掉。
-<img width="739" alt="截屏2022-05-18 下午12 07 21" src="https://user-images.githubusercontent.com/30898964/168955241-cad7f134-6c9c-4746-a559-14ed4a0a29ca.png">
+    正确: See the menu 
+    
+    原因分析：因为 is it poosible/can i please 后可跟任何从句，句子主干部分不是is it possible, 且please该作为停用词。太多大量非表达主干意思的短句会导致短句误触发意图。所以这
+    里省去。
+    
+    5. 去掉程度词、量词、副词等非表达句子主要意思的句子成分。
+    如下图红色部分的字体，我们需要把它们从训练句子中去掉。
+    
+    
+<img width="500" alt="截屏2022-05-18 下午12 07 21" src="https://user-images.githubusercontent.com/30898964/168955241-cad7f134-6c9c-4746-a559-14ed4a0a29ca.png">
 
-### 3.1.6 可选择的句类 
-<img width="695" alt="截屏2022-05-18 下午12 09 17" src="https://user-images.githubusercontent.com/30898964/168955435-ec519acd-ec6d-4fa5-8d7c-5567f166940b.png">
-
-### 3.1.7 时态与语态 
+    6. 可选择的句类 
+<img width="500" alt="截屏2022-05-18 下午12 09 17" src="https://user-images.githubusercontent.com/30898964/168955435-ec519acd-ec6d-4fa5-8d7c-5567f166940b.png">
+    
+    7. 时态与语态 
     可以根据意图需求选择训练句子的时态和语态，大多数情况用一般现在时。但对于有些些意图，如表达“已经预约”，需要使用过去式或者被动语态。
     e.g I made an appointment/my appointment was made yestoday.
-### 3.1.8 实体的构建
+    
+    8. 实体的构建
     语法用途的实体需要行涵盖尽可能多的同义词，或者该实体的子类（视情况而定），最好测一下谷歌的拾音。
 
 ## <a name="85">3.2 问题发现与规避</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-    起初我们遇到了各种意图误触发的问题，可以采用如下的解决方法来减少误触发。
+   起初我们遇到了各种意图误触发的问题，可以采用如下的解决方法来减少误触发。
 
-#### 3.2.1 意图太类似导致的误触发
+    1. 意图太类似导致的误触发
+    
     *原因：
     语料的质量对模型识别率产生了极大的影响，因此每个意图的语料必须有区分性，区分性意思是避免将同类意思训练句子放入多个意图，这样会导致较高的误触发。基于公司的场景，大部分的业务需求都是
     查询操作，比如查找设施、查找商铺等。这从决定了需要将大量的查询类的英语句子加入意图，最开始我们的做法是将查询类的句子放入多个意图，这导致了高误触发率。每个意图“长得像”，似乎都是查询 
     类的句子，而唯一不同的只是实体。 
     
     *解决方法：
-    最后我们从行为的角度讲训练句子进行划分，依靠“行为”+“实体”来进行意图判断。常见的行为抽象如：想要某物、查询某物、喜欢某物。比如意图“查看菜单”可理解为 “查询某物”+“菜单实体”和“想要某     物”+“菜单实体”。 那么行为意图+实体= ？业务意图，这是由产品经理决定。
+    最后我们从行为的角度讲训练句子进行划分，依靠“行为”+“实体”来进行意图判断。常见的行为抽象如：想要某物、查询某物、喜欢某物。比如意图“查看菜单”可理解为 “查询某物”+“菜单实体”和“想要
+    某物”+“菜单实体”。 那么行为意图+实体= ？业务意图，这是由产品经理决定。
 
-#### 3.2.2 谷歌内置单词自动变形导致的误触发
+    2. 谷歌内置单词自动变形导致的误触发
+    
     谷歌内置了单词的自动变形导致的误触发,谷歌内置的单词变形主要分为一下几种：
     单复数变形: eggs<->egg 
     动词时态变形:booking<->book<->booked
+    
+    
+    
+    
+    实体类型：GRA_BOOK 
+    实体集：book/booked/booking/reservation
+  
+    意图1：want_to_book
+        训练句子： I want to book a table/book a table for me/ book a table  # 标记 book为实体类型GRA_BOOK
+    意图2：already_booked
+        训练句子： I booked a table/I have a table booked # 标记 booked 为实体类型GRA_BOOK
+   
+  
+    
+    
 
 #### 3.2.3 输入短语导致的触发意图
     单输入无意义的短语，如"can you"也会触发意图。
