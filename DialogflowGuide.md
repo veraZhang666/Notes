@@ -1,102 +1,95 @@
 
 <a name="index">**目录**</a>
 </br>
-<a href="#0">1. 概念解释</a> </br>
-&emsp;<a href="#1">1.1公司业务的相关的概念</a> </br>
-&emsp;&emsp;<a href="#2">1.1.1 公司项目与场景</a> </br>
-&emsp;<a href="#3">1.2 谷歌名词概念与解释</a>  <br>
-&emsp;&emsp;<a href="#4">1.2.1 谷歌项目</a>  <br>
-&emsp;&emsp;<a href="#5">1.2.2 谷歌的服务</a>  <br>
-&emsp;&emsp;<a href="#6">1.2.3 谷歌代理</a>  <br>
-&emsp;&emsp;<a href="#6">1.2.4 公司项目和谷歌代理的关系</a>  <br>
-&emsp;&emsp;&emsp;<a href="#7">1.2.4.1 何为模板代理</a>  <br>
-&emsp;&emsp;&emsp;<a href="#8">1.2.4.2 为什么要设置多个模板代理</a>  <br>
-&emsp;&emsp;&emsp;<a href="#9">1.2.4.3 模板代理的版本控制</a>  <br>
-&emsp;&emsp;&emsp;<a href="#10">1.2.4.4 父模板代理与“复制品”的关系</a> <br>
-&emsp;&emsp;&emsp;<a href="#11">1.2.4.5 谷歌项目、代理、意图的命名规范</a>  <br>
-&emsp;<a href="#12">1.3 公司业务与谷歌服务的融合</a><br>
-&emsp;&emsp;<a href="#13">1.3.1 父模板代理及其环境</a><br>
-
-<a href="#15">2. 实践操作</a>  
-&emsp;<a href="#16">2.1 登录google cloud platform</a>  
-&emsp;<a href="#17">2.2 新建项目</a>  
-&emsp;&emsp;<a href="#18">2.2.1 步骤1</a>  
-&emsp;&emsp;<a href="#19">2.2.2 步骤2</a>  
-&emsp;<a href="#20">2.3 为该项目创建服务账号 </a>  
-&emsp;&emsp;<a href="#21">2.3.1 什么是服务账号？</a>  
-&emsp;&emsp;<a href="#22">2.3.2 服务账号创建步骤</a>  
-&emsp;<a href="#29">2.4 最佳做法与解决方案</a>  
-&emsp;&emsp;<a href="#30">2.4.1 谷歌技术人员给出的建议</a>  
-&emsp;&emsp;<a href="#31">2.4.2 具体步骤</a>  
-&emsp;<a href="#32">2.5 设置环境变量</a>  
-&emsp;&emsp;&emsp;<a href="#33">2.5.1 windows 用户的环境变量设置</a>  
-&emsp;&emsp;&emsp;<a href="#34">2.5.2 linux, mac 用户的环境变量设置</a>  
-
-如何开通谷歌API
-
-
-&emsp;<a href="#35">2.6 代理的操作</a>  
-&emsp;&emsp;<a href="#36">2.6.1 代理的创建</a>  
-
-代理的创建 加入地理区域初始化 
-提前新增空项目
-
-&emsp;&emsp;&emsp;<a href="#37">通过控制台创建</a>  
-&emsp;&emsp;&emsp;<a href="#38">通过客户端创建</a>  
-&emsp;&emsp;&emsp;<a href="#39">创建代理需要传入的参数</a>  
-&emsp;&emsp;&emsp;<a href="#40">代理的可选时区、语言、区域表</a>  
-&emsp;&emsp;&emsp;<a href="#41">代码段</a>  
-&emsp;&emsp;<a href="#42">2.6.2 代理的导出</a>  
-&emsp;&emsp;&emsp;<a href="#43">使用控制台导出</a>  
-&emsp;&emsp;&emsp;<a href="#44">使用客户端库导出</a>  
-&emsp;&emsp;<a href="#45">2.6.3 代理的导入</a>  
-&emsp;&emsp;&emsp;<a href="#46">通过控制台导入</a>  
-&emsp;&emsp;&emsp;<a href="#47">通过客户端库导入</a>  
-&emsp;&emsp;<a href="#48">2.6.4 代理的删除</a>  
-&emsp;&emsp;&emsp;<a href="#49">通过控制台删除</a>  
-&emsp;&emsp;&emsp;<a href="#50">通过客户端库删除</a>  
-&emsp;<a href="#51">2.7 Dialogflow 控制台面板功能介绍</a>   
-&emsp;<a href="#52">2.8 流、页面、意图、实体的概念和用法</a>  
-&emsp;&emsp;<a href="#53">流的特点</a>  
-&emsp;&emsp;<a href="#54">流的增、删、导出、导入</a>  
-&emsp;&emsp;&emsp;<a href="#55">增加流</a>  
-&emsp;&emsp;&emsp;<a href="#56">删除流</a>  
-&emsp;&emsp;&emsp;<a href="#57">导出流</a>  
-&emsp;&emsp;&emsp;<a href="#58">导入流</a>  
-&emsp;<a href="#59">2.9 页面 </a>  
-&emsp;&emsp;<a href="#60">页面的特点</a>  
-&emsp;&emsp;<a href="#61">初始页面的功能</a>  
-&emsp;&emsp;<a href="#62">普通页面的功能</a>  
-&emsp;&emsp;&emsp;<a href="#63">Entry fulfillment </a>  
-&emsp;&emsp;&emsp;<a href="#64">Parameters参数收集</a>  
-&emsp;&emsp;&emsp;<a href="#65">Add state handler 状态处理</a>  
-&emsp;&emsp;&emsp;&emsp;<a href="#66">Routes 路由</a>  
-&emsp;&emsp;&emsp;&emsp;<a href="#67">Routes Groups 路由组</a>  
-&emsp;&emsp;&emsp;&emsp;<a href="#68">Event Handler 事件处理</a>  
-&emsp;<a href="#69">2.10 意图</a>  
-&emsp;&emsp;<a href="#70">意图匹配</a>  
-&emsp;&emsp;<a href="#71">默认欢迎意图</a>  
-&emsp;&emsp;<a href="#72">默认负意图</a>  
-&emsp;&emsp;<a href="#73">取消意图</a><br>
-&emsp;&emsp;<a href="#74">代码-上传训练句子到意图</a><br>
-&emsp;&emsp;<a href="#75">意图的误匹配情况</a><br>
-&emsp;<a href="#76">2.11 实体</a> <br>
-&emsp;&emsp;<a href="#77">实体类型</a>  <br>
-&emsp;&emsp;<a href="#78">“普通实体”和会话实体</a>  <br>
-&emsp;&emsp;<a href="#101">实体的original值和resolved值</a>  <br>
-&emsp;<a href="#79">2.12 流的版本和环境</a>  <br>
-&emsp;&emsp;<a href="#80">概念</a>  <br>
-&emsp;&emsp;<a href="#81">创建建流版本</a>  <br>
-&emsp;&emsp;<a href="#82">创建环境</a>  <br>
-&emsp;&emsp;<a href="#82">创建环境</a>  <br>
-<a href="#83">3.最佳做法与避坑指南</a><br>
-&emsp;<a href="#84">3.1 语料收集方法</a><br>
-&emsp;<a href="#85">3.2 问题发现与规避</a><br>
-
-
-
-
-
+<a href="#0">1. 概念解释</a></br>
+&emsp;<a href="#1">1.1 公司业务的相关的概念</a></br>
+&emsp;&emsp;<a href="#2">1.1.1 公司项目与场景</a></br>
+&emsp;<a href="#3">1.2 谷歌名词概念解释</a></br>
+&emsp;&emsp;<a href="#4">1.2.1 谷歌项目与代理</a></br>
+&emsp;&emsp;<a href="#5">1.2.2 谷歌的服务</a></br>
+&emsp;&emsp;<a href="#6">1.2.3 谷歌代理与公司项目</a></br>
+&emsp;&emsp;&emsp;<a href="#7">1.2.3.1 公司项目和谷歌代理的关系</a></br>
+&emsp;&emsp;&emsp;<a href="#8">1.2.3.2 何为模板代理</a></br>
+&emsp;&emsp;&emsp;<a href="#9">1.2.3.3 为什么要设置多个模板代理</a></br>
+&emsp;&emsp;&emsp;<a href="#10">1.2.3.4 模板代理的版本控制</a></br>
+&emsp;&emsp;&emsp;<a href="#11">1.2.3.5 父模板代理与“复制品”的关系</a></br>
+&emsp;&emsp;&emsp;<a href="#12">1.2.3.6 谷歌项目、代理、意图的命名规范</a></br>
+&emsp;<a href="#13">1.3 公司业务与谷歌服务的融合</a></br>
+&emsp;&emsp;<a href="#14">1.3.1 父模板代理及其环境</a></br>
+<a href="#15">2 实践操作</a></br>
+&emsp;<a href="#16">2.1 登录google cloud platform</a></br>
+&emsp;<a href="#17">2.2 新建谷歌项目</a></br>
+&emsp;&emsp;<a href="#18">2.2.1 步骤1</a></br>
+&emsp;&emsp;<a href="#19">2.2.2 步骤2</a></br>
+&emsp;<a href="#19">2.3 为该项目创建服务账号 </a></br>
+&emsp;&emsp;<a href="#21">2.3.1 什么是服务账号？</a></br>
+&emsp;&emsp;<a href="#22">2.3.2 创建服务账号</a></br>
+&emsp;<a href="#23">2.4 最佳做法与解决方案</a></br>
+&emsp;&emsp;<a href="#24">2.4.1 谷歌技术人员给出的建议</a></br>
+&emsp;&emsp;<a href="#25">2.4.2 具体步骤</a></br>
+&emsp;<a href="#26">2.5 设置环境变量</a></br>
+&emsp;&emsp;<a href="#27">2.5.1 linux, mac 用户的环境变量设置</a></br>
+&emsp;<a href="#28">2.6 代理的操作 </a></br>
+&emsp;&emsp;<a href="#29">2.6.1 代理的创建</a></br>
+&emsp;&emsp;&emsp;<a href="#30">2.6.1.1 通过控制台创建</a></br>
+&emsp;&emsp;&emsp;<a href="#31">2.6.1.2 代理地区的手动初始化</a></br>
+&emsp;&emsp;&emsp;<a href="#32">2.6.1.3 通过客户端创建</a></br>
+&emsp;&emsp;&emsp;<a href="#33">2.6.1.4 代理的时区、语言、区域表</a></br>
+&emsp;&emsp;<a href="#34">2.6.2 代理的导出</a></br>
+&emsp;&emsp;&emsp;<a href="#35">2.6.2.1 使用控制台导出</a></br>
+&emsp;&emsp;&emsp;<a href="#36">2.6.2.2 使用客户端库导出</a></br>
+&emsp;&emsp;<a href="#37">2.6.3 代理的导入</a></br>
+&emsp;&emsp;&emsp;<a href="#38">2.6.3.1 通过控制台导入</a></br>
+&emsp;&emsp;&emsp;<a href="#39">2.6.3.2 通过客户端库导入</a></br>
+&emsp;&emsp;<a href="#40">2.6.4 代理的删除</a></br>
+&emsp;&emsp;&emsp;<a href="#41">2.6.4.1 通过控制台删除</a></br>
+&emsp;&emsp;&emsp;<a href="#42">2.6.4.2 通过客户端库删除</a></br>
+&emsp;<a href="#43">2.7 Dialogflow 控制台面板功能介绍</a></br>
+&emsp;&emsp;<a href="#44">2.7.1 在控制台测试代理 </a></br>
+&emsp;<a href="#45">2.8 代理各组件概念与操作</a></br>
+&emsp;&emsp;<a href="#46">2.8.1 概念</a></br>
+&emsp;&emsp;&emsp;<a href="#47">2.8.1.1 意图</a></br>
+&emsp;&emsp;&emsp;<a href="#48">2.8.1.2 实体类型</a></br>
+&emsp;&emsp;&emsp;<a href="#49">2.8.1.3 流</a></br>
+&emsp;&emsp;&emsp;<a href="#50">2.8.1.4 页面</a></br>
+&emsp;&emsp;&emsp;<a href="#51">2.8.1.5 状态处理程序 </a></br>
+&emsp;&emsp;&emsp;&emsp;<a href="#52">2.8.1.5.1 路由 </a></br>
+&emsp;&emsp;&emsp;&emsp;<a href="#53">2.8.1.5.2 路由组 </a></br>
+&emsp;&emsp;&emsp;&emsp;<a href="#54">2.8.1.5.3 事件处理 </a></br>
+&emsp;&emsp;&emsp;<a href="#55">2.8.1.6 页面、流、意图的关系</a></br>
+&emsp;&emsp;<a href="#56">2.8.2 流的操作</a></br>
+&emsp;&emsp;&emsp;<a href="#57">2.8.2.1 增删导入导出</a></br>
+&emsp;<a href="#58">2.9 页面的操作 </a></br>
+&emsp;&emsp;<a href="#59">2.9.1 设置页面初始回复 </a></br>
+&emsp;&emsp;<a href="#60">2.9.2 参数收集</a></br>
+&emsp;&emsp;<a href="#61">2.9.3 将意图加入到页面</a></br>
+&emsp;&emsp;<a href="#62">2.9.4 条件设置 </a></br>
+&emsp;&emsp;<a href="#63">2.9.5 添加事件处理 </a></br>
+&emsp;&emsp;<a href="#64">2.9.6 页面的执行顺序 </a></br>
+&emsp;&emsp;<a href="#65">2.9.7 意图的操作</a></br>
+&emsp;&emsp;&emsp;<a href="#66">2.9.7.1  默认的意图</a></br>
+&emsp;&emsp;&emsp;<a href="#67">2.9.7.2 新建意图 </a></br>
+&emsp;&emsp;&emsp;<a href="#68">2.9.7.3 上传训练句子到意图 </a></br>
+&emsp;<a href="#69">2.11 实体</a></br>
+&emsp;&emsp;<a href="#70">2.11.1 “普通实体”和会话实体</a></br>
+&emsp;&emsp;<a href="#71">2.11.2 系统实体</a></br>
+&emsp;&emsp;<a href="#72">2.11.3 创建实体类型</a></br>
+&emsp;&emsp;<a href="#73">2.11.4 上传实体到实体类型</a></br>
+&emsp;&emsp;<a href="#74">2.11.5 系统实体表</a></br>
+&emsp;&emsp;<a href="#75">2.11.6 日期和时间系统实体类型</a></br>
+&emsp;&emsp;&emsp;<a href="#76">2.11.6.1 单个日期实体（sys.date）</a></br>
+&emsp;&emsp;&emsp;<a href="#77">2.11.6.2 单个时间实体（sys.time)</a></br>
+&emsp;&emsp;&emsp;<a href="#78">2.11.6.3 日期+时间组合实体类型（sys.date-time）</a></br>
+&emsp;&emsp;&emsp;<a href="#79">2.11.6.4 日期区间实体(sys.date-period)</a></br>
+&emsp;&emsp;&emsp;<a href="#80">2.11.6.5 时间区间实体（sys.time-period）</a></br>
+&emsp;&emsp;<a href="#81">2.11.7 实体的original值和resolved值（sys.time-period）</a></br>
+&emsp;<a href="#82">2.12 流的版本和环境</a></br>
+&emsp;&emsp;<a href="#83">2.12.1 概念</a></br>
+&emsp;&emsp;<a href="#84">2.12.2 创建建流版本</a></br>
+&emsp;&emsp;<a href="#85">2.12.3 创建环境</a></br>
+<a href="#86">3 最佳做法与避坑指南</a></br>
+&emsp;<a href="#87">3.1 语料收集方法</a></br>
+&emsp;<a href="#88">3.2 问题发现与避免</a></br>
 
 
 
@@ -130,27 +123,27 @@
 
 ## <a name="3">1.2 谷歌名词概念解释</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="4">1.2.1 谷歌项目与代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-#### 1.2.1.1 什么是谷歌项目？
+    1. 什么是谷歌项目？
 
     简单来说，这是谷歌为了用户使用他们的服务而设立的。为了使用谷歌的服务，如谷歌地图、STT、TTS,必须建立一个谷歌项目，想要使用谷歌的某服务必须开启对应服务的API。
     关于项目管理我们的做法：
     目前我们的做法是将谷歌项目当作一类服务的容器，这样便于项目管理和账单查看。 比如,谷歌项目“项目1”只用于Dialoflow CX 代理，“项目2”只用于STT、TTS,“项目3”只用于Google map，注意“项目1”、“项目2”、“项目3”为自定义项目名字，请读者根据规范建立项目名
 
 
-#### 1.2.1.2 什么是代理？
+    2. 什么是代理？
     谷歌代理（Agent)是一个功能的抽象，比如订票代理、订房代理、订餐代理，其中订票机器人只负责订票的业务。
     本文档所说的代理是Dialogflow CX的代理（Agent)，我们可以在通过代理实现对话机器人搭建。一个谷歌项目下最多可创建1000个代理，谷歌在全球设立了12个大区，创建代理时需选择一个区域，区域代表了该代理存放的地理位置，这将影响到服务访问速度。
 
-#### 1.2.1.3 什么是流？
+    3. 什么是流？
    
     流决定了对话的走向，一个代理可以由一个或多个流组成。谷歌提供流级别的版本控制，即可以为每个流打一个或多个版本。 
 
-#### 1.2.1.4 什么是代理环境？
+    4. 什么是代理环境？
 
     谷歌代理本身没有版本可言，只有流才有版本控制，那么谷歌怎么做到代理的版本控制呢？
     我们可以在Dialogflow控制台(简称控制台）建立环境，环境的名字由我们自定义，代理环境可以被理解为一个文件夹，它对各个版本的流只是一个指向关系。在环境页面，我们需要指定每个流的版本（详细操作流程），如果不指定该流的版本，那么该代理就不具备这个流的功能。 
 
-#### 1.2.1.5 草稿和环境有什么区别？
+    5. 草稿和环境有什么区别？
 
     从版本的角度来讲，代理可草稿和环境代理。开发人员在控制台编辑的代理叫草稿，环境代理是上述中我们自定义环境中指向的各个版本的流组成的代理。开发人员将草稿代理调试通过后，我们才将该流打版本。 我们需要自定义环境，方便公司研发、生产、测试时访问不同的代理（稍后会讲解具体做法）。
 
@@ -163,7 +156,7 @@
 
 ### <a name="5">1.2.2 谷歌的服务</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-#### 1.2.2.1 我们用到了哪些谷歌服务？
+    1. 我们用到了哪些谷歌服务？
 
     - STT服务，即语音识别，谷歌提供多语种的语音识别、语种识别。
     - TTS服务，即语音播报，谷歌提供多语种的男女生播报，截止当前谷歌尚未支持童声（2022-5)
@@ -176,7 +169,7 @@
 
 ### <a name="6">1.2.3 谷歌代理与公司项目</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-### 1.2.3.1 商家代理和谷歌代理的对应关系
+    1. 商家代理和谷歌代理的对应关系
 
     每个商家项目对应唯一一个谷歌代理，代理名为商家项目id，下图中代理的“Display name”为商家项目ID。
 
@@ -185,13 +178,13 @@
 
 
 
-### <a name="7">1.2.3.2 公司项目和谷歌代理的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="7">1.2.3.1 公司项目和谷歌代理的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
     一个公司场景的项目对应同一种功能的谷歌代理，比如餐饮场景对应餐饮代理，餐饮代理只具有餐饮业务的语义功能。该代理存放了餐饮场景下该商家项目的意图、实体数据（比如菜名、菜口味等)。 
     根据公司研发管理流程，我们现有研发、测试、生产环境，因此我们需要基于此来划分谷歌项目和代理。 
 
 
-#### <a name="701">1.2.3.3 何为模板代理？</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="8">1.2.3.2 何为模板代理？</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
     在理解模板代理之前先要弄清楚什么是动态实体和静态实体。<br>
@@ -216,7 +209,7 @@
     谷歌代理。<br>
 
 
-#### <a name="8">1.2.3.4 为什么要设置多个模板代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="9">1.2.3.3 为什么要设置多个模板代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 <p>
 
@@ -233,7 +226,7 @@ c.为了语义服务响应速度
 </p>
 
 
-#### <a name="9">1.2.3.5 模板代理的版本控制</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="10">1.2.3.4 模板代理的版本控制</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 上面提到一个谷歌代理具有流级别的版本控制功能，我们为可以为每个流保存一个或多个版本，然后自定义环境来指向每个流的其中一个版本，这样就达到了代理版本的控制。现在我们的做法是，在模板代理里设置3个环境，即研发、生产、测试，然后根据开发情况指向所需要流的版本。因为每个环境的代理都有唯一的地址，我们可以通过环境id来访问不同版本的代理。如下图：<br>
 
@@ -241,7 +234,7 @@ c.为了语义服务响应速度
 <img width="900" alt="截屏2022-05-18 上午8 57 14" src="https://user-images.githubusercontent.com/30898964/168935620-be5bf150-6abd-4253-8ebc-b940e735a43e.png">
 
 
-#### <a name="10">1.2.3.6 父模板代理与“复制品”的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="11">1.2.3.5 父模板代理与“复制品”的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 ##### 什么是父模板代理？
 <p>
@@ -253,7 +246,7 @@ c.为了语义服务响应速度
 当前我们在父模板代理中自定义研发、生产、测试环境，但其“复制品”代理无环境，复制品从父模板代理复制后默认保存在草稿代理。简单来说，“复制品”代理存在的意义只是为了地区访问速度而设置。为每个复制品代理设置环境无意义。商家项目的代理会遵从地理位置就近的原则，从最近的模板代理的草稿拉去数据。 因此在每次语义版本迭代的时候，代理通过研发和测试无误后，我们将生产环境指向该代理。然后将该代理导出，再手动导入到“复制品”代理。
 </p>
 
-#### <a name="11">1.2.3.7 谷歌项目、代理、意图的命名规范</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="12">1.2.3.6 谷歌项目、代理、意图的命名规范</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
     a.模板代理的命名约定
     
@@ -320,10 +313,10 @@ c.为了语义服务响应速度
     UsaOfficeEnglishProject 美国写字楼英语生产环境项目
      
      
-## <a name="12">1.3 公司业务与谷歌服务的融合</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="13">1.3 公司业务与谷歌服务的融合</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
-### <a name="13">1.3.1 父模板代理及其环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="14">1.3.1 父模板代理及其环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
 #### 我们设立研发环境的谷歌项目（DevelopmentProject）和测试环境的谷歌项目（TestProject）、生产环境的谷歌项目。那么这三个项目从哪里复制模板代理数据？
@@ -340,7 +333,7 @@ c.为了语义服务响应速度
 <img width="862" alt="截屏2022-05-18 下午3 04 13" src="https://user-images.githubusercontent.com/30898964/168977930-25642ff0-02ef-4828-95b8-5d1e2320f51f.png">
 
 
-## <a name="15">2 实践操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+# <a name="15">2 实践操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 ### <a name="16">2.1 登录google cloud platform</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
@@ -395,9 +388,9 @@ c.为了语义服务响应速度
 
 <img width="1008" alt="截屏2022-05-27 上午11 35 20" src="https://user-images.githubusercontent.com/30898964/170624066-77a692fb-ee53-4b03-a4c9-46b61b566c88.png">
 
-## <a name="29">2.4 最佳做法与解决方案</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="23">2.4 最佳做法与解决方案</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-### <a name="30">2.4.1 谷歌技术人员给出的建议：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="24">2.4.1 谷歌技术人员给出的建议：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 为一个谷歌项目创建其对应的服务账号，如果有多个谷歌项目，就需要多个服务账号，这样方便账单的计算。 这样基于最小权限原则，对项目管理也相对安全。  <br>
 
 基于公司的业务需求，服务账号该以如下方法进行管理。  <br>
@@ -411,7 +404,7 @@ c.为了语义服务响应速度
 将其中一个服务账号作为父账号，其功能是生成json密匙，我们可以根据需求将父账号的作为owner的角色添加到子账号。 谷歌的服务账号本身并没有父子等级关系，这样做完全基于公司的的业务管理需求。
 以此达到了使用一把json密匙，访问到多个dialogflow cx项目 <br>
 
-### <a name="31">2.4.2 具体步骤：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="25">2.4.2 具体步骤：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 假如现在有两个project，分别为projectTest1，catering Robot。 这两个项目都已经通过上面的方式建立了自己的服务账号，我们想要做到用catering Robot的密匙访问projectTest1. <br>
 
 步骤1：
@@ -427,7 +420,7 @@ c.为了语义服务响应速度
 <img width="899" alt="截屏2022-05-27 上午11 36 57" src="https://user-images.githubusercontent.com/30898964/170624230-549199fd-74ed-428c-83d7-d4fe8e847c31.png">
 
 
-## <a name="32">2.5 设置环境变量</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="26">2.5 设置环境变量</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 [链接](https://cloud.google.com/iam/docs/service-accounts?hl=zh-cn&_ga=2.98308319.-139742340.1639388700)
 
@@ -458,7 +451,7 @@ windows+pycharm
 
 
 
-### <a name="34">2.5.1 linux, mac 用户的环境变量设置</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="27">2.5.1 linux, mac 用户的环境变量设置</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 可以直接把json密匙路径配置到用户环境变量，生效范围为该linux系统的用户，当然你也可也设置linux系统级的环境变量（参照链接：https://www.cnblogs.com/lihao-blog/p/6945040.html）
 
@@ -490,11 +483,11 @@ source ~/.bashrc
 搞定！
 
 
-## <a name="35">2.6 代理的操作 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-### <a name="36">2.6.1 代理的创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="28">2.6 代理的操作 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="29">2.6.1 代理的创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 我们可以通过API、客户端、控制台创建代理
 这里仅展示通过控制台、客户端创建代理。
-#### <a name="37">2.6.1.1 通过控制台创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="30">2.6.1.1 通过控制台创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 登录后，在project下拉框，你会发现刚刚创建的google could 项目 projectTest已经显示到了这里。
 1.点击 Enable API ->create agent
@@ -521,7 +514,7 @@ dialogflow代理id为谷歌自动生成，创建代理成功后可以通过API�
 <img width="873" alt="截屏2022-05-27 上午11 40 20" src="https://user-images.githubusercontent.com/30898964/170624598-e75db3ec-03c0-4b6f-9a14-72e10a513296.png">
 
 
-#### <a name="370">2.6.1.2 代理地区的手动初始化</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="31">2.6.1.2 代理地区的手动初始化</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 为什么要初始化代理的地区？
 
@@ -536,7 +529,7 @@ step2.对于代理的“location”下拉列表中的每一个地区都执行下
 <img width="604" alt="截屏2022-05-24 下午2 18 12" src="https://user-images.githubusercontent.com/30898964/169962164-a6709f75-11df-4a66-852a-1ab2413e3fc4.png">
 
 
-#### <a name="38">2.6.1.3 通过客户端创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="32">2.6.1.3 通过客户端创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 通过客户端创建代理需要传入的参数：</br>
 project_id：项目id， 最简单的方法是直接复制Dialogflow控制台导航栏的url并截取相关部分。</br>
@@ -598,7 +591,7 @@ display_name：我们刚为代理取的名字<br>
     }
 
 
-#### <a name="40">代理的时区、语言、区域表</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="33">2.6.1.4 代理的时区、语言、区域表</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 请查看谷歌官方文档以得到最新列表，此附录跟新时间为2022.5.24<br>
 区域：<br>
@@ -773,8 +766,8 @@ zu — Zulu
 ```
 
 
-### <a name="42">2.6.2 代理的导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-#### <a name="43">2.6.2.1 使用控制台导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="34">2.6.2 代理的导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="35">2.6.2.1 使用控制台导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 步骤1：</br>
 </br>
 ![image](https://user-images.githubusercontent.com/30898964/150994138-4e1a7d7a-3f05-46a4-91aa-bb2f5b4bf02c.png)
@@ -782,7 +775,8 @@ zu — Zulu
 </br>
 ![image](https://user-images.githubusercontent.com/30898964/150997846-3822be2d-1bc7-49db-b099-822f6eec67dd.png)
 
-#### <a name="44">2.6.2.2 使用客户端库导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="36">2.6.2.2 使用客户端库导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 [文档链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/agents.html)
 
 这里只是为了展示代理导出的功能才使用while True，在实际项目中，请不要这样使用。</br>
@@ -842,8 +836,9 @@ if __name__ == '__main__':
 
 ```
 
-### <a name="45">2.6.3 代理的导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-#### <a name="46">2.6.3.1 通过控制台导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="37">2.6.3 代理的导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="38">2.6.3.1 通过控制台导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 步骤1：
 ![image](https://user-images.githubusercontent.com/30898964/151000728-1e3709d1-e8e3-41de-8522-c01a2979176f.png)
 步骤2：
@@ -852,7 +847,7 @@ if __name__ == '__main__':
 ![image](https://user-images.githubusercontent.com/30898964/151000911-11d2ff7b-c764-4bd4-8074-e40ee51181ef.png)
 
 
-#### <a name="47">2.6.3.2 通过客户端库导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="39">2.6.3.2 通过客户端库导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 步骤：</br>
 - 先导出一个代理，那到该代理的二进制文件
 - 通过新建一个代理或者使用现有的代理，然后执行导入操作。
@@ -889,19 +884,19 @@ if __name__ == '__main__':
 
 ```
 
-### <a name="48">2.6.4 代理的删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-#### <a name="49">2.6.4.1 通过控制台删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="40">2.6.4 代理的删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="41">2.6.4.1 通过控制台删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 步骤1：
 ![image](https://user-images.githubusercontent.com/30898964/151003260-1087ad8a-5bf7-4a7e-a9e7-719578b717c8.png)
 步骤2：
 ![image](https://user-images.githubusercontent.com/30898964/151003345-e5242c6d-2154-450b-92ac-560c9648f050.png)
 
 
-#### <a name="50">2.6.4.2 通过客户端库删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="42">2.6.4.2 通过客户端库删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 待更新......</r>
 通过客户端库删除代理的方法和创建代理类似，可参照谷歌文档。 
 
-# <a name="51">2.7 Dialogflow 控制台面板功能介绍</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="43">2.7 Dialogflow 控制台面板功能介绍</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 ![image](https://user-images.githubusercontent.com/30898964/170485518-591c8bca-c00e-4575-be6b-eb24ad5babfb.png)
 
@@ -917,7 +912,7 @@ Classification thredshould：<br>
 意图检测的阈值，如果意图匹配的置信度分数小于阈值，则会调用[无匹配事件](https://cloud.google.com/dialogflow/cx/docs/concept/handler#event-built-in)
 
 
-### <a name="39">2.7.1 在控制台测试代理 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="44">2.7.1 在控制台测试代理 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 点击右边test Agent可对创作好的代理进行测试。
 
@@ -942,17 +937,18 @@ Classification thredshould：<br>
 <img width="600" alt="截屏2022-05-26 上午1050" src="https://user-images.githubusercontent.com/30898964/170486137-03db21a3-2caf-48d2-98b1-13f16f507ee5.png">
 <img width="400" alt="截屏2022-05-26 上午10 450" src="https://user-images.githubusercontent.com/30898964/170486141-da3acd67-0387-4379-a3bb-603368b9386e.png">
 
-## <a name="52">2.8 代理各组件概念与操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-### <a name="52"> 2.8.1 概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-#### <a name="52"> 2.8.1.1 意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="45">2.8 代理各组件概念与操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="46"> 2.8.1 概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="47"> 2.8.1.1 意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 意图：表达用户的意图，一个代理可以定义多个意图，我们需要根据业务对用户意图进行分类，意图分类也叫意图匹配。比如餐饮场景下的用户意图有查看菜单、查看菜品等。
 
-#### <a name="52"> 2.8.1.2 实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="48"> 2.8.1.2 实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 - 实体类型：可以认为是某一个概念，比如人名、地名、公司名、菜名、店铺名。
 - 实体：某一个概念的实例，比如张三、深圳、科卫机器人、红烧肉、星巴克。张三属于人名实体类型，深圳属于地名实体类型。
 - 
-#### <a name="52"> 2.8.1.3 流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="49"> 2.8.1.3 流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 流分为默认初始流（Default start flow）和非初始流，非初始流也是开发人员自定义的流（见下图）。<br>
 <p>
@@ -964,7 +960,7 @@ Classification thredshould：<br>
 
 ![image](https://user-images.githubusercontent.com/30898964/170424511-0bc514da-287c-4c12-87f9-620029d3136a.png)
 
-#### <a name="52"> 2.8.1.4 页面</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="50"> 2.8.1.4 页面</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 <p>
 页面可以分为默认初始流的开始页面、自定义流开始页面、非开始页面，开始页面无法删除。非开始页面指的是默认初始流和自定义流中的非开始页面，非开始页面的功能都一样。 而默认初始流和自定义初始流的功能不一样，其主要区别如下：
@@ -985,7 +981,8 @@ Classification thredshould：<br>
 - 在一个页面可以设置回复语句。
 
 <img width="300" alt="截屏2022-05-26 上午10 44 50" src="https://user-images.githubusercontent.com/30898964/170402753-6e40d385-d9ba-4968-b2a6-e091f5512d93.png">
-#### <a name="52"> 2.8.1.5 状态处理程序 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+#### <a name="51"> 2.8.1.5 状态处理程序 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
 状态处理程序包含路线和事件处理，路线包括路线和路线组。事件处理用于接收各种预期外的事件发生，比如匹配不到意图时该如何响应，网络钩子请求超时该如何响应。
@@ -1045,7 +1042,7 @@ Classification thredshould：<br>
 
 
 
-##### <a name="52"> 2.8.1.5.2 路由组 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+##### <a name="53"> 2.8.1.5.2 路由组 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
 路由组可被理解为一“打包袋”，要打包的是路由，这里举两个例子说明。<br>
@@ -1072,14 +1069,14 @@ Classification thredshould：<br>
 ![image](https://user-images.githubusercontent.com/30898964/170458400-6df0cb2f-82ec-4342-bfba-e4cf24722b19.png)
 
 
-##### <a name="52">  2.8.1.5.3 事件处理 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+##### <a name="54">  2.8.1.5.3 事件处理 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
         
 事件处理程序用于处理非预期的事件，比如用户无输入、意图无匹配等，分为流级别和页面级别的处理程序，流级别的事件处理需要在流的初始页面设置，生效范围为整个流的所有页面。 页面级的时间处理程序生效范围为当前页面。 页面和流事件处理程序有优先级之分，如果某个事件被触发，在当前页中如果没设置该事件的处理程序，那么代理区寻找在流中是否设置了该事件的处理程序。<br>
 每个流都有针对 no-match 和 no-input 内置事件的事件处理脚本。这些事件处理脚本会在您创建流时自动创建，并且不能删除。<br>
 内置事件的列表链接： https://cloud.google.com/dialogflow/cx/docs/concept/handler?hl=zh-cn <br>
 
-#### <a name="52">  2.8.1.6 页面、流、意图的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="55">  2.8.1.6 页面、流、意图的关系</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 简单的来说，页面是包含意图的容器，流是页面的容器。页面决定了对话的走向。<br>
 <br>
@@ -1088,9 +1085,9 @@ Classification thredshould：<br>
 <img width="700" alt="截屏2022-05-26 上午10 51 49" src="https://user-images.githubusercontent.com/30898964/170405835-01618a83-1ca6-45e3-a0f8-49fc1de35176.png">
 
 
-### <a name="53">2.8.2 流的操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="56">2.8.2 流的操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-#### <a name="54">2.8.2.1 增删导入导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="57">2.8.2.1 增删导入导出</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 流的操作有三种方式:</br>
 1.通过API ([链接](https://cloud.google.com/dialogflow/cx/docs/concept/flow))。 </br>
@@ -1116,54 +1113,54 @@ Classification thredshould：<br>
 删除某个流的时候需要注意与之关联的页面、流等信息，要确保删除后其他页面或者流不受影响，如果该流以后可能需要，可以选择导出存到本地，或者为该流保存一个版本，关于流的版本，请参照流的版本控制。</br>
 
 
-## <a name="59">2.9 页面的操作 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a
-
-### <a name="590">2.9.1 设置页面初始回复 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="58">2.9 页面的操作 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="59">2.9.1 设置页面初始回复 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 初始回复（entry fulfilment)和其他回复（fulfilment)，可以将初始回复理解为进入该页面的导向语句，比如顾客在上一步完成了点餐，现在进入了下订单的页面，在下订单的页面初始流中，我们可以设置这样的说法：“现在我将帮助您支付订单”。 如果设置了初始回复，那么一进入该页面就会被触发。 
 ![image](https://user-images.githubusercontent.com/30898964/170469944-740a43a6-cdd1-47ed-9688-dd5d3b78f29d.png)
 
    
-### <a name="64">2.9.2 参数收集</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-参数分为：</br>
-- 意图参数
-- 表单参数
-- 会话参数
+### <a name="60">2.9.2 参数收集</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+参数分为：<br>
+    - 意图参数
+    - 表单参数
+    - 会话参数
 
 1.意图参数</br>
+    
 意图参数在为意图添加训练语句时，系统会自动提取并添加。 </br>
 意图使用参数来提取在意图匹配时最终用户提供的数据。以下数据用于定义意图参数：
 - 名称（也称为 ID 或显示名）：用于标识参数的名称。
 - 实体类型：与参数关联的实体类型。
-- 为列表：如果为 true，则该参数会被视为值列表。
+- 为列表：如果为 true，则该参数会被视为值列表。当你想通过一个意图收集多个同类型实体时使用。
 - 在日志中隐去 (Redact in log)：如果设置为 true，最终用户提供的参数数据会隐去。</br>
-1.1名称
-见下图箭头 </br>
-我的实体类型为color，下图为color的实体集合
+
 ![image](https://user-images.githubusercontent.com/30898964/151097170-0595a7ae-922e-4bf4-bf86-11e0963ead21.png)
-下图为意图训练语句。</br>
+
 ![image](https://user-images.githubusercontent.com/30898964/151097364-6449150b-c65a-4bf3-9d5f-c17f2e2917fd.png)
-1.2.实体类型</br>
-实体类型，也就是上图中的Entity entype</br>
-1.3.为列表</br>
-当你想通过一个意图收集多个同类型实体时使用。</br>
-例子：我希望收集用户喜欢的颜色。</br>
-在上图训练语句中，我在一条训练语句中标记了color类型的实体中的两个参数,勾选了右边的is List方框。</br>
-效果是提取到了用户说的所有颜色实体。</br>
+
+    列表实体的的标记的说明：
+    例子：我希望收集用户喜欢的颜色。
+    在上图训练语句中，我在一条训练语句中标记了color类型的实体中的两个参数,勾选了右边的is List方框,效果是提取到了用户说的所有颜色实体。
 ![image](https://user-images.githubusercontent.com/30898964/151097723-2e21ce78-ef94-4871-9e68-75fd4c3aa17c.png)
-</br>
-1.4.在日志中隐去。</br>
- 例如，假设最终用户输入“My address is 1600 Amphitheatre Parkway”，则 address 参数会设置为“1600 Amphitheatre Parkway”。日志记录的文字将为“My address is $address_redacted”。</br>
-意图参数的引用：</br>
-- $intent.params.parameter-id.original 引用实体原名
-- $intent.params.parameter-id.resolved 引用用户说出的实体名
+
+
+    在日志中隐去的说明：
+    例如，假设最终用户输入“My address is 1600 Amphitheatre Parkway”，则 address 参数会设置为“1600 Amphitheatre Parkway”。日志记录的文字将为“My address is        
+    $address_redacted”。
+    意图参数的引用说明：</br>
+    - $intent.params.parameter-id.original 引用实体原名
+    - $intent.params.parameter-id.resolved 引用用户说出的实体名
 
 2.表单参数</br>
+
 - 为每个页面定义一个表单，该表单上列出应从该页面的最终用户处收集的参数，可以理解为槽位填充。</br>
 - 表单参数按照参数的顺序收集。</br>。
 - 当前页面可以访问其他页、流的表单参数。访问方式为$session.params.xxx, 访问当前页面的表单参数方式为$page.params.xxx</br>
 - 所有的表单参数都会被写入会话参数，在会话期间收集的参数，有效范围为一轮会话，当会话结束时，所有参数会被清空。</br>
 注意： 在收集参数的时候注意在先前页或者流中是否已经收集了这个参数，如果已经收集了，假设参数名为name，这时候你在当页再次收集同名参数，就不会产生一个参数收集的执行，系统认为参数已经被收集了，没必要再收集一次。如果在当前页在路由中你加入了参数收集完毕的条件路由，此时将会直接执行该路由。</br>
+
 2.1 表单参数的状态判断：</br>
 $page.params.status = "FINAL"  检查当前页面的整个表单是否已填充</br>
 $page.params.parameter-id.status = "UPDATED" 检查上轮对话中是否填充了特定表单参数</br>
@@ -1176,6 +1173,7 @@ Requried的意思是如果你设置了参数的默认值，这里如果勾选Req
 isList 和 Redact in Log 的意思请参照上面的解释。</br>
 
 3.会话参数：</br>
+
 当在运行时设置任何类型的参数时，该参数将被写入会话并成为会话参数。这些参数在设计时未明确定义。您可以在会话期间随时引用这些会话参数。</br>
 引用会话参数</br>
 会话参数引用可用于以下类型的 fulfillment 的静态响应消息中：</br>
@@ -1190,7 +1188,7 @@ isList 和 Redact in Log 的意思请参照上面的解释。</br>
 $session.params.parameter-id
 如：$session.params.color color为收集参数的时候填写的参数名
 
-### <a name="64">2.9.3 将意图加入到页面</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="61">2.9.3 将意图加入到页面</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 方式一： 通过控制台</br>
 先创建好意图，再到页面路由界面将意图加入。
@@ -1317,7 +1315,7 @@ if __name__ == '__main__':
 ```
 
 
-### <a name="590">2.9.4 条件设置 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="62">2.9.4 条件设置 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 a. 条件“或”</br>
 
@@ -1345,7 +1343,8 @@ e.Transition</br>
 
 当意图路由或者条件路由被触发的时候，页面的走向。</br>
 
-#### 2.9.5 添加事件处理
+
+### <a name="63">2.9.5 添加事件处理 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 点击页面 "Add state handler" -> 勾选Event Handler，如下图：</br>
 ![image](https://user-images.githubusercontent.com/30898964/151100522-a96b7600-6197-45de-aa14-63e1617a0f49.png)
@@ -1355,7 +1354,7 @@ e.Transition</br>
 上图为设置事件处理的页面，具体说明如下：</br>
 ![image](https://user-images.githubusercontent.com/30898964/151104633-975c1b24-6334-4b8c-b189-c892f96b44e1.png)
 
-### <a name="61">2.9.6 页面的执行顺序 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="64">2.9.6 页面的执行顺序 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 当进入一个页面时候，页面的执行顺序为：</br>
 Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（如果有） -> EventHandler（如果我们为当前页设置了事件处理,如果没设置默认调Dafault Start Flow的事件处理。</br>
@@ -1363,16 +1362,16 @@ Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（
 ![image](https://user-images.githubusercontent.com/30898964/151007620-1b705164-7de0-4c8b-a477-2e014571ea30.png)
 
 
-### <a name="69">2.9.7 意图的操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="65">2.9.7 意图的操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
-#### <a name="71">2.9.7.1  默认的意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="66">2.9.7.1  默认的意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 创建代理时，系统会为您创建默认欢迎意图、和默认的负意图。这两个意图都不能被删除。 
 当预料中存在大量的重复句子，导致用户输入无意义的短句误触发意图，我们把这些所谓无意义的短句加入到负意图后，这些表达就不会触发任何意图了，谷歌官方提醒我们不要把太多的短句加入负意图，因为加入大量的短句会对模型造成负面影响。 在探索Dialogflow初期，
 
 
-####  <a name="69">2.9.7.2 新建意图 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+####  <a name="67">2.9.7.2 新建意图 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 当用户输入或说出某些内容时，Dialogflow 会将该输入与意图训练短语进行比较，以找到最佳匹配。此过程称为“意图匹配”。只有与范围内的意图路由（具有意图要求的状态处理程序）关联的意图才会发生意图匹配。</br>
 
@@ -1395,7 +1394,7 @@ Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（
 
 
 
-####  <a name="69">2.9.7.3  上传训练句子到意图 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+####  <a name="68">2.9.7.3  上传训练句子到意图 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
 这段代码的功能是上传无需标记实体的训练句子到代理的某个意图
@@ -1615,31 +1614,23 @@ if __name__ == '__main__':
 ```
 
 
-
-
-
-
-
-
-## <a name="76">2.11实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-### <a name="77">2.11 实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="69">2.11 实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 实体分系统实体和自定义实体，这些系统实体可以匹配许多常见数据类型。例如，有用于匹配日期、时间、颜色、电子邮件地址等类型的系统实体。自定义实体是开发者根据需求自定义的实体。</br>
-### <a name="78">2.11.1“普通实体”和会话实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="70">2.11.1 “普通实体”和会话实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+<p>
+会话”表示 Dialogflow 代理与最终用户之间的对话。您可以在会话期间创建名为“会话实体”或“用户实体”的特殊实体。 会话实体可以扩展或替换自定义实体类型，并且仅在为其创建的会话期间存在。   
+Dialogflow 将所有会话数据（包括会话实体）存储 20 分钟，也就是说从当前会话结束的那一刻开始，在20分钟内，如果没有通过同样的session id来访问该代理，该会话的实体就被被清空。
+"普通实体"是相对会话而言，这里指的是长期有效的实体，比如自定义实体和代理的系统实体。
+</p>
 
-    会话”表示 Dialogflow 代理与最终用户之间的对话。您可以在会话期间创建名为“会话实体”或“用户实体”的特殊实体。 会话实体可以扩展或替换自定义实体类型，并且仅在为其创建的会话期间存在。   
-    Dialogflow 将所有会话数据（包括会话实体）存储 20 分钟，也就是说从当前会话结束的那一刻开始，在20分钟内，如果没有通过同样的session id来访问该代理，该会话的实体就被被清空。
-    "普通实体"是相对会话而言，这里指的是长期有效的实体，比如自定义实体和代理的系统实体。
-### <a name="763">2.11.2 系统实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="71">2.11.2 系统实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 系统实体为Dialogflow系统自带的实体，我们只需要标记系统实体类型中的一个实体，dialogflow就会帮我们识别该实体类型下其他的实体。常用的系统实体包括数字、日期、 地址、城市没名等，详情参照官方文档 https://cloud.google.com/dialogflow/cx/docs/reference/
 sys.number的实体地址为： "projects/-/locations/-/agents/-/entityTypes/sys.number"
 sys.date-time的实体地址为： "projects/-/locations/-/agents/-/entityTypes/sys.date-time"
 这些实体地址可以在Dialogflow cx官方文档中找到，当通过api上传训练句子时，如果你需要标记系统实体，就需要把系统实体加入到你的实体类型和id字典。
 
 
-### <a name="78">2.11.3 创建实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-
-
-
+### <a name="72">2.11.3 创建实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 通过api创建实体类型：
 
@@ -1693,7 +1684,7 @@ if __name__ == '__main__':
     creat_entity('DEF_TASTE')
 
 ```
-### <a name="763">2.11.4 上传实体到实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="73">2.11.4 上传实体到实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
 ```python
@@ -1768,7 +1759,8 @@ if __name__ == '__main__':
 ```
 
 
-### <a name="763">2.11.5 系统实体表</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="74">2.11.5 系统实体表</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 ```python
 '''
 @sys.address
@@ -1830,11 +1822,11 @@ if __name__ == '__main__':
 @sys.url
 @sys.zip-code
 ```
-### <a name="764">2.11.6 日期和时间系统实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="75">2.11.6 日期和时间系统实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 Dialogflow 日期时间类实体大致分为五类： <br>
 
-#### <a name="764">2.11.6.1 单个日期实体（sys.date）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="76">2.11.6.1 单个日期实体（sys.date）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 <p>
 返回结果中参数为“月、日、年”
@@ -1879,7 +1871,7 @@ Dialogflow参数返回示例：
 加上“今年”，即 ”I want to book for May 2 this year“. 
 </p>
 
-#### <a name="590">2.11.6.2 单个时间实体（sys.time）（sys.date-time）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="77">2.11.6.2 单个时间实体（sys.time)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
 <p>
@@ -1908,7 +1900,7 @@ I want to book for 3 o’clock 正确
 I want to book for 3 animals 不合理
 </p>
 
-#### <a name="590">2.11.6.3 日期+时间组合实体类型（sys.date-time）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="78">2.11.6.3 日期+时间组合实体类型（sys.date-time）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 <p>
 这是日期和时间的组合实体类型，日期和时间实体可只出现一个，或两个同时出现。
@@ -1971,7 +1963,7 @@ I want to book for 4:30 pm
                   "minutes": 30
                 }}
 
-#### <a name="590"> 2.11.6.4 日期区间实体(sys.date-period)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="79"> 2.11.6.4 日期区间实体(sys.date-period)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 <p>
 日期区间实体为两个日期的组合，建议标记“from {日期1} to {日期2} ”等英文表达为sys.date-period实体类型。返回字的实体类型为“sys.date-period”,参数里有“endDate”、“startDate”，分别为结束日期、开始日期。
@@ -2020,7 +2012,7 @@ I want to book from May 24 to May 26.
             }}
 
 
-#### <a name="590"> 2.11.6.5 时间区间实体（sys.time-period）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+#### <a name="80"> 2.11.6.5 时间区间实体（sys.time-period）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 <p>
 时间区间实体是两个时间实体类型的组合，比如，从下午3点到下午4点， “from 3pm to 4 pm”，只返回一个实体类型，返回参数的字段包含”startTime” 和”endTime”
@@ -2045,7 +2037,7 @@ I want to book from 4pm to 5pm
                   }
                 }
 
-### <a name="590"> 2.11.6 实体的original值和resolved值（sys.time-period）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="81"> 2.11.7 实体的original值和resolved值（sys.time-period）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 <p>
 谷歌内置名词动词的单复数转换、动词时态的转换、动词变名词（suggest->suggestion)。 有些时候用户说出的单词不在训练语料中，但通过词型的自动转换，谷歌能找出该单词的其他词形。我们可以查看谷歌的响应字符串来判断单词的原始值（用户发言）和该单词在语料中的形式。
@@ -2080,8 +2072,8 @@ I want to book from 4pm to 5pm
 
 
 
-## <a name="79">2.12 流的版本和环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-### <a name="80">2.12.1 概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="82">2.12 流的版本和环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="83">2.12.1 概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 草稿：没有环境的代理为草稿，我们在控制台编辑的代理叫草稿。</br>
 草稿流：草稿代理种的流为草稿流。</br>
 我们可以保存一个草稿流为一个版本，这个版本的流相当于一个快照，包含了该流中原有的实体、路由、意图、网络钩子等信息。</br>
@@ -2090,8 +2082,10 @@ I want to book from 4pm to 5pm
 - 每个代理的环境数量上限：20 个</br>
 - 每个流的版本数量限制：20个</br>
 
-### <a name="81">2.12.2 创建建流版本</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
- 关于代理的所有操作dialogflow都提供API、客户端库、控制台三种方式，流的版本创建亦是如此。
+### <a name="84">2.12.2 创建建流版本</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+ 关于代理的所有操作dialogflow都提供API、客户端库、控制台三种方式，流的版本创建亦是如此,具体步骤如下：
+ 
 ![image](https://user-images.githubusercontent.com/30898964/151107494-aae0c51b-27bd-4acc-97fc-c1e8763a4304.png)
 
 ![image](https://user-images.githubusercontent.com/30898964/151107615-3199c392-6867-44b1-b90c-8dbc7352f515.png)
@@ -2099,7 +2093,8 @@ I want to book from 4pm to 5pm
 ![image](https://user-images.githubusercontent.com/30898964/151107655-3296c338-d45b-4453-b22e-9109f9c4a33c.png)
 
 
-### <a name="82">2.12.3 创建环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="85">2.12.3 创建环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 请根据下图步骤操作：</br>
 ![image](https://user-images.githubusercontent.com/30898964/151107693-fe002a08-03a1-443b-a222-0413e077a1aa.png)
 
@@ -2110,8 +2105,8 @@ I want to book from 4pm to 5pm
 ![image](https://user-images.githubusercontent.com/30898964/151108186-e1147d8f-1c63-490b-aef6-cd40c498ae19.png)
 
 
-# <a name="83">3 最佳做法与避坑指南</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a> <br>
-## <a name="84">3.1 语料收集方法</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>  <br>
+# <a name="86">3 最佳做法与避坑指南</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="87">3.1 语料收集方法</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
    
     语料的收集与创建需遵循一定原则，为了保证意图识别模型的收敛，需要注意以下几点:
     
@@ -2156,7 +2151,7 @@ I want to book from 4pm to 5pm
     8. 实体的构建
     语法用途的实体需要行涵盖尽可能多的同义词，或者该实体的子类（视情况而定），最好测一下谷歌的拾音。
 
-## <a name="85">3.2 问题发现与规避</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="88">3.2 问题发现与避免</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
    起初我们遇到了各种意图误触发的问题，可以采用如下的解决方法来减少误触发。
 
