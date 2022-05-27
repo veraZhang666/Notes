@@ -144,6 +144,7 @@
     本文档所说的代理是Dialogflow CX的代理（Agent)，我们可以在通过代理实现对话机器人搭建。一个谷歌项目下最多可创建1000个代理，谷歌在全球设立了12个大区，创建代理时需选择一个区域，区域代表了该代理存放的地理位置，这将影响到服务访问速度。
 
 #### 1.2.1.3 什么是流？
+   
     流决定了对话的走向，一个代理可以由一个或多个流组成。谷歌提供流级别的版本控制，即可以为每个流打一个或多个版本。 
 
 #### 1.2.1.4 什么是代理环境？
@@ -153,11 +154,11 @@
 
 #### 1.2.1.5 草稿和环境有什么区别？
 
-从版本的角度来讲，代理可草稿和环境代理。开发人员在控制台编辑的代理叫草稿，环境代理是上述中我们自定义环境中指向的各个版本的流组成的代理。开发人员将草稿代理调试通过后，我们才将该流打版本。 我们需要自定义环境，方便公司研发、生产、测试时访问不同的代理（稍后会讲解具体做法）。
+    从版本的角度来讲，代理可草稿和环境代理。开发人员在控制台编辑的代理叫草稿，环境代理是上述中我们自定义环境中指向的各个版本的流组成的代理。开发人员将草稿代理调试通过后，我们才将该流打版本。 我们需要自定义环境，方便公司研发、生产、测试时访问不同的代理（稍后会讲解具体做法）。
 
-草稿和环境代理在字段上的区别：<br>
-草稿代理: 地址没有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx <br>
-环境代理：地址中有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx/environments/xxxx<br>
+    草稿和环境代理在字段上的区别：
+    草稿代理: 地址没有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx 
+    环境代理：地址中有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx/environments/xxxx
 
 
 ![image](https://user-images.githubusercontent.com/30898964/168820871-44ad95c2-0ff2-493d-9b72-09bee7b07a82.png)
@@ -180,7 +181,7 @@
 ### 1.2.3.1 商家代理和谷歌代理的对应关系
 
     每个商家项目对应唯一一个谷歌代理，代理名为商家项目id，下图中代理的“Display name”为商家项目ID。
-<br>
+
  
 <img width="1015" alt="截屏2022-05-17 下午11 53 26" src="https://user-images.githubusercontent.com/30898964/168855043-86d8a211-b28b-4860-a5e3-bc7d8cad06c8.png">
 
@@ -195,26 +196,26 @@
 #### <a name="701">1.2.3.3 何为模板代理？</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
-    在理解模板代理之前先要弄清楚什么是动态实体和静态实体
+    在理解模板代理之前先要弄清楚什么是动态实体和静态实体。<br>
 
-    动态实体： 指的是商家在管理平台自定义的字段。如商家名、菜名名、客房名、公司名等。我们约定动态实体命名以“DYN_” 开头。
+    动态实体： 指的是商家在管理平台自定义的字段。如商家名、菜名名、客房名、公司名等。我们约定动态实体命名以“DYN_” 开头。<br>
     静态实体： 静态实体是相对动态而言的，可分为武汉人机协作平台（简称平台）预设的实体和语法用途的实体，平台预设的实体命名以“DEF_”开头，比如在餐饮场景中，食材和口味是我们预设的，在平台商家
     菜品配置页面中，以下拉列表呈现，商家只能选择，不能填写。语料用途的实体以“GRA_"开头。这是为了优化训练句子而设置的，比如， "do you have an empty table? "在这句话中，empty有
-    很多近义词,下面句子的表达了同样的意思。
-    do you have a vacant table?
-    do you have a free table?
-    do you have an unoccupied table?
+    很多近义词,下面句子的表达了同样的意思。<br>
+    do you have a vacant table?<br>
+    do you have a free table?<br>
+    do you have an unoccupied table?<br>
 
-    如果有些单词有十几个同义词，我们需要写十几句话。这样做的缺点是：
+    如果有些单词有十几个同义词，我们需要写十几句话。这样做的缺点是：<br>
     a.不方便管理
-    b.短语高频出现在训练语料导致意图误触发： 比如单输入“do you have” 也会触发意图。
-    所以我们决定通过建立一个实体类型的方式来达到句子同义词扩充的目的。此处我们新建实体类型GRA_EMPTY,其实体集合为：empty/cacant/free/unoccupied
+    b.短语高频出现在训练语料导致意图误触发： 比如单输入“do you have” 也会触发意图。<br>
+    所以我们决定通过建立一个实体类型的方式来达到句子同义词扩充的目的。此处我们新建实体类型GRA_EMPTY,其实体集合为：empty/cacant/free/unoccupied<br>
 
 
     模板代理是我们根据公司业务抽象而来，而谷歌本身没有模板代理的概念。模板代理产生的原因是为了做到商家的数据分割、场景的业务意图统一。拿餐饮场景来举例，开发人员维护一个模板代理，我们
     希望餐饮场景下的所有项目都具有同样的语义功能，每次新增一个餐饮项目，一个谷歌空代理会被创建，该餐饮项目的代理会把模板代理复制一份，然后直接将其覆盖到该商家代理，这样此商家代理就具有
     了模板代理的所有功能。 值得注意的是，不同的商家配置了不同的菜名、口味等。如何保证商家的数据隔离呢？ 拉取模板代理后，我们会判断哪些是动态实体，然后将该商家的动态实体更新到与之对应的
-    谷歌代理。
+    谷歌代理。<br>
 
 
 #### <a name="8">1.2.3.4 为什么要设置多个模板代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -1399,41 +1400,227 @@ Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（
 ####  <a name="69">2.9.7.3  上传训练句子到意图 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
-
-
-
+这段代码的功能是上传无需标记实体的训练句子到代理的某个意图
 
 ``` python 
-from google.cloud.dialogflowcx_v3beta1.types import Intent,UpdateIntentRequest
+#上传无需被标记的训练句子
+from google.cloud.dialogflowcx_v3beta1.services.agents import AgentsClient
+from google.cloud.dialogflowcx_v3beta1.types import Intent, UpdateIntentRequest,ListEntityTypesRequest
 from google.cloud.dialogflowcx_v3beta1.services.intents import IntentsClient
+from google.api_core.client_options import ClientOptions
+from google.cloud import dialogflowcx
 
-def get_trainingPhrase_obj_list():
-    generate = ['I am hungry','I am starving','I want to eat something'] # 即将被上传的训练句子
+
+# 从代理处获得实体类型和id
+
+AGENT ='projects/catering-robot/locations/us-central1/agents/ebb79c10-7630-479b-8886-e281455d7275'
+SYS_NUMBER_ENTITY_TYPE_ID = "projects/-/locations/-/agents/-/entityTypes/sys.number"
+LOCATION_ID = AgentsClient.parse_agent_path(AGENT)['location']
+OPTIONS = ClientOptions(api_endpoint=LOCATION_ID + "-dialogflow.googleapis.com")
+
+
+
+def get_trainingPhrase_obj_list(traning_phrase_list):
     train_list = []
-    for phrase in generate:
+    for phrase in traning_phrase_list:
         part1 = Intent.TrainingPhrase.Part()
         part1.text = phrase
         train1 = Intent.TrainingPhrase()
-        train1.parts = [part1] # 一个训练句子由可以由很多个part组成，多个part的情况适用于需要标记实体，这里我不需要标记实体，所以列表里只有一个part
-        train1.repeat_count=1 # 训练句子在意图中出现的次数
+        # 一个训练句子由可以由很多个part组成，多个part的情况适用于需要标记实体，这里我不需要标记实体，所以列表里只有一个part
+        train1.parts = [part1]
+        # 训练句子在意图中出现的次数
+        train1.repeat_count=1
         train_list.append(train1)
-    print(f'=============训练句子的数量{len(train_list)}==============')
     return train_list
 
 
-intent_id ='projects/catering-robot/locations/us-central1/agents/3005db1a-d681-4456-8647-4f3f0b7ca886/intents/74388479-beab-4e97-aa7a-641bf6b90ab3'
-intent = Intent()
-intent.name = intent_id # 意图的id
-intent.display_name = 'restaurant_foreign_want_to_eat' # 意图名字
-intent.training_phrases = get_trainingPhrase_obj_list()
+def uploadTraining_no_mark(intent_id,intent_display_name,traning_phrase_list_no_mark):
+    intent = Intent()
+    intent.name = intent_id  # 意图的id
+    intent.display_name = intent_display_name  # 意图名字
+    intent.training_phrases = get_trainingPhrase_obj_list(traning_phrase_list_no_mark) # 拿到句子part列表
+    request = UpdateIntentRequest(intent=intent)
+    intent_client = IntentsClient(client_options=OPTIONS)
+    intent_client.update_intent(request=request)
+    print(f'训练句子上传成功', intent_display_name, len(traning_phrase_list_no_mark))
 
-location = 'us-central1' # 这个location是intent_id的location
-request = UpdateIntentRequest(intent = intent)
-intent_client = IntentsClient(client_options={"api_endpoint": f"{location}-dialogflow.googleapis.com"})
-intent_client.update_intent(request=request)
+
+if __name__ == '__main__':
+    # 要上传的意图id
+    # 请先去代理新建号空意图，然后选中，直接从导航栏处复制看可得到意图id
+    # 意图id格式： intent_id = 'projects/xxxx/locations/xxxx/agents/xxxx/intents/xxxx'
+    intent_id='projects/catering-robot/locations/us-central1/agents/ebb79c10-7630-479b-8886-e281455d7275/intents/5d3a490c-920a-4360-befc-9fd3dcee476d'
+    # # 这是已经在代理处新建好的意图display name
+
+    traning_phrase_list_no_mark = ['I am hungry','I am starving','I want to eat something'] # 即将被上传的训练句子
+    intent_display_name='restaurant_foreign_want_to_eat'
+    uploadTraining_no_mark(intent_id,intent_display_name,traning_phrase_list_no_mark)
 
 
 ``` 
+
+
+
+这段代码的功能是上传需要标记实体的训练句子到代理的某个意图
+```python
+
+from google.cloud.dialogflowcx_v3beta1.services.agents import AgentsClient
+from google.cloud.dialogflowcx_v3beta1.types import Intent, UpdateIntentRequest,ListEntityTypesRequest
+from google.cloud.dialogflowcx_v3beta1.services.intents import IntentsClient
+from google.api_core.client_options import ClientOptions
+from google.cloud import dialogflowcx
+
+
+
+
+# 从代理处获得实体类型和id
+
+AGENT ='projects/catering-robot/locations/us-central1/agents/ebb79c10-7630-479b-8886-e281455d7275'
+SYS_NUMBER_ENTITY_TYPE_ID = "projects/-/locations/-/agents/-/entityTypes/sys.number"
+LOCATION_ID = AgentsClient.parse_agent_path(AGENT)['location']
+OPTIONS = ClientOptions(api_endpoint=LOCATION_ID + "-dialogflow.googleapis.com")
+
+
+# 拿到我们在谷歌自定义的所有实体类型和id
+def list_entity_types():
+    '''
+    :param agent:
+    :return: {'实体名'：'实体id路径'}
+    '''
+    # 系统实体类型的默认id
+    entity_types_client = dialogflowcx.EntityTypesClient(client_options=OPTIONS)
+    list_entity_types_request = dialogflowcx.ListEntityTypesRequest(parent=AGENT)
+    resp = entity_types_client.list_entity_types(list_entity_types_request)
+
+    entity_dict = {}
+
+    for x in resp:
+        entity_dict[x.display_name] = x.name
+        # 系统实体有默认的id，我们无法直接获取，你需要再训练句子中需要标记系统实体，请在这里加入，可查阅文档找到更多系统实体类型ID
+        entity_dict['sys.number'] = SYS_NUMBER_ENTITY_TYPE_ID
+    return entity_dict
+
+
+# 拿到句子片段列表
+def get_partials(sententce_list, mark_dic):
+    '''
+    :param sententce_list:[i want invitation code,'show me the company list']
+    :param mark_dic:{‘GRA_COMPANY’:['company','firm'],'GRA_INVITATION_CODE':["invitation code"]}
+    :return:[['I', 'want', ['invitation-code']],[],...[]]
+    '''
+    mark_words = list(mark_dic.values())
+    mark_words_1_dimension = []
+    for i in range(len(mark_words)):
+        for j in range(len(mark_words[i])):
+            mark_words_1_dimension.append(mark_words[i][j]) #  #['unoccupied'], ['table', 'seats'], ['number'], ['delicious']]多维变1维 ['unoccupied','table', 'seats','number','delicious']
+
+    big_list = []
+
+    for sent in sententce_list:
+        in_list = []
+        for word in mark_words_1_dimension:
+            word = word.replace('-', ' ')
+            if word in sent:
+                in_list.append(word)
+        in_list = list(set(in_list))  # 在训练句子中需要被标记的单词或者短句
+        for x in in_list:
+            if ' ' in x:
+                sent = sent.replace(x, x.replace(' ', '-'))  # ['invitation code'] => [invitation-code']
+        sent_words = sent.split(" ")
+        for i in range(len(sent_words)):
+            for mark_word in in_list:
+                mark_word = mark_word.replace(' ', '-')
+                if sent_words[i] == mark_word:
+                    sent_words[i] = [mark_word]
+        big_list.append(sent_words)
+    return big_list
+
+
+
+# 拿到训练列表，列表元素是谷歌part类型，每个part指明了该段短句的文字和是参数id（如果需要被标记）
+def get_trainingPhrase_obj_list(mark_dic,training_phrase_list):
+
+    train_list = []
+    big_list = get_partials(training_phrase_list, mark_dic)
+
+    for sentlist in big_list:
+        train1 = Intent.TrainingPhrase()
+        part_list = []
+        for sent in sentlist:
+            if sent:
+                part1 = Intent.TrainingPhrase.Part()
+                part2 = Intent.TrainingPhrase.Part()
+                part2.text = ' '
+
+                if isinstance(sent, list):
+                    mark_word = sent[0]
+                    part1.text = mark_word.replace('-',' ')  # ['I', 'want', ['invitation-code']] =>['I', 'want', ['invitation code']]
+                    part1.parameter_id = mark_word
+                else:
+                    sent = sent.strip()
+                    part1.text = sent
+
+                part_list.append(part1)
+                part_list.append(part2)
+
+        train1.parts = part_list
+        train1.repeat_count = 1
+        train_list.append(train1)
+    return train_list
+
+def get_parameterType(mark_dic):
+    # 获取代理现有实体类型和id
+    entity_type_dict=list_entity_types()
+    # 系统实体
+    parame_list = []
+    for entity_type,entity_value_list in mark_dic.items():
+            for entity_value in entity_value_list:
+                param = Intent.Parameter()
+                param.id = entity_value
+                param.entity_type = entity_type_dict[entity_type]
+                # 设置实体类型为非列表
+                param.is_list = False
+                parame_list.append(param)
+    return parame_list
+
+def uploadTraining_with_mark(intent_id,intent_display_name,traning_phrase_list,mark_dic):
+    intent = Intent()
+    intent.name = intent_id  # 意图的id
+    intent.display_name = intent_display_name  # 意图名字
+    train_phrases= get_trainingPhrase_obj_list(mark_dic,traning_phrase_list) # 拿到句子part列表
+    intent.training_phrases =train_phrases
+    intent.parameters = get_parameterType(mark_dic)
+    request = UpdateIntentRequest(intent=intent)
+    intent_client = IntentsClient(client_options=OPTIONS)
+    intent_client.update_intent(request=request)
+    print(f'训练句子上传成功', intent_display_name, len(train_phrases))
+
+
+
+if __name__ == '__main__':
+    # mark_dic 需要被标记的实体类型，键是实体类型，值是参数id，注意"mushroom-pizza"中间有空格
+    # 这是因为参数id不能有空格，这里对于两个以上单词的实体，我们用中划线替换多个单词之间的空格
+    # 但是训练句子还是原样上传，实体不含中划线
+    mark_dic = {'DYN_DISH_NAME': ['burger','pizza','mushroom-pizza'],
+                'sys.number': ['two']
+                }
+
+    # 这是在代理里已经新建好意图的display name
+    intent_display_name = 'restaurant_english_want_to_eat'
+    
+    # 这里请替换为你的意图id， 意图id格式： intent_id = 'projects/xxxx/locations/xxxx/agents/xxxx/intents/xxxx'
+    intent_id = 'projects/catering-robot/locations/us-central1/agents/ebb79c10-7630-479b-8886-e281455d7275/intents/5d3a490c-920a-4360-befc-9fd3dcee476d'
+    traning_phrase_list_mark = ['i want to eat burger', 'i want to eat pizza', 'i want two burgers','i want to have mushroom pizza']
+    uploadTraining_with_mark(intent_id, intent_display_name, traning_phrase_list_mark, mark_dic)
+    
+
+```
+
+
+
+
+
+
 
 
 ## <a name="76">2.11实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -1443,11 +1630,147 @@ intent_client.update_intent(request=request)
 
     会话”表示 Dialogflow 代理与最终用户之间的对话。您可以在会话期间创建名为“会话实体”或“用户实体”的特殊实体。 会话实体可以扩展或替换自定义实体类型，并且仅在为其创建的会话期间存在。   
     Dialogflow 将所有会话数据（包括会话实体）存储 20 分钟，也就是说从当前会话结束的那一刻开始，在20分钟内，如果没有通过同样的session id来访问该代理，该会话的实体就被被清空。
-    "普通实体"为本人命名，这是相对会话实体而言的，意思是长期有效的实体。
+    "普通实体"是相对会话而言，这里指的是长期有效的实体，比如自定义实体和代理的系统实体。
 ### <a name="763">2.11.2 系统实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 系统实体为Dialogflow系统自带的实体，我们只需要标记系统实体类型中的一个实体，dialogflow就会帮我们识别该实体类型下其他的实体。常用的系统实体包括数字、日期、 地址、城市没名等，详情参照官方文档 https://cloud.google.com/dialogflow/cx/docs/reference/
+sys.number的实体地址为： "projects/-/locations/-/agents/-/entityTypes/sys.number"
+sys.date-time的实体地址为： "projects/-/locations/-/agents/-/entityTypes/sys.date-time"
+这些实体地址可以在Dialogflow cx官方文档中找到，当通过api上传训练句子时，如果你需要标记系统实体，就需要把系统实体加入到你的实体类型和id字典。
 
-### <a name="763">2.11.3 系统实体表</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+### <a name="78">2.11.3 创建实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+
+
+
+通过api创建实体类型：
+
+```python
+
+from google.cloud.dialogflowcx_v3.types.entity_type import EntityType
+from google.cloud import dialogflowcx
+from google.api_core.client_options import ClientOptions
+from google.cloud.dialogflowcx_v3.types.entity_type import EntityType
+from google.cloud.dialogflowcx_v3beta1.services.agents import AgentsClient
+from google.cloud.dialogflowcx_v3.services.entity_types import EntityTypesClient
+
+AGENT ='projects/catering-robot/locations/us-central1/agents/ebb79c10-7630-479b-8886-e281455d7275'
+SYS_NUMBER_ENTITY_TYPE_ID = "projects/-/locations/-/agents/-/entityTypes/sys.number"
+LOCATION_ID = AgentsClient.parse_agent_path(AGENT)['location']
+OPTIONS = ClientOptions(api_endpoint=LOCATION_ID + "-dialogflow.googleapis.com")
+
+def list_entity_types():
+    '''
+    :param agent:
+    :return: {'实体名'：'实体id路径'}
+    '''
+    # 系统实体类型的默认id
+    entity_types_client = dialogflowcx.EntityTypesClient(client_options=OPTIONS)
+    list_entity_types_request = dialogflowcx.ListEntityTypesRequest(parent=AGENT)
+    resp = entity_types_client.list_entity_types(list_entity_types_request)
+
+    entity_dict = {}
+
+    for x in resp:
+        entity_dict[x.display_name] = x.name
+    return entity_dict
+
+def creat_entity(entity_name):
+    # 拿到现有实体列表， 如有已经存在，就不再创建
+    entity_dict = list_entity_types()
+    existed_entities_types = list(entity_dict.keys())
+    if entity_name in existed_entities_types:
+        print('已经存在实体',entity_name)
+    else:
+        entityTypesClient = EntityTypesClient(client_options=OPTIONS)
+        name = entity_name
+        kind = EntityType.Kind.KIND_MAP
+        entity_type = EntityType(display_name=name, kind=kind)
+        entity = entityTypesClient.create_entity_type(parent=AGENT,entity_type=entity_type)
+        print('实体创建成功',entity)
+
+
+if __name__ == '__main__':
+
+    creat_entity('DEF_TASTE')
+
+```
+### <a name="763">2.11.4 上传实体到实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
+
+```python
+
+from google.cloud.dialogflowcx_v3.types.entity_type import EntityType
+from google.cloud import dialogflowcx
+from google.api_core.client_options import ClientOptions
+from google.cloud.dialogflowcx_v3.types.entity_type import EntityType
+from google.cloud.dialogflowcx_v3beta1.services.agents import AgentsClient
+from google.cloud.dialogflowcx_v3.services.entity_types import EntityTypesClient
+
+AGENT ='projects/catering-robot/locations/us-central1/agents/ebb79c10-7630-479b-8886-e281455d7275'
+SYS_NUMBER_ENTITY_TYPE_ID = "projects/-/locations/-/agents/-/entityTypes/sys.number"
+LOCATION_ID = AgentsClient.parse_agent_path(AGENT)['location']
+OPTIONS = ClientOptions(api_endpoint=LOCATION_ID + "-dialogflow.googleapis.com")
+
+# 传入单个实体类型和实体的字典，返回列表，列表元素为dialogflow实体对象
+def make_one_type_entity(entity_dict):
+    entity_names = list(set(entity_dict.keys()))
+
+    list_of_entity_items = []
+    for name in entity_names:
+        if isinstance(name,float):
+            name = int(name)
+            name = str(name)
+        entity_to_add = EntityType.Entity(value=name, synonyms=entity_dict[name])
+        list_of_entity_items.append(entity_to_add)
+    return  list_of_entity_items
+
+def list_entity_types():
+    '''
+    :param agent:
+    :return: {'实体名'：'实体id路径'}
+    '''
+    # 系统实体类型的默认id
+    entity_types_client = dialogflowcx.EntityTypesClient(client_options=OPTIONS)
+    list_entity_types_request = dialogflowcx.ListEntityTypesRequest(parent=AGENT)
+    resp = entity_types_client.list_entity_types(list_entity_types_request)
+
+    entity_dict = {}
+
+    for x in resp:
+        entity_dict[x.display_name] = x.name
+    return entity_dict
+
+# 更新实体、会直接覆盖原有实体。这里更新单个实体类型
+def update_one_entity(entity_display_name,entity_dic):
+    print('实体上传中...',entity_display_name)
+
+
+    all_entity_from_google = list_entity_types()
+    entity_item_list = make_one_type_entity(entity_dic) # 拿到实体集合
+
+    entity_type = EntityType(name=all_entity_from_google[entity_display_name],
+                                 display_name=entity_display_name,
+                                 entities=entity_item_list,
+                                 kind=EntityType.Kind.KIND_MAP)
+
+    list_entity_types_request = dialogflowcx.UpdateEntityTypeRequest(entity_type = entity_type)
+
+    # 更新实体
+    entity_types_client = dialogflowcx.EntityTypesClient(client_options=OPTIONS)
+    entity_types_client.update_entity_type(list_entity_types_request)
+    print('实体上传成功',entity_display_name)
+
+if __name__ == '__main__':
+    # creat_entity('DEF_TASTE')
+
+    entity_dic = {"sweet":['sweet','sugary']}
+    update_one_entity('DEF_TASTE', entity_dic)
+
+```
+
+
+### <a name="763">2.11.5 系统实体表</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ```python
 '''
 @sys.address
@@ -1509,11 +1832,11 @@ intent_client.update_intent(request=request)
 @sys.url
 @sys.zip-code
 ```
-### <a name="764">2.11.4 日期和时间系统实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="764">2.11.6 日期和时间系统实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 Dialogflow 日期时间类实体大致分为五类： <br>
 
-#### 2.11.4.1 单个日期实体（sys.date）
+#### 2.11.6.1 单个日期实体（sys.date）
 <p>
 返回结果中参数为“月、日、年”
 例1：
@@ -1557,7 +1880,7 @@ Dialogflow参数返回示例：
 加上“今年”，即 ”I want to book for May 2 this year“. 
 </p>
 
-#### 2.11.4.2.单个时间实体（sys.time）
+#### 2.11.6.2.单个时间实体（sys.time）
 
 <p>
 返回结果中参数为“时、分、秒、毫秒”
@@ -1585,7 +1908,7 @@ I want to book for 3 o’clock 正确
 I want to book for 3 animals 不合理
 </p>
 
-#### 2.11.4.3.日期+时间组合实体类型（sys.date-time）
+#### 2.11.6.3.日期+时间组合实体类型（sys.date-time）
 <p>
 这是日期和时间的组合实体类型，日期和时间实体可只出现一个，或两个同时出现。
 先需要在训练句子中标记任何时间、日期、完整日期时间为系统实体类型"sys.date-time",这样Dialogflow就会解析用户说的日期时间，并把用户说的日期时间作为一个参数返回。
@@ -1647,7 +1970,7 @@ I want to book for 4:30 pm
                   "minutes": 30
                 }}
 
-#### 2.11.4.4.日期区间实体(sys.date-period)
+#### 2.11.6.4 日期区间实体(sys.date-period)
 <p>
 日期区间实体为两个日期的组合，建议标记“from {日期1} to {日期2} ”等英文表达为sys.date-period实体类型。返回字的实体类型为“sys.date-period”,参数里有“endDate”、“startDate”，分别为结束日期、开始日期。
 
@@ -1695,7 +2018,7 @@ I want to book from May 24 to May 26.
             }}
 
 
-#### 2.11.4.5．时间区间实体（sys.time-period）
+#### 2.11.6.5．时间区间实体（sys.time-period）
 <p>
 时间区间实体是两个时间实体类型的组合，比如，从下午3点到下午4点， “from 3pm to 4 pm”，只返回一个实体类型，返回参数的字段包含”startTime” 和”endTime”
 例1：
@@ -1720,7 +2043,7 @@ I want to book from 4pm to 5pm
                 }
 
 
-### <a name="101">2.11.5 实体的original值和resolved值</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+### <a name="101">2.11.7 实体的original值和resolved值</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 <p>
 谷歌内置名词动词的单复数转换、动词时态的转换、动词变名词（suggest->suggestion)。 有些时候用户说出的单词不在训练语料中，但通过词型的自动转换，谷歌能找出该单词的其他词形。我们可以查看谷歌的响应字符串来判断单词的原始值（用户发言）和该单词在语料中的形式。
 大概分为如下几种情况讨论： 
@@ -1755,7 +2078,7 @@ I want to book from 4pm to 5pm
 
 
 # <a name="79">2.12 流的版本和环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-## <a name="80">概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="80">2.12.1 概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 草稿：没有环境的代理为草稿，我们在控制台编辑的代理叫草稿。</br>
 草稿流：草稿代理种的流为草稿流。</br>
 我们可以保存一个草稿流为一个版本，这个版本的流相当于一个快照，包含了该流中原有的实体、路由、意图、网络钩子等信息。</br>
@@ -1764,7 +2087,7 @@ I want to book from 4pm to 5pm
 - 每个代理的环境数量上限：20 个</br>
 - 每个流的版本数量限制：20个</br>
 
-## <a name="81">创建建流版本</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="81">2.12.2 创建建流版本</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
  关于代理的所有操作dialogflow都提供API、客户端库、控制台三种方式，流的版本创建亦是如此。
 ![image](https://user-images.githubusercontent.com/30898964/151107494-aae0c51b-27bd-4acc-97fc-c1e8763a4304.png)
 
@@ -1773,7 +2096,7 @@ I want to book from 4pm to 5pm
 ![image](https://user-images.githubusercontent.com/30898964/151107655-3296c338-d45b-4453-b22e-9109f9c4a33c.png)
 
 
-## <a name="82">创建环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="82">2。12.3 创建环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 请根据下图步骤操作：</br>
 ![image](https://user-images.githubusercontent.com/30898964/151107693-fe002a08-03a1-443b-a222-0413e077a1aa.png)
 
@@ -1784,7 +2107,7 @@ I want to book from 4pm to 5pm
 ![image](https://user-images.githubusercontent.com/30898964/151108186-e1147d8f-1c63-490b-aef6-cd40c498ae19.png)
 
 
-# <a name="83">3.最佳做法与避坑指南</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a> <br>
+# <a name="83">3 最佳做法与避坑指南</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a> <br>
 ## <a name="84">3.1 语料收集方法</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>  <br>
    语料的收集与创建需遵循一定原则，为了保证意图识别模型的收敛，需要注意以下几点:<br>
 ### 3.1.1 包含俚语或口语化的说法<br>
@@ -1819,7 +2142,7 @@ I want to book from 4pm to 5pm
 ### 3.1.8 实体的构建
     语法用途的实体需要行涵盖尽可能多的同义词，或者该实体的子类（视情况而定），最好测一下谷歌的拾音。
 
-##<a name="85">3.2 问题发现与规避</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="85">3.2 问题发现与规避</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
     起初我们遇到了各种意图误触发的问题，可以采用如下的解决方法来减少误触发。
 
