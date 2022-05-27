@@ -106,8 +106,9 @@
 <br>
 以下为一个语义请求字段：<br>
 其中“project”字段为商家项目id，“deviceID”为机器人设备id,"ask"为用户发言 <br>
-
-    {
+```python
+'''
+ {
         "type": 0,
         "project": "62342feb4a6c213fc8c09632",
         "deviceID": "YHPR1120B00811SZGM4321020142",
@@ -119,50 +120,50 @@
         "requestID": "",
         "version": "v1.0.0"
     }
-
-
+'''
+```
 ## <a name="3">1.2 谷歌名词概念解释</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="4">1.2.1 谷歌项目与代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-    1. 什么是谷歌项目？
+1. 什么是谷歌项目？<br>
 
-    简单来说，这是谷歌为了用户使用他们的服务而设立的。为了使用谷歌的服务，如谷歌地图、STT、TTS,必须建立一个谷歌项目，想要使用谷歌的某服务必须开启对应服务的API。
-    关于项目管理我们的做法：
-    目前我们的做法是将谷歌项目当作一类服务的容器，这样便于项目管理和账单查看。 比如,谷歌项目“项目1”只用于Dialoflow CX 代理，“项目2”只用于STT、TTS,“项目3”只用于Google map，注意“项目1”、“项目2”、“项目3”为自定义项目名字，请读者根据规范建立项目名
-
-
-    2. 什么是代理？
-    谷歌代理（Agent)是一个功能的抽象，比如订票代理、订房代理、订餐代理，其中订票机器人只负责订票的业务。
-    本文档所说的代理是Dialogflow CX的代理（Agent)，我们可以在通过代理实现对话机器人搭建。一个谷歌项目下最多可创建1000个代理，谷歌在全球设立了12个大区，创建代理时需选择一个区域，区域代表了该代理存放的地理位置，这将影响到服务访问速度。
-
-    3. 什么是流？
-   
-    流决定了对话的走向，一个代理可以由一个或多个流组成。谷歌提供流级别的版本控制，即可以为每个流打一个或多个版本。 
-
-    4. 什么是代理环境？
-
-    谷歌代理本身没有版本可言，只有流才有版本控制，那么谷歌怎么做到代理的版本控制呢？
-    我们可以在Dialogflow控制台(简称控制台）建立环境，环境的名字由我们自定义，代理环境可以被理解为一个文件夹，它对各个版本的流只是一个指向关系。在环境页面，我们需要指定每个流的版本（详细操作流程），如果不指定该流的版本，那么该代理就不具备这个流的功能。 
-
-    5. 草稿和环境有什么区别？
-
-    从版本的角度来讲，代理可草稿和环境代理。开发人员在控制台编辑的代理叫草稿，环境代理是上述中我们自定义环境中指向的各个版本的流组成的代理。开发人员将草稿代理调试通过后，我们才将该流打版本。 我们需要自定义环境，方便公司研发、生产、测试时访问不同的代理（稍后会讲解具体做法）。
-
-    草稿和环境代理在字段上的区别：
-    草稿代理: 地址没有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx 
-    环境代理：地址中有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx/environments/xxxx
+简单来说，这是谷歌为了用户使用他们的服务而设立的。为了使用谷歌的服务，如谷歌地图、STT、TTS,必须建立一个谷歌项目，想要使用谷歌的某服务必须开启对应服务的API。<br>
+关于项目管理我们的做法：<br>
+目前我们的做法是将谷歌项目当作一类服务的容器，这样便于项目管理和账单查看。 比如,谷歌项目“项目1”只用于Dialoflow CX 代理，“项目2”只用于STT、TTS,“项目3”只用于Google map，注意“项目1”、“项目2”、“项目3”为自定义项目名字，请读者根据规范建立项目名。<br>
 
 
-![image](https://user-images.githubusercontent.com/30898964/168820871-44ad95c2-0ff2-493d-9b72-09bee7b07a82.png)
+2. 什么是代理？<br>
+谷歌代理（Agent)是一个功能的抽象，比如订票代理、订房代理、订餐代理，其中订票机器人只负责订票的业务。<br>
+本文档所说的代理是Dialogflow CX的代理（Agent)，我们可以在通过代理实现对话机器人搭建。一个谷歌项目下最多可创建1000个代理，谷歌在全球设立了12个大区，创建代理时需选择一个区域，区域代表了该代理存放的地理位置，这将影响到服务访问速度。<br>
+
+3. 什么是流？<br>
+
+流决定了对话的走向，一个代理可以由一个或多个流组成。谷歌提供流级别的版本控制，即可以为每个流打一个或多个版本。 <br>
+
+4. 什么是代理环境？<br>
+
+谷歌代理本身没有版本可言，只有流才有版本控制，那么谷歌怎么做到代理的版本控制呢？<br>
+
+我们可以在Dialogflow控制台(简称控制台）建立环境，环境的名字由我们自定义，代理环境可以被理解为一个文件夹，它对各个版本的流只是一个指向关系。在环境页面，我们需要指定每个流的版本（详细操作流程），如果不指定该流的版本，那么该代理就不具备这个流的功能。 <br>
+
+5. 草稿和环境有什么区别？<br>
+
+从版本的角度来讲，代理可草稿和环境代理。开发人员在控制台编辑的代理叫草稿，环境代理是上述中我们自定义环境中指向的各个版本的流组成的代理。开发人员将草稿代理调试通过后，我们才将该流打版本。 我们需要自定义环境，方便公司研发、生产、测试时访问不同的代理（稍后会讲解具体做法）。<br>
+
+草稿和环境代理在字段上的区别：<br>
+草稿代理: 地址没有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx <br>
+环境代理：地址中有'/environment/'字段，如：projects/future-area-343501/locations/asia-southeast1/agents/xxxxx/environments/xxxx<br>
+
+<img width="900" alt="截屏2022-05-17 下午11 53 26" src="https://user-images.githubusercontent.com/30898964/168820871-44ad95c2-0ff2-493d-9b72-09bee7b07a82.png">
 
 ### <a name="5">1.2.2 谷歌的服务</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-    1. 我们用到了哪些谷歌服务？
+1. 我们用到了哪些谷歌服务？<br>
 
-    - STT服务，即语音识别，谷歌提供多语种的语音识别、语种识别。
-    - TTS服务，即语音播报，谷歌提供多语种的男女生播报，截止当前谷歌尚未支持童声（2022-5)
-    - Dialogflow CX，即谷歌的对话搭建平台，提供意图识别、对话搭建。
-    - 谷歌地图
-    注意使用这些服务需要先建立谷歌项目，然后开通对应的API （见目录“如何开通谷歌API”）
+- STT服务，即语音识别，谷歌提供多语种的语音识别、语种识别。
+- TTS服务，即语音播报，谷歌提供多语种的男女生播报，截止当前谷歌尚未支持童声（2022-5)
+- Dialogflow CX，即谷歌的对话搭建平台，提供意图识别、对话搭建。
+- 谷歌地图
+注意使用这些服务需要先建立谷歌项目，然后开通对应的API （见目录“如何开通谷歌API”）
 
 
 <img width="1135" alt="截屏2022-05-17 下午9 07 05" src="https://user-images.githubusercontent.com/30898964/168818016-2584397a-9196-4d13-beca-915867373164.png">
@@ -174,7 +175,7 @@
     每个商家项目对应唯一一个谷歌代理，代理名为商家项目id，下图中代理的“Display name”为商家项目ID。
 
  
-<img width="1015" alt="截屏2022-05-17 下午11 53 26" src="https://user-images.githubusercontent.com/30898964/168855043-86d8a211-b28b-4860-a5e3-bc7d8cad06c8.png">
+<img width="900" alt="截屏2022-05-17 下午11 53 26" src="https://user-images.githubusercontent.com/30898964/168855043-86d8a211-b28b-4860-a5e3-bc7d8cad06c8.png">
 
 
 
@@ -187,26 +188,27 @@
 #### <a name="8">1.2.3.2 何为模板代理？</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
-    在理解模板代理之前先要弄清楚什么是动态实体和静态实体。<br>
+    在理解模板代理之前先要弄清楚什么是动态实体和静态实体。
 
-    动态实体： 指的是商家在管理平台自定义的字段。如商家名、菜名名、客房名、公司名等。我们约定动态实体命名以“DYN_” 开头。<br>
-    静态实体： 静态实体是相对动态而言的，可分为武汉人机协作平台（简称平台）预设的实体和语法用途的实体，平台预设的实体命名以“DEF_”开头，比如在餐饮场景中，食材和口味是我们预设的，在平台商家
+    动态实体： 指的是商家在管理平台自定义的字段。如商家名、菜名名、客房名、公司名等。我们约定动态实体命名以“DYN_” 开头。
+    静态实体： 静态实体是相对动态而言的，可分为武汉人机协作平台（简称平台）预设的实体和语法用途的实体，平台预设的实体命名以“DEF_”开头，比如在餐饮场景中，食材和口味是我们预设的，在平台
+    商家
     菜品配置页面中，以下拉列表呈现，商家只能选择，不能填写。语料用途的实体以“GRA_"开头。这是为了优化训练句子而设置的，比如， "do you have an empty table? "在这句话中，empty有
-    很多近义词,下面句子的表达了同样的意思。<br>
-    do you have a vacant table?<br>
-    do you have a free table?<br>
-    do you have an unoccupied table?<br>
+    很多近义词,下面句子的表达了同样的意思。
+    do you have a vacant table?
+    do you have a free table?
+    do you have an unoccupied table?
 
-    如果有些单词有十几个同义词，我们需要写十几句话。这样做的缺点是：<br>
+    如果有些单词有十几个同义词，我们需要写十几句话。这样做的缺点是：
     a.不方便管理
-    b.短语高频出现在训练语料导致意图误触发： 比如单输入“do you have” 也会触发意图。<br>
-    所以我们决定通过建立一个实体类型的方式来达到句子同义词扩充的目的。此处我们新建实体类型GRA_EMPTY,其实体集合为：empty/cacant/free/unoccupied<br>
+    b.短语高频出现在训练语料导致意图误触发： 比如单输入“do you have” 也会触发意图。
+    所以我们决定通过建立一个实体类型的方式来达到句子同义词扩充的目的。此处我们新建实体类型GRA_EMPTY,其实体集合为：empty/cacant/free/unoccupied
 
 
     模板代理是我们根据公司业务抽象而来，而谷歌本身没有模板代理的概念。模板代理产生的原因是为了做到商家的数据分割、场景的业务意图统一。拿餐饮场景来举例，开发人员维护一个模板代理，我们
     希望餐饮场景下的所有项目都具有同样的语义功能，每次新增一个餐饮项目，一个谷歌空代理会被创建，该餐饮项目的代理会把模板代理复制一份，然后直接将其覆盖到该商家代理，这样此商家代理就具有
     了模板代理的所有功能。 值得注意的是，不同的商家配置了不同的菜名、口味等。如何保证商家的数据隔离呢？ 拉取模板代理后，我们会判断哪些是动态实体，然后将该商家的动态实体更新到与之对应的
-    谷歌代理。<br>
+    谷歌代理。
 
 
 #### <a name="9">1.2.3.3 为什么要设置多个模板代理</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -250,7 +252,7 @@ c.为了语义服务响应速度
 
     a.模板代理的命名约定
     
-    命名规则如下：<br>
+    命名规则如下：
     第一部分代表大区名， "Hk"代表香港 
     第二部分代表场景，“Office”代表写字楼 
     第三部分代表语言，“English”代表英语 
@@ -262,7 +264,7 @@ c.为了语义服务响应速度
        
     b.意图命名约定
     
-    意图命名规范： 语言+场景+行为意图名 <br>
+    意图命名规范： 语言+场景+行为意图名 
     第一部分为语言，如“english“代表英语，其他语言请参照英文翻译
     第二部分为场景，第二部分由公司场景名或“public"组成，
         其中公司场景名为：
@@ -324,7 +326,7 @@ c.为了语义服务响应速度
 在上面提到了我们只在父模板代理里自定义研发、测试、生产环境，谷歌研发项目中所有的代理只从父模板代理的研发环境复制。同理，谷歌测试项目中所有代理只从父模板代理的测试环境复制。而生产环境的谷歌代理处理方式则不同，我们需要把父模板的生产环境的代理导入到各大区的“复制品”模板代理。语义服务数据库存有一表，该表指明了生产环境的某商家项目该从哪个模板代理复制。从模板代理处拉取代理数据后，该商家代理会清空所有数据并用模板代理的数据直接覆盖当前代理(包括意图、实体等)。然后，该商家代理会自动更新动态实体，并自动训练。
 </p>
 
-<img width="333" alt="image" src="https://user-images.githubusercontent.com/30898964/168944420-3f23efa7-dc45-4624-9e2c-a511c64cedea.png">
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/30898964/168944420-3f23efa7-dc45-4624-9e2c-a511c64cedea.png">
 
 <p>
 我们有六大场景，每个场景都有与之对应的模板代理项目、研发环境谷歌项目、测试环境谷歌项目、生产环境谷歌项目。具体关系如下图所示。其中，模板代理项目的用于存放父模板代理和“复制品”代理，研发环境谷歌项目用于存放公司研发环境的代理，测试环境谷歌项目（TestProject）用于存放公司测试环境的代理，这些代理一般是由测试部门同事新建。
@@ -597,11 +599,11 @@ display_name：我们刚为代理取的名字<br>
 区域：<br>
 ```python
 '''
-us-central1 (Iowa, USA)<br/>
-us-east1 (South Carolina, USA)<br/>
+us-central1 (Iowa, USA)
+us-east1 (South Carolina, USA)
 us-west1 (Oregon, USA)<br/>
-asia-northeast1 (Tokyo, Japan)<br/>
-asia-south1 (Mumbai, India)<br/>
+asia-northeast1 (Tokyo, Japan)
+asia-south1 (Mumbai, India)
 asia-southeast1 (Jurong West, Singapore)
 australia-southeast1 (Sydney, Australia)
 northamerica-northeast1 (Montréal, Québec, Canada)
@@ -898,11 +900,9 @@ if __name__ == '__main__':
 
 ## <a name="43">2.7 Dialogflow 控制台面板功能介绍</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-![image](https://user-images.githubusercontent.com/30898964/170485518-591c8bca-c00e-4575-be6b-eb24ad5babfb.png)
 
-
-![image](https://user-images.githubusercontent.com/30898964/170485532-260b6d0e-c661-4683-aed1-7fe860f4d18e.png)
-
+<img width="600" alt="截屏2022-05-26 上午1050" src="https://user-images.githubusercontent.com/30898964/170485518-591c8bca-c00e-4575-be6b-eb24ad5babfb.png">
+<img width="600" alt="截屏2022-05-26 上午1050" src="https://user-images.githubusercontent.com/30898964/170485532-260b6d0e-c661-4683-aed1-7fe860f4d18e.png">
 
 按钮说明：<br>
 Agent settings中的NLU type：<br>
@@ -934,8 +934,8 @@ Classification thredshould：<br>
 
 - Environment: Draft:  这里的意思是当前测试的是草稿代理，如果您建立了代理版本打开测试代理就会弹出代理版本供您选择测试。
 
-<img width="600" alt="截屏2022-05-26 上午1050" src="https://user-images.githubusercontent.com/30898964/170486137-03db21a3-2caf-48d2-98b1-13f16f507ee5.png">
-<img width="400" alt="截屏2022-05-26 上午10 450" src="https://user-images.githubusercontent.com/30898964/170486141-da3acd67-0387-4379-a3bb-603368b9386e.png">
+<img width="900" alt="截屏2022-05-26 上午1050" src="https://user-images.githubusercontent.com/30898964/170486137-03db21a3-2caf-48d2-98b1-13f16f507ee5.png">
+<img width="900" alt="截屏2022-05-26 上午10 450" src="https://user-images.githubusercontent.com/30898964/170486141-da3acd67-0387-4379-a3bb-603368b9386e.png">
 
 ## <a name="45">2.8 代理各组件概念与操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="46"> 2.8.1 概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -1006,7 +1006,7 @@ Classification thredshould：<br>
 - 当我们设置了参数收集时，用户的输入满足了一定条件，条件检查会触发会话转换到其他页面。比如参数收集完毕后该怎么跳转，用户输入的参数小于50时该怎么跳转。
 - 设置为 true 并强制页面转换的条件检查。
 
-例1:br>
+例1:<br>
 如果您的需求是在页面添加一些意图，命中到其中一个意图后就做相关的操作，不涉及任何参数收集。你可以把多个意图加入到添加到该页面中，在添加意图到页面的时候指定接下来的操作即可。 注意当添加一个意图的时候条件意图只能选择条件“或”，即"Match at least one rule",因为在该页面意图只能被命中一个。
 
 ![image](https://user-images.githubusercontent.com/30898964/170439916-2c880ab6-aa5b-46c9-ad32-d30ad1a7da83.png)
@@ -1026,7 +1026,7 @@ Classification thredshould：<br>
 
 ![image](https://user-images.githubusercontent.com/30898964/170453905-d9175864-770d-4c18-ba62-99b5d6ae322e.png)
 
-    单选框“页面”的功能解释： <br>
+    单选框“页面”的功能解释： 
 
     Start 当前流的开始页面
     End Flow 结束当前流
@@ -1065,7 +1065,7 @@ Classification thredshould：<br>
 方法1：<br>
 ![image](https://user-images.githubusercontent.com/30898964/170458772-76225db4-7ac0-4693-bca2-4b2d5690d5b8.png)
 
-方法2：<br
+方法2：<br>
 ![image](https://user-images.githubusercontent.com/30898964/170458400-6df0cb2f-82ec-4342-bfba-e4cf24722b19.png)
 
 
@@ -1149,7 +1149,7 @@ Classification thredshould：<br>
     在日志中隐去的说明：
     例如，假设最终用户输入“My address is 1600 Amphitheatre Parkway”，则 address 参数会设置为“1600 Amphitheatre Parkway”。日志记录的文字将为“My address is        
     $address_redacted”。
-    意图参数的引用说明：</br>
+    意图参数的引用说明：
     - $intent.params.parameter-id.original 引用实体原名
     - $intent.params.parameter-id.resolved 引用用户说出的实体名
 
@@ -2139,10 +2139,10 @@ I want to book from 4pm to 5pm
     如下图红色部分的字体，我们需要把它们从训练句子中去掉。
     
     
-<img width="500" alt="截屏2022-05-18 下午12 07 21" src="https://user-images.githubusercontent.com/30898964/168955241-cad7f134-6c9c-4746-a559-14ed4a0a29ca.png">
+<img width="800" alt="截屏2022-05-18 下午12 07 21" src="https://user-images.githubusercontent.com/30898964/168955241-cad7f134-6c9c-4746-a559-14ed4a0a29ca.png">
 
     6. 可选择的句类 
-<img width="500" alt="截屏2022-05-18 下午12 09 17" src="https://user-images.githubusercontent.com/30898964/168955435-ec519acd-ec6d-4fa5-8d7c-5567f166940b.png">
+<img width="700" alt="截屏2022-05-18 下午12 09 17" src="https://user-images.githubusercontent.com/30898964/168955435-ec519acd-ec6d-4fa5-8d7c-5567f166940b.png">
     
     7. 时态与语态 
     可以根据意图需求选择训练句子的时态和语态，大多数情况用一般现在时。但对于有些些意图，如表达“已经预约”，需要使用过去式或者被动语态。
@@ -2248,7 +2248,7 @@ I want to book from 4pm to 5pm
     - 实体type为空的原因：
     在大多数情况下，实体type为空的原因是因为一个实体存在于两个实体类型中。dialogflow无法判断该实体到底属于哪个实体类型。 
 
-    解决方法:<br>
+    解决方法:
     对于可以穷举的实体，用枚举的方法把实体列出来，放在同一个实体类型中，这样就解决了type为空和实体类型误识别的问题。 截图为楼层实体的做法。 
 
 <img width="972" alt="截屏2022-05-27 下午1 19 50" src="https://user-images.githubusercontent.com/30898964/170634490-91dca8fa-047b-43f1-9f10-ae06264d2d78.png">
