@@ -394,12 +394,12 @@ c.为了语义服务响应速度 <br>
 为一个谷歌项目创建其对应的服务账号，如果有多个谷歌项目，就需要多个服务账号，这样方便账单的计算。 这样基于最小权限原则，对项目管理也相对安全。 <br>
 虽然基于最小原则会更安全，但因在linux环境变量中只能设置一个json密匙。我们用到了多个谷歌项目，多把服务账号密匙会造成不好管理。所以我们只生成其中一个谷歌项目的服务账号密匙，这一个密匙用来做所有谷歌代理项目的访问密匙。<br>
 
-： <br>
-将其中一个服务账号作为父账号，其功能是生成json密匙，我们可以根据需求将父账号的作为owner的角色添加到子账号。 谷歌的服务账号本身并没有父子等级关系，这样做完全基于公司的的业务管理需求。
+一把密匙访问多项目的做法： <br>
+将其中一个服务账号作为主账号，其功能是生成json密匙，我们可以根据需求将主账号的服务账号作为owner角色添加到其他账号。 谷歌的服务账号本身并没有主次等级关系，这样做完全基于公司的的业务管理需求。
 以此达到了使用一把json密匙，访问到多个dialogflow cx项目 <br>
 
 ### <a name="25">2.4.2 具体步骤：</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-假如现在有两个project，分别为projectTest1，catering Robot。 这两个项目都已经通过上面的方式建立了自己的服务账号，我们想要做到用catering Robot的密匙访问projectTest1. <br>
+假如现在有两个谷歌项目，项目名为分别为projectTest1，catering Robot。 这两个项目都已经通过上面的方式建立了自己的服务账号，我们想要做到用catering Robot的密匙访问projectTest1. <br>
 
 步骤1：
 复制catering Robot的服务账号。
@@ -422,8 +422,7 @@ c.为了语义服务响应速度 <br>
 
 ### <a name="33">2.5.1 windows 用户的环境变量设置</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-前提：
-windows+pycharm 
+前提：windows+pycharm  <br>
 
 以下配置方法生效范围为整个pycharm项目目录
 
@@ -479,8 +478,7 @@ source ~/.bashrc
 
 ## <a name="28">2.6 代理的操作 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="29">2.6.1 代理的创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-我们可以通过API、客户端、控制台创建代理
-这里仅展示通过控制台、客户端创建代理。
+我们可以通过API、客户端、控制台创建代理,这里仅展示通过控制台、客户端创建代理。
 #### <a name="30">2.6.1.1 通过控制台创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 登录后，在project下拉框，你会发现刚刚创建的google could 项目 projectTest已经显示到了这里。
@@ -494,7 +492,7 @@ location：代理所在的google服务器的区域，这会影响到意图识别
 
 Default language：代理使用的语言，这决定了意图识别、实体的主要语言，一个代理只能选中一门语言作为主识别语言。 虽然你可以把多国语言作为训练语句加入意图，但这样做不利于管理。 
 
-Time zone：代理所用的时区，美国
+Time zone：代理所用的时区，时区决定了代理所用的时间，这将影响系统实践类实体的返回结果。
 <img width="609" alt="截屏2022-05-27 上午11 39 43" src="https://user-images.githubusercontent.com/30898964/170624528-e2d0367a-9702-4bff-978b-09e33f5a5d23.png">
 
 
@@ -512,16 +510,13 @@ dialogflow代理id为谷歌自动生成，创建代理成功后可以通过API�
 
 为什么要初始化代理的地区？
 
-我们需要先初始化代理地区，然后才能新建位于该地区的谷歌代理。代理地区初始化必须在控制台手动完成。如果不初始化某个地区，当我们使用api创建位于该地区的代理时，会发生代理创建失败的错误！
+我们需要先初始化代理地区，然后才能新建位于该地区的谷歌代理。代理地区初始化必须在控制台手动完成。如果不初始化某个地区，当我们使用api创建位于该地区的代理时，会发生代理创建失败的错误！<br>
 在控制台“新建代理”的页面就可以把该谷歌项目下的所有代理地区初始化。 所以每次新建一个谷歌项目（用于存放代理的项目）第一件要做的事就是初始化代理地区。<br>
 具体操作如下：<br>
-step1.在控制台点击“Create Agent”<br>
-step2.对于代理的“location”下拉列表中的每一个地区都执行下面两张图的操作。如果该地区没有初始化，当选中这个location的时候会出现“You have selected a location that has not been configured yet.”<br>
+step1： 在控制台点击“Create Agent”<br>
+step2： 对于代理的“location”下拉列表中的每一个地区都执行下面两张图的操作。如果该地区没有初始化，当选中这个location的时候会出现“You have selected a location that has not been configured yet.”<br>
 
-<img width="604" alt="截屏2022-05-24 下午2 18 13" src="https://user-images.githubusercontent.com/30898964/169962078-93a295dd-1e9e-48d7-8ac9-9b0af1009b17.png">
-
-<img width="604" alt="截屏2022-05-24 下午2 18 12" src="https://user-images.githubusercontent.com/30898964/169962164-a6709f75-11df-4a66-852a-1ab2413e3fc4.png">
-
+<img width="500" alt="截屏2022-05-24 下午2 18 13" src="https://user-images.githubusercontent.com/30898964/169962078-93a295dd-1e9e-48d7-8ac9-9b0af1009b17.png"><img width="500" alt="截屏2022-05-24 下午2 18 12" src="https://user-images.githubusercontent.com/30898964/169962164-a6709f75-11df-4a66-852a-1ab2413e3fc4.png">
 
 #### <a name="32">2.6.1.3 通过客户端创建</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
@@ -539,9 +534,10 @@ display_name： 给代理取名，注意一个区域下的代理名字不能重�
 > 确保已经配置好该代理所属项目的json密匙，并将密匙下载到本地，然后加入到环境变量（见”最佳做法与解决方案“）。  <br>
 
 无权限的几种情况：<br>
-+ 没把该代理所属项目的密匙添加到环境换辆。见”最佳做法与解决方案“<br>
-+ 把其他项目的密匙加入了环境变量。<br>
-解决：<br>
+- 没把该代理所属项目的密匙添加到环境换辆。见”最佳做法与解决方案“<br>
+- 把其他项目的密匙加入了环境变量。<br>
+<br>
+解决方式：<br>
 方法1：将一个项目的密匙作为唯一的访问谷歌代理的密匙，在其他谷歌项目给予这个项目owner权限（见”最佳做法与解决方案“） <br>
 方法2：使用本项目的密匙，使用”一次性环境“变量。<br>
 mac或linux用户， 在终端或命令行输入：$export GOOGLE_APPLICATION_CREDENTIALS=“{密匙的绝对路径}",<br>
@@ -774,8 +770,10 @@ zu — Zulu
 [文档链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/agents.html)
 
 这里只是为了展示代理导出的功能才使用while True，在实际项目中，请不要这样使用。</br>
-下面代码段的功能是导出指定环境的代理,当然如果不指定环境，你导出的将是草稿代理。</br>
+下面代码段的功能是导出指定环境的代理,当然如果不指定环境，导出的将是草稿代理。</br>
 拿到指定环境的代理地址最直接的方法是从控制台复制，如下图：</br>
+</br>
+
 ![image](https://user-images.githubusercontent.com/30898964/151000104-690ec26e-ffa7-43ff-adbd-4b56956a6148.png)
 
 
@@ -843,9 +841,10 @@ if __name__ == '__main__':
 
 #### <a name="39">2.6.3.2 通过客户端库导入</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 步骤：</br>
-- 先导出一个代理，那到该代理的二进制文件
-- 通过新建一个代理或者使用现有的代理，然后执行导入操作。
-以下代码段仅展示效果，可参照客户端库文件了解详细导入操作
+1. 先导出一个代理，拿到该代理的二进制文件；</br>
+2. 通过新建一个代理或者使用现有的代理，然后执行导入操作；</br>
+以下代码段仅展示效果，可参照客户端库文件了解详细导入操作。</br>
+
 [文档链接](https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/agents.html)
 
 ``` python 
