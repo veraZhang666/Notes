@@ -100,10 +100,8 @@
 
 
 
-
-
 # <a name="0">1. 概念解释</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-## <a name="1">1.1公司业务的相关的概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+## <a name="1">1.1 公司业务的相关的概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="2">1.1.1 公司项目与场景</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 - 公司场景：截止当前为止，公司的场景分为6类，即：商超、展厅、写字楼、医院、餐饮、酒店。<br>
 - 公司项目：以上六大场景分别对应六大类的公司项目，每一个大类的项目有国内与海外之分。如，海外商超项目与国内商超项目。 此文档仅讨论海外项目。<br>
@@ -2257,7 +2255,10 @@ I want to book from 4pm to 5pm
 
     解决方法:<br>
     对于可以穷举的实体，用枚举的方法把实体列出来，放在同一个实体类型中，这样就解决了type为空和实体类型误识别的问题。 截图为楼层实体的做法。 
-   <img width="711" alt="截屏2022-05-18 下午1 33 45" src="https://user-images.githubusercontent.com/30898964/168964400-4c6360f0-056f-4f3f-97af-875d4834ef94.png">
+
+<img width="972" alt="截屏2022-05-27 下午1 19 50" src="https://user-images.githubusercontent.com/30898964/170634490-91dca8fa-047b-43f1-9f10-ae06264d2d78.png">
+
+
 
     7. 不同渠道相同句子的测试结果差异问题
     
