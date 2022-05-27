@@ -874,7 +874,6 @@ if __name__ == '__main__':
     agent_to_be_restored= 'projects/catering-robot/locations/asia-northeast1/agents/XXXX' # 被导入的草稿代理地址，注意只能导入到草稿代理，不能导入到环境代理。
     restore_agent(agent_to_be_restored,agent_binary_document)
 
-
 ```
 
 ### <a name="40">2.6.4 代理的删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -886,14 +885,40 @@ if __name__ == '__main__':
 
 
 #### <a name="42">2.6.4.2 通过客户端库删除</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-待更新......</r>
-通过客户端库删除代理的方法和创建代理类似，可参照谷歌文档。 
+谷歌代理文档链接：https://googleapis.dev/python/dialogflow-cx/latest/dialogflowcx_v3beta1/agents.html
+<br>
+```python
+from google.cloud.dialogflowcx_v3beta1.services.agents import AgentsClient
+from google.api_core.client_options import ClientOptions
+from google.cloud.dialogflowcx_v3beta1.types import DeleteAgentRequest,Agent
+
+
+# 要删除的代理,在实际操作中，请把类似代理地址等固定参数写入__init__.py
+AGENT ='projects/catering-robot/locations/us-central1/agents/ebb79c10-7630-479b-8886-e281455d7275'
+LOCATION_ID = AgentsClient.parse_agent_path(AGENT)['location']
+OPTIONS = ClientOptions(api_endpoint=LOCATION_ID + "-dialogflow.googleapis.com")
+
+def deleteAgent():
+    request = DeleteAgentRequest(name=AGENT)
+    agentClient = AgentsClient(client_options=OPTIONS)
+    agentClient.delete_agent(request)
+
+if __name__ == '__main__':
+    deleteAgent()
+
+
+```
+
+
 
 ## <a name="43">2.7 Dialogflow 控制台面板功能介绍</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
 <img width="600" alt="截屏2022-05-26 上午1050" src="https://user-images.githubusercontent.com/30898964/170485518-591c8bca-c00e-4575-be6b-eb24ad5babfb.png">
 <img width="600" alt="截屏2022-05-26 上午1050" src="https://user-images.githubusercontent.com/30898964/170485532-260b6d0e-c661-4683-aed1-7fe860f4d18e.png">
+
+<img width="1000" alt="截屏2022-05-27 下午4 12 36" src="https://user-images.githubusercontent.com/30898964/170659418-bbbcff38-1359-4218-8aaa-84febf075929.png">
+
 
 按钮说明：<br>
 Agent settings中的NLU type：<br>
@@ -926,7 +951,7 @@ Classification thredshould：<br>
 - Environment: Draft:  这里的意思是当前测试的是草稿代理，如果您建立了代理版本打开测试代理就会弹出代理版本供您选择测试。
 
 <img width="900" alt="截屏2022-05-26 上午1050" src="https://user-images.githubusercontent.com/30898964/170486137-03db21a3-2caf-48d2-98b1-13f16f507ee5.png">
-<img width="900" alt="截屏2022-05-26 上午10 450" src="https://user-images.githubusercontent.com/30898964/170486141-da3acd67-0387-4379-a3bb-603368b9386e.png">
+<img width="600" alt="截屏2022-05-26 上午10 450" src="https://user-images.githubusercontent.com/30898964/170486141-da3acd67-0387-4379-a3bb-603368b9386e.png">
 
 ## <a name="45">2.8 代理各组件概念与操作</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="46"> 2.8.1 概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -938,16 +963,16 @@ Classification thredshould：<br>
 
 - 实体类型：可以认为是某一个概念，比如人名、地名、公司名、菜名、店铺名。
 - 实体：某一个概念的实例，比如张三、深圳、科卫机器人、红烧肉、星巴克。张三属于人名实体类型，深圳属于地名实体类型。
-- 
+
 #### <a name="49"> 2.8.1.3 流</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 流分为默认初始流（Default start flow）和非初始流，非初始流也是开发人员自定义的流（见下图）。<br>
 <p>
-每个代理有且仅有一个默认初始流，初始流无法删除,这是对话的入口。对于构造简单的代理，您可能只需要这一个流。如果业务量多或者对话逻辑太复杂，我们可以根据功能模块的划分，自定义多个流，一个流执行一类的操作，这样方便流的管理和后期流的版本控制。比如你想搭建一个定外卖的bot，这个bot需要点餐、下订单、支付三个功能，那么我们就设计三个流，即点餐流、下订单流、支付流，负责点餐的开发人员只需要维护点餐的流。将来点餐模块的功能如果有变动，只修改点餐流并不会对其他流造成影响。
+每个代理有且仅有一个默认初始流，初始流无法删除,这是对话的入口。对于构造简单的代理，您可能只需要这一个流，如果业务量多或者对话逻辑太复杂，我们可以根据功能模块的划分，自定义多个流，一个流执行一类的操作，这样方便流的管理和后期流的版本控制。比如你想搭建一个定外卖的bot，这个bot需要点餐、下订单、支付三个功能，那么我们就设计三个流，即点餐流、下订单流、支付流，负责点餐的开发人员只需要维护点餐的流。将来点餐模块的功能如果有变动，只修改点餐流并不会对其他流造成影响。
 </p>
-- 多个流之间可以相互协作，可以共享整个对话的数据。 
-- 默认初始流的ID为00000000-0000-0000-0000-000000000000
-- 每个流都有一个默认的start page，在调用该代理的API或使用客户端时，可以通过 pageId=START_PAGE 判断是否为开始流。
+- 多个流之间可以相互协作，可以共享整个对话的数据 
+- 默认初始流的ID为 00000000-0000-0000-0000-000000000000
+- 每个流都有一个默认的start page，在调用该代理的API或使用客户端时，可以通过 pageId=START_PAGE 判断是否为开始流
 
 ![image](https://user-images.githubusercontent.com/30898964/170424511-0bc514da-287c-4c12-87f9-620029d3136a.png)
 
@@ -957,10 +982,10 @@ Classification thredshould：<br>
 页面可以分为默认初始流的开始页面、自定义流开始页面、非开始页面，开始页面无法删除。非开始页面指的是默认初始流和自定义流中的非开始页面，非开始页面的功能都一样。 而默认初始流和自定义初始流的功能不一样，其主要区别如下：
 </p>
 
-- 区别1：非开始页面比默认流开始页和自定义流开始页面多了一个Entry fulfilement，这是用于进去页面时的引导话术设置。
-- 区别2：默认开始流的开始页面有欢迎意图（Default welcome Intent）,这是代理默认就有的，该意图无删除，也无法改名。如果我们想自定义打招呼的意图且给意图换个名字，我们能做的就是把默认欢迎意图中的训练句子全删掉，这样默认欢迎意图就不会被触发。
-- 区别3：默认初始流的开始页面和自定义流的开始页面有默认的事件处理，我们可以在这里设置对仅该流有效的全局事件处理（详情见下一节“状态处理程序”）。 
-- 区别4：开始页面中不可以设置参数收集，而非开始页面可以设置。
+- 非开始页面比默认流开始页和自定义流开始页面多了一个Entry fulfilement，这是用于进去页面时的引导话术设置
+- 默认开始流的开始页面有欢迎意图（Default welcome Intent）,这是代理默认就有的，该意图无删除，也无法改名。如果我们想自定义打招呼的意图且给意图换个名字，我们能做的就是把默认欢迎意图中的训练句子全删掉，这样默认欢迎意图就不会被触发
+- 默认初始流的开始页面和自定义流的开始页面有默认的事件处理，我们可以在这里设置对仅该流有效的全局事件处理（详情见下一节“状态处理程序”）
+- 开始页面中不可以设置参数收集，而非开始页面可以设置
 
 ![image](https://user-images.githubusercontent.com/30898964/170432127-1a7fd63e-4a2f-4cb8-8ec4-9311079f4b9c.png)
 
@@ -976,7 +1001,7 @@ Classification thredshould：<br>
 #### <a name="51"> 2.8.1.5 状态处理程序 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
-状态处理程序包含路线和事件处理，路线包括路线和路线组。事件处理用于接收各种预期外的事件发生，比如匹配不到意图时该如何响应，网络钩子请求超时该如何响应。
+状态处理程序包含路线和事件处理，路线包括路线（也称路由）和路线组（也称路由组）。事件处理用于接收各种预期外的事件发生，比如匹配不到意图时该如何响应，网络钩子请求超时该如何响应。
 
 <img width="600" alt="截屏2022-05-26 上午10 44 50" src="https://user-images.githubusercontent.com/30898964/170443310-49574722-c87d-4a3f-9113-9571e69c8d8f.png">
 
@@ -985,17 +1010,17 @@ Classification thredshould：<br>
 ##### <a name="52"> 2.8.1.5.1 路由 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
-当用户的输入匹配某个意图和/或会话状态的某个条件得以满足时，系统将调用路由。本文档所说的路由和路线可以理解为一个东西。
+当用户的输入匹配某个意图和/或会话状态的某个条件得以满足时，系统将调用路由。
 下图为路由设置页面：<br>
 ![image](https://user-images.githubusercontent.com/30898964/170441910-c253ef68-a977-43c7-9c0c-a0b5530eb647.png)
 
 
 ###### 路由的条件
 
-- 当用户的输入匹配某个意图时，触发静态 fulfillment，即回复文字。
-- 当用户的输入匹配某个意图时，触发启用网络钩子请求。
-- 当我们设置了参数收集时，用户的输入满足了一定条件，条件检查会触发会话转换到其他页面。比如参数收集完毕后该怎么跳转，用户输入的参数小于50时该怎么跳转。
-- 设置为 true 并强制页面转换的条件检查。
+- 当用户的输入匹配某个意图时，触发静态 fulfillment，即回复文字
+- 当用户的输入匹配某个意图时，触发启用网络钩子请求
+- 当我们设置了参数收集时，用户的输入满足了一定条件，条件检查会触发会话转换到其他页面。比如参数收集完毕后该怎么跳转，用户输入的参数小于50时该怎么跳转
+- 设置为 true 并强制页面转换的条件检查
 
 例1:<br>
 如果您的需求是在页面添加一些意图，命中到其中一个意图后就做相关的操作，不涉及任何参数收集。你可以把多个意图加入到添加到该页面中，在添加意图到页面的时候指定接下来的操作即可。 注意当添加一个意图的时候条件意图只能选择条件“或”，即"Match at least one rule",因为在该页面意图只能被命中一个。
@@ -1045,10 +1070,10 @@ Classification thredshould：<br>
 路由组的生效范围是什么？<br>
 
 我们可以将路由组加入三个地方，即默认初始流的开始页面、自定义流开始页面、某个流的非初始页面。<br>
-- 默认初始流的开始页面：生效范围仅是默认初始流，在默认初始流中的任何页面可被触发。
-- 自定义流开始页面：生效范围是当前自定义流，当前自定义流中的任何页面都被触发。
-- 非初始页面：如果路由组被添加到非初始页面，不管这个页面在默认初始流还是自定义流，生效法范围仅是当前页面。
 
+1.默认初始流的开始页面：生效范围仅是默认初始流，在默认初始流中的任何页面可被触发。<br>
+2.自定义流开始页面：生效范围是当前自定义流，当前自定义流中的任何页面都被触发。<br>
+3.非初始页面：如果路由组被添加到非初始页面，不管这个页面在默认初始流还是自定义流，生效法范围仅是当前页面。<br>
 
 新建路由组：<br>
 有两种方法新建路由组。第一种是在代理界面左边工具条里新建，第二种是在页面里新建，在页面新路由组会新建并将该路由组添加到该页面。 如果通过第一种方法新建的话，还需要在某个页面添加这个路由组。<br>
@@ -1107,42 +1132,39 @@ Classification thredshould：<br>
 ## <a name="58">2.9 页面的操作 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="59">2.9.1 设置页面初始回复 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-初始回复（entry fulfilment)和其他回复（fulfilment)，可以将初始回复理解为进入该页面的导向语句，比如顾客在上一步完成了点餐，现在进入了下订单的页面，在下订单的页面初始流中，我们可以设置这样的说法：“现在我将帮助您支付订单”。 如果设置了初始回复，那么一进入该页面就会被触发。 
+初始回复（entry fulfilment)和其他回复（fulfilment)，可以将初始回复理解为进入该页面的导向语句，比如顾客在上一步完成了点餐，现在进入了下订单的页面，在下订单的页面初始流中，我们可以设置这样的说法：“现在我将帮助您支付订单”。 如果设置了初始回复，那么一进入该页面就会被触发。 <br>
+<br>
 ![image](https://user-images.githubusercontent.com/30898964/170469944-740a43a6-cdd1-47ed-9688-dd5d3b78f29d.png)
 
    
 ### <a name="60">2.9.2 参数收集</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-参数分为：<br>
-    - 意图参数
-    - 表单参数
-    - 会话参数
+参数分为意图参数、表单参数、会话参数。
 
 1.意图参数</br>
     
-意图参数在为意图添加训练语句时，系统会自动提取并添加。 </br>
-意图使用参数来提取在意图匹配时最终用户提供的数据。以下数据用于定义意图参数：
-- 名称（也称为 ID 或显示名）：用于标识参数的名称。
-- 实体类型：与参数关联的实体类型。
-- 为列表：如果为 true，则该参数会被视为值列表。当你想通过一个意图收集多个同类型实体时使用。
-- 在日志中隐去 (Redact in log)：如果设置为 true，最终用户提供的参数数据会隐去。</br>
+在通过控制台添加训练语句时，系统会自动提取并标记自定义实体或系统实体，如果通过api上传训练句子，我们需要手动标记实体。 </br>
 
-![image](https://user-images.githubusercontent.com/30898964/151097170-0595a7ae-922e-4bf4-bf86-11e0963ead21.png)
+<img width="802" alt="截屏2022-05-27 下午4 33 40" src="https://user-images.githubusercontent.com/30898964/170663192-cc5f8ad8-28dd-42bc-8e8b-62a852e8833c.png">
+  
+截图字段说明：<br>
+parameterid: 参数id <br>
+entity type: 实体类型 <br>
+entity:实体原名，注意当通过api上传实体的时候，一定要将实体原名追加到别名。通过控制台手工录入实体时，实体原名会自动加入别名。如果实体原名不在别名里，会导致用原名提取不到实体。<br>
+is list：参数是否为列表<br>
+Redact in log ：谷歌有运行时候的参数（实体）日志，在日志中隐去如果设置为 true，在日志中参数就不会原样显示，比如用户说了"My address is 1600 Amphitheatre Parkway" 在日志中就会这么显示"My address is $address_redacted"<br>
+  
+  
+一个列表实体的例子：<br>  
+我希望收集用户喜欢的颜色,在上图训练语句中，我在一条训练语句中标记了color类型的实体中的两个参数,勾选了右边的is List方框,效果是提取到了用户说的所有颜色实体。<br>  
+在测试的时候，用户所说的所有实体会被提取到，如下图。
+<br>
 
-![image](https://user-images.githubusercontent.com/30898964/151097364-6449150b-c65a-4bf3-9d5f-c17f2e2917fd.png)
-
-    列表实体的的标记的说明：
-    例子：我希望收集用户喜欢的颜色。
-    在上图训练语句中，我在一条训练语句中标记了color类型的实体中的两个参数,勾选了右边的is List方框,效果是提取到了用户说的所有颜色实体。
 ![image](https://user-images.githubusercontent.com/30898964/151097723-2e21ce78-ef94-4871-9e68-75fd4c3aa17c.png)
 
-
-    在日志中隐去的说明：
-    例如，假设最终用户输入“My address is 1600 Amphitheatre Parkway”，则 address 参数会设置为“1600 Amphitheatre Parkway”。日志记录的文字将为“My address is        
-    $address_redacted”。
-    意图参数的引用说明：
-    - $intent.params.parameter-id.original 引用实体原名
-    - $intent.params.parameter-id.resolved 引用用户说出的实体名
+意图参数的引用说明：<br>
+- $intent.params.parameter-id.original 引用实体原名
+- $intent.params.parameter-id.resolved 引用用户说出的实体名
 
 2.表单参数</br>
 
@@ -1165,17 +1187,17 @@ isList 和 Redact in Log 的意思请参照上面的解释。</br>
 
 3.会话参数：</br>
 
-当在运行时设置任何类型的参数时，该参数将被写入会话并成为会话参数。这些参数在设计时未明确定义。您可以在会话期间随时引用这些会话参数。</br>
-引用会话参数</br>
-会话参数引用可用于以下类型的 fulfillment 的静态响应消息中：</br>
+当在运行时设置任何类型的参数时，参数将被写入会话并成为会话参数。这些参数在设计时未明确定义。您可以在会话期间随时引用这些会话参数。</br>
+
+在设计多轮对话的时候产生的参数叫会话参数，会话参数有效范围为如下：</br>
 
 页面条目 fulfillment</br>
 路由 fulfillment</br>
 事件处理程序 fulfillment</br>
 表单提示 fulfillment</br>
 表单重新提示 fulfillment</br>
-引用方式：</br>
 
+引用方式：</br>
 $session.params.parameter-id
 如：$session.params.color color为收集参数的时候填写的参数名
 
@@ -1338,11 +1360,15 @@ e.Transition</br>
 ### <a name="63">2.9.5 添加事件处理 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 点击页面 "Add state handler" -> 勾选Event Handler，如下图：</br>
+
 ![image](https://user-images.githubusercontent.com/30898964/151100522-a96b7600-6197-45de-aa14-63e1617a0f49.png)
 
-![image](https://user-images.githubusercontent.com/30898964/151104323-75a365b3-c0d2-4b57-986c-417aa2f1f58a.png)
+<img width="500" alt="截屏2022-05-26 上午10 51 49" src="https://user-images.githubusercontent.com/30898964/151104323-75a365b3-c0d2-4b57-986c-417aa2f1f58a.png">
 
-上图为设置事件处理的页面，具体说明如下：</br>
+
+
+各种可能发生的事件：</br>
+
 ![image](https://user-images.githubusercontent.com/30898964/151104633-975c1b24-6334-4b8c-b189-c892f96b44e1.png)
 
 ### <a name="64">2.9.6 页面的执行顺序 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -1358,8 +1384,9 @@ Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（
 
 #### <a name="66">2.9.7.1  默认的意图</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-创建代理时，系统会为您创建默认欢迎意图、和默认的负意图。这两个意图都不能被删除。 
-当预料中存在大量的重复句子，导致用户输入无意义的短句误触发意图，我们把这些所谓无意义的短句加入到负意图后，这些表达就不会触发任何意图了，谷歌官方提醒我们不要把太多的短句加入负意图，因为加入大量的短句会对模型造成负面影响。 在探索Dialogflow初期，
+创建代理时，系统会为您创建默认欢迎意图、默认的负意图。这两个意图都不能被删除。 
+当语料中存在大量的重复句子，导致用户输入无意义的短句误触发意图，我们把这些所谓无意义的短句加入到默认负意图后，这些表达就不会触发任何意图了，谷歌官方提醒我们不要把太多的短句加入负意图，因为加入大量的短句会对模型造成负面影响。
+![image](https://user-images.githubusercontent.com/30898964/170667116-1373fa33-6000-4bb5-8e56-48feed9ba7ca.png)
 
 
 ####  <a name="67">2.9.7.2 新建意图 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -1369,11 +1396,11 @@ Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（
 在搜索匹配意图时，Dialogflow 根据“意图置信度分数”（也称“置信度分数”）为潜在匹配项评分。取值范围从 0.0（完全不确定）到 1.0（完全确定）。 在对意图进行评分后，可能会出现以下两种结果：</br>
 
 - 如果得分最高的意图的置信度得分大于或等于分类阈值设置，则系统会将其返回为匹配项。
-- 如果没有任何意图满足阈值，则系统会调用无匹配事件。
+- 如果没有任何意图满足阈值，则系统会调用无匹配事件（sys.no-match-default）。
 
 
 我们可以在控制台，或者通过API或Dialogflow客户端库对意图增删改。详情参照链接[链接](https://cloud.google.com/dialogflow/cx/docs/concept/intent) </br>
-注： 在Dialogflow cx中一个意图最多只允许2000条训练语句,一个意图只能标记<=19个实体类型。 </br>
+注： 在Dialogflow cx中一个意图最多只允许上传2000条训练语句,一个意图只能标记<=19个实体类型。 </br>
 
 创建意图的方式：</br>
 点击manage -> create->填入意图名，收集参数（如需要）</br>
@@ -1388,7 +1415,7 @@ Entry fulfillment -> Parameter收集（如果有）-> Routes 和 Route Groups（
 ####  <a name="68">2.9.7.3  上传训练句子到意图 </a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
-这段代码的功能是上传无需标记实体的训练句子到代理的某个意图
+这段代码的功能是上传训练句子，不标记实体
 
 ``` python 
 #上传无需被标记的训练句子
@@ -1449,7 +1476,7 @@ if __name__ == '__main__':
 
 
 
-这段代码的功能是上传需要标记实体的训练句子到代理的某个意图
+这段代码的功能是上传训练句子且标记实体
 ```python
 
 from google.cloud.dialogflowcx_v3beta1.services.agents import AgentsClient
@@ -1615,10 +1642,11 @@ Dialogflow 将所有会话数据（包括会话实体）存储 20 分钟，也�
 </p>
 
 ### <a name="71">2.11.2 系统实体</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
-系统实体为Dialogflow系统自带的实体，我们只需要标记系统实体类型中的一个实体，dialogflow就会帮我们识别该实体类型下其他的实体。常用的系统实体包括数字、日期、 地址、城市没名等，详情参照官方文档 https://cloud.google.com/dialogflow/cx/docs/reference/
-sys.number的实体地址为： "projects/-/locations/-/agents/-/entityTypes/sys.number"
-sys.date-time的实体地址为： "projects/-/locations/-/agents/-/entityTypes/sys.date-time"
-这些实体地址可以在Dialogflow cx官方文档中找到，当通过api上传训练句子时，如果你需要标记系统实体，就需要把系统实体加入到你的实体类型和id字典。
+
+系统实体为Dialogflow系统自带的实体，我们只需要标记系统实体类型中的一个实体，dialogflow就会帮我们识别该实体类型下其他的实体。常用的系统实体包括数字、日期、 地址、城市没名等，详情参照官方文档 https://cloud.google.com/dialogflow/cx/docs/reference/<br>
+sys.number的实体地址为： "projects/-/locations/-/agents/-/entityTypes/sys.number" <br>
+sys.date-time的实体地址为： "projects/-/locations/-/agents/-/entityTypes/sys.date-time"<br>
+这些实体地址可以在Dialogflow cx官方文档中找到，当通过api上传训练句子时，如果你需要标记系统实体，就需要把系统实体加入到你的实体类型和id字典。<br>
 
 
 ### <a name="72">2.11.3 创建实体类型</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
@@ -1819,11 +1847,10 @@ Dialogflow 日期时间类实体大致分为五类： <br>
 
 #### <a name="76">2.11.6.1 单个日期实体（sys.date）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-<p>
-返回结果中参数为“月、日、年”
-例1：
-I want to book for today. 标记today为sys.date
-</p>
+返回结果中参数为“月、日、年”<br>
+例1：<br>
+I want to book for today. 标记today为sys.date<br>
+
 
 
                 "date-time": {
@@ -1836,16 +1863,16 @@ I want to book for today. 标记today为sys.date
                   }
                 }
 
-<p>
-例2：
-I want to book for May 2nd
-I want to book for May second 
-I want to book for May 2 
-标记 May 2 nd、May second、May 2为sys.date 
 
-注：如果当前代理的时间已经过了5月2号，返回的结果为下一年的5月2号，如：
-Dialogflow参数返回示例：
-</p>
+例2： <br>
+I want to book for May 2nd <br>
+I want to book for May second <br>
+I want to book for May 2 <br>
+标记 May 2 nd、May second、May 2为sys.date <br>
+
+注：如果当前代理的时间已经过了5月2号，返回的结果为下一年的5月2号，如：<br>
+Dialogflow参数返回示例：<br>
+
     
 
 
@@ -1857,19 +1884,17 @@ Dialogflow参数返回示例：
             }}   
 
 
-<p>
-当前代理时间已经超过了要用户所说的时间，但是我们想要提取今年该如何做到？
-加上“今年”，即 ”I want to book for May 2 this year“. 
-</p>
+
+当前代理时间已经超过了要用户所说的时间，但是我们想要提取今年该如何做到？<br>
+加上“今年”，即 "I want to book for May 2 this year".<br> 
+
 
 #### <a name="77">2.11.6.2 单个时间实体（sys.time)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
+返回结果中参数为“时、分、秒、毫秒”<br>
+例1： I want to book at 3 pm <br>
+Dialogflow参数返回示例：<br>
 
-<p>
-返回结果中参数为“时、分、秒、毫秒”
-例1： I want to book at 3 pm 
-Dialogflow参数返回示例：
-</p>
 
 
     "time": {
@@ -1882,30 +1907,30 @@ Dialogflow参数返回示例：
                 }
                 }
 
-<p>
-可以标记下面的任意一种表达作为时间实体类型sys.time，谷歌会自动识别。 
-4:30:00 PM、4 pm、4:30:00 AM、4:30 pm、4, three thirty
-注：类似“3 o’clock”的特殊表达，谷歌并未针对“o’clock”做时间解析，但是，我们可以通过标记整数为实体类型“sys.time”达到效果，但存在一定问题，比如下面这三句都提取到了同样时间实体：
-I want to book for 3 视情况而定
-I want to book for 3 o’clock 正确
-I want to book for 3 animals 不合理
-</p>
+
+可以标记下面的任意一种表达作为时间实体类型sys.time，谷歌会自动识别。 <br>
+4:30:00 PM、4 pm、4:30:00 AM、4:30 pm、4, three thirty<br>
+注：类似“3 o’clock”的特殊表达，谷歌并未针对“o’clock”做时间解析，但是，我们可以通过标记整数为实体类型“sys.time”达到效果，但存在一定问题，比如下面这三句都提取到了同样时间实体：<br>
+I want to book for 3 视情况而定<br>
+I want to book for 3 o’clock 正确<br>
+I want to book for 3 animals 不合理<br><br>
+
 
 #### <a name="78">2.11.6.3 日期+时间组合实体类型（sys.date-time）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-<p>
-这是日期和时间的组合实体类型，日期和时间实体可只出现一个，或两个同时出现。
-先需要在训练句子中标记任何时间、日期、完整日期时间为系统实体类型"sys.date-time",这样Dialogflow就会解析用户说的日期时间，并把用户说的日期时间作为一个参数返回。
-标记后，谷歌返回的实体类型都为“sys.date-time”，参数字段分为下面三种情况：
+
+这是日期和时间的组合实体类型，日期和时间实体可只出现一个，或两个同时出现。<br>
+先需要在训练句子中标记任何时间、日期、完整日期时间为系统实体类型"sys.date-time",这样Dialogflow就会解析用户说的日期时间，并把用户说的日期时间作为一个参数返回。<br>
+标记后，谷歌返回的实体类型都为“sys.date-time”，参数字段分为下面三种情况：<br>
 
 - 如果用户发言包含日期和时间，返回字段有“月、日、年、时、分、秒、毫秒”
 - 如果用户发言只包含日期，返回字段有“月、日、年”
 - 如果用户发言只包时间，返回字段有“时、分、秒、毫秒”
 
-例子1：
-I want to book today at 4:30 pm 
-返回参数结果：
-</p>
+例子1：<br>
+I want to book today at 4:30 pm <br>
+返回参数结果：<br>
+
 
     "date-time": {
                       "type": "@sys.date-time",
@@ -1921,11 +1946,10 @@ I want to book today at 4:30 pm
                       }
                     }
 
-<p>
-例子2:
-I want to book for today
-返回参数结果：
-</p>
+
+例子2:<br>
+I want to book for today<br>
+返回参数结果：<br>
 
 
             "date-time": {
@@ -1938,11 +1962,10 @@ I want to book for today
                   }
                 }
 
-<p>
-例子3：
-I want to book for 4:30 pm
-返回参数结果：
-</p>
+<br>
+例子3：<br>
+I want to book for 4:30 pm<br>
+返回参数结果：<br>
 
     "date-time": {
                 "type": "@sys.date-time",
@@ -1956,14 +1979,14 @@ I want to book for 4:30 pm
 
 #### <a name="79"> 2.11.6.4 日期区间实体(sys.date-period)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-<p>
-日期区间实体为两个日期的组合，建议标记“from {日期1} to {日期2} ”等英文表达为sys.date-period实体类型。返回字的实体类型为“sys.date-period”,参数里有“endDate”、“startDate”，分别为结束日期、开始日期。
 
-例句1: 
-I want to book from Monday to Friday
+日期区间实体为两个日期的组合，建议标记“from {日期1} to {日期2} ”等英文表达为sys.date-period实体类型。返回字的实体类型为“sys.date-period”,参数里有“endDate”、“startDate”，分别为结束日期、开始日期。<br>
 
-返回参数结果:
-</p>
+例句1: <br>
+I want to book from Monday to Friday<br>
+
+返回参数结果:<br>
+
 
     "type": "@sys.date-period",
                 "original": "from monday to friday",
@@ -1982,11 +2005,11 @@ I want to book from Monday to Friday
               }
             }
 
-<p>
-例句2: 
-I want to book from May 24 to May 26.
-返回参数结果:
-</p>
+
+例句2: <br>
+I want to book from May 24 to May 26.<br>
+返回参数结果:<br>
+
 
           "date-period": {
             "resolved": {
@@ -2005,12 +2028,11 @@ I want to book from May 24 to May 26.
 
 #### <a name="80"> 2.11.6.5 时间区间实体（sys.time-period）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-<p>
-时间区间实体是两个时间实体类型的组合，比如，从下午3点到下午4点， “from 3pm to 4 pm”，只返回一个实体类型，返回参数的字段包含”startTime” 和”endTime”
-例1：
-I want to book from 4pm to 5pm
-返回参数结果: <br>
-</p>
+时间区间实体是两个时间实体类型的组合，比如，从下午3点到下午4点， “from 3pm to 4 pm”，只返回一个实体类型，返回参数的字段包含”startTime” 和”endTime”<br>
+例1：<br>
+I want to book from 4pm to 5pm<br>
+返回参数结果: <br><br>
+
 
     "time-period": {
                     "startTime": {
@@ -2030,10 +2052,9 @@ I want to book from 4pm to 5pm
 
 ### <a name="81"> 2.11.7 实体的original值和resolved值（sys.time-period）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-<p>
-谷歌内置名词动词的单复数转换、动词时态的转换、动词变名词（suggest->suggestion)。 有些时候用户说出的单词不在训练语料中，但通过词型的自动转换，谷歌能找出该单词的其他词形。我们可以查看谷歌的响应字符串来判断单词的原始值（用户发言）和该单词在语料中的形式。
-大概分为如下几种情况讨论： 
-</p>   
+谷歌内置名词动词的单复数转换、动词时态的转换、动词变名词（suggest->suggestion)。 有些时候用户说出的单词不在训练语料中，但通过词型的自动转换，谷歌能找出该单词的其他词形。我们可以查看谷歌的响应字符串来判断单词的原始值（用户发言）和该单词在语料中的形式。<br>
+大概分为如下几种情况讨论： <br>
+
 
  - 情况 1: 输入句子的实体值在实体类型中能找到。
     original 为用户输入的原实体值 resolved 为谷歌实体类型里的值,如下图:<br>
@@ -2054,7 +2075,7 @@ I want to book from 4pm to 5pm
   - 情况 2: 输入句子的实体值经过谷歌自动处理单复数后，在实体类型的实体集中能找到。
 
       例句:let me know your powers<br>
-      截图说明：
+      截图说明：<br>
       powers 不在实体类型 GRA_SKILLS 里，但是谷歌做了单数转换，powers 的单数 power 在实 体类型 GRA_SKILLS 里。<br>
       original 为用户输入的原实体值(powers) resolved 为谷歌实体类型里的值(power)。<br>
       original 为用户输入的原实体值 resolved 为谷歌实体类型里的值。<br>
@@ -2065,6 +2086,7 @@ I want to book from 4pm to 5pm
 
 ## <a name="82">2.12 流的版本和环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 ### <a name="83">2.12.1 概念</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+
 草稿：没有环境的代理为草稿，我们在控制台编辑的代理叫草稿。</br>
 草稿流：草稿代理种的流为草稿流。</br>
 我们可以保存一个草稿流为一个版本，这个版本的流相当于一个快照，包含了该流中原有的实体、路由、意图、网络钩子等信息。</br>
@@ -2075,7 +2097,7 @@ I want to book from 4pm to 5pm
 
 ### <a name="84">2.12.2 创建建流版本</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
- 关于代理的所有操作dialogflow都提供API、客户端库、控制台三种方式，流的版本创建亦是如此,具体步骤如下：
+ 关于代理的所有操作dialogflow都提供API、客户端库、控制台三种方式，流的版本创建亦是如此,具体步骤如下：<br>
  
 ![image](https://user-images.githubusercontent.com/30898964/151107494-aae0c51b-27bd-4acc-97fc-c1e8763a4304.png)
 
@@ -2087,6 +2109,7 @@ I want to book from 4pm to 5pm
 ### <a name="85">2.12.3 创建环境</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 请根据下图步骤操作：</br>
+
 ![image](https://user-images.githubusercontent.com/30898964/151107693-fe002a08-03a1-443b-a222-0413e077a1aa.png)
 
 ![image](https://user-images.githubusercontent.com/30898964/151107905-73a1a33a-9610-4e32-bf55-9fe5e785ab74.png)
@@ -2144,7 +2167,6 @@ I want to book from 4pm to 5pm
 
 ## <a name="88">3.2 问题发现与避免</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-   起初我们遇到了各种意图误触发的问题，可以采用如下的解决方法来减少误触发。
 
     1. 意图太类似导致的误触发
     
@@ -2261,10 +2283,9 @@ I want to book from 4pm to 5pm
         building这句话就无法提取出microsoft实体，但is there company in building就可以提取出company实体。
         
         
- #### 语料利器
- 
- 查同义词：https://www.thesaurus.com/browse/
- 句子转述：https://app.wordtune.com/ 
+ 语料利器<br>
+ 查同义词：https://www.thesaurus.com/browse/<br>
+ 句子转述：https://app.wordtune.com/ <br>
  
 
 
