@@ -2260,15 +2260,18 @@ I want to book from 4pm to 5pm
    <img width="711" alt="截屏2022-05-18 下午1 33 45" src="https://user-images.githubusercontent.com/30898964/168964400-4c6360f0-056f-4f3f-97af-875d4834ef94.png">
 
     7. 不同渠道相同句子的测试结果差异问题
+    
        我们可以通过控制台测试代理，或者通过调用谷歌API测试的代理，但有时候会产生测试结果差异的问题。我们遇到了如下几类问题：
         - 使用网页测试偶尔会出现不同电脑可能测试结果不同；
         - 在显示模型训练结束的情况下，使用接口测试前后测试提取实体的结果可能不一样，这个概率比较低，在大批量测试时可能会出现；
         - 偶尔出现更新实体并自动train成功后，新增实体不能识别；
         - 我们业务中的动态实体所在的训练语句泛化性不如静态实体;
+        
         主要体现在：
-        意图中使用同样的句式，使用稍微泛化的问法测试时，动态实体可能就提取不出来。例如对于whether_have_xxx意图中，有训  练语句is there dyn_company_name和is there company，
+        
+        意图中使用同样的句式，使用稍微泛化的问法测试时，动态实体可能就提取不出来。例如对于whether_have_xxx意图中，有训练语句is there dyn_company_name和is there company，
         其中dyn_company_name和company是槽。若使用is there microsoft in building(microsoft是动态公司名称)和is there company in building时，is there microsoft in 
-        building这句话就无法提取出microsoft实体，但is there company in building就可以提取出company实体<br>
+        building这句话就无法提取出microsoft实体，但is there company in building就可以提取出company实体。
         
         
  #### 语料利器
